@@ -1,309 +1,465 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucca Tuelher | Storyboard Artist</title>
+    <title>Lucca Tuelher | Portfolio</title>
     <style>
-        /* --- VIBE SETTINGS (CSS) --- */
+        /* --- ESTILO GERAL (JOURNAL THEME) --- */
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent: #f5c518; /* Um amarelo meio cinema/IMDb para destaque */
-            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --bg: #f4f4f0;          /* Creme */
+            --text: #1a1a1a;        /* Preto suave */
+            --muted: #666;          /* Cinza */
+            --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --serif: 'Georgia', serif; 
+            --highlight: #2a5caa;   /* Azul caneta */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            padding-bottom: 150px; /* Espaço para o editor */
+            transition: background 0.3s;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
+        /* Bilíngue */
+        body.lang-pt .en-only { display: none !important; }
+        body.lang-en .pt-only { display: none !important; }
 
-        /* --- HEADER & NAV --- */
+        /* LAYOUT 70% (SOLICITADO) */
+        .container { 
+            width: 70%;      /* Largura fixa relativa */
+            max-width: 1200px; /* Trava máxima para telas gigantes */
+            min-width: 320px;
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+        .hidden { display: none !important; }
+
+        /* --- HEADER --- */
         header {
-            padding: 2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(18, 18, 18, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #333;
+            padding: 2.5rem 0; 
+            border-bottom: 2px solid var(--text); 
+            margin-bottom: 50px;
+            display: flex; justify-content: space-between; align-items: flex-end;
         }
+        
+        h1 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; line-height: 1; text-transform: uppercase; }
+        h2 { font-size: 1rem; color: var(--muted); font-weight: 400; margin-top: 5px; font-family: var(--serif); font-style: italic;}
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        nav { display: flex; gap: 30px; }
+        .nav-link { 
+            color: var(--muted); cursor: pointer; text-decoration: none; 
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+            padding-bottom: 2px; border-bottom: 2px solid transparent; transition: 0.3s;
         }
+        .nav-link:hover, .nav-link.active { color: var(--text); border-color: var(--text); }
+        .private-btn { color: #d68c00; } 
+        
+        /* Bandeiras */
+        .lang-icons { display: inline-flex; gap: 10px; margin-left: 15px; vertical-align: middle; }
+        .flag-icon { width: 22px; height: 16px; cursor: pointer; opacity: 0.3; transition: 0.3s; border: 1px solid #999; }
+        .flag-icon:hover { opacity: 1; }
+        body.lang-pt .flag-br { opacity: 1; border-color: #000; }
+        body.lang-en .flag-us { opacity: 1; border-color: #000; }
 
-        .logo span { color: var(--accent); }
-
-        nav ul { display: flex; gap: 2rem; }
-        nav a:hover { color: var(--accent); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 0 5%;
-            background: radial-gradient(circle at top right, #2a2a2a 0%, #121212 60%);
+        /* --- BANNER --- */
+        .banner-container {
+            width: 100%; height: 400px; overflow: hidden; margin-bottom: 60px; position: relative;
+            background: #e0e0e0;
         }
+        .banner-img { width: 100%; height: 100%; object-fit: cover; }
 
-        .hero h1 {
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            padding: 1rem 2rem;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cta-button:hover {
-            background: var(--accent);
-            color: #000;
-        }
-
-        /* --- SECTIONS GENERAL --- */
-        section { padding: 4rem 5%; }
+        /* --- GRID --- */
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            border-left: 4px solid var(--accent);
-            padding-left: 1rem;
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            border-bottom: 1px solid #ccc; padding-bottom: 15px; margin-bottom: 40px; margin-top: 80px;
+            display: flex; justify-content: space-between;
         }
 
-        /* --- PROJECTS GRID --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 4rem; }
+        
+        .project-card { cursor: pointer; transition: 0.3s; position: relative; }
+        .project-card:hover { opacity: 0.7; transform: translateY(-3px); }
+        
+        .thumb { 
+            width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; 
+            background: #ddd; margin-bottom: 15px; border: 1px solid rgba(0,0,0,0.1);
         }
+        .card-info h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
+        .card-info p { font-size: 0.85rem; color: var(--muted); font-family: var(--serif); }
 
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
+        /* --- BLOG / NOTES --- */
+        .blog-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 4rem;
         }
+        .blog-item { 
+            border: 1px solid rgba(0,0,0,0.05); padding: 20px; background: #fff; 
+            transition: 0.3s; cursor: pointer; position: relative;
+        }
+        .blog-item:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .blog-thumb { width: 100%; height: 200px; object-fit: cover; background: #eee; margin-bottom: 20px; }
+        .blog-title { font-size: 1.4rem; font-family: var(--serif); margin-bottom: 10px; line-height: 1.2; }
 
-        .project-card:hover { transform: translateY(-5px); }
+        /* --- GALERIA DE ARTE --- */
+        .art-gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start;
+        }
+        .art-item { margin-bottom: 20px; position: relative; }
+        .art-img { width: 100%; height: auto; display: block; background: #ddd; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background-color: #333;
-            object-fit: cover;
-            /* Placeholder pattern */
-            background-image: repeating-linear-gradient(45deg, #333 25%, transparent 25%, transparent 75%, #333 75%, #333), repeating-linear-gradient(45deg, #333 25%, #222 25%, #222 75%, #333 75%, #333);
-            background-position: 0 0, 10px 10px;
-            background-size: 20px 20px;
+        /* --- DETALHE DO PROJETO --- */
+        /* Importante: Flex para organizar os blocos adicionados verticalmente */
+        .detail-container { 
+            display: flex; flex-direction: column; gap: 30px; 
+            max-width: 100%; margin: 0 auto; 
         }
         
-        /* Se você tiver as imagens reais, use a tag img dentro da div ou substitua o background */
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .detail-header { text-align: left; border-bottom: 1px solid #ccc; padding-bottom: 30px; }
+        .detail-title { font-size: 3rem; margin-bottom: 10px; line-height: 1; font-family: var(--font); }
+        .detail-desc { font-size: 1.2rem; color: #444; font-family: var(--serif); line-height: 1.6; }
+
+        /* Blocos Genéricos (Adicionados pelo usuário) */
+        .generic-block { position: relative; width: 100%; }
+        .generic-text { 
+            font-family: var(--serif); font-size: 1.1rem; line-height: 1.6; color: #333; 
+            margin-bottom: 20px; min-height: 1em; white-space: pre-wrap;
+        }
+        .generic-img { 
+            width: 100%; height: auto; display: block; background: #eee; 
+            margin-bottom: 20px; cursor: pointer;
         }
 
-        .card-content { padding: 1.5rem; }
-        .card-title { font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: bold; }
-        .card-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
-        .card-tag { 
-            display: inline-block; 
-            padding: 0.2rem 0.6rem; 
-            background: #333; 
-            font-size: 0.75rem; 
-            border-radius: 4px; 
-            color: var(--accent);
+        .embed-area { 
+            width: 100%; background: #000; margin-bottom: 30px; 
+            display: flex; justify-content: center; align-items: center; position: relative;
         }
+        .embed-area iframe { width: 100%; height: auto; aspect-ratio: 16/9; }
 
-        /* --- GALLERY (MASONRY VIBE) --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-        .gallery-item {
-            background: #222;
-            height: 250px; /* Altura fixa para o exemplo */
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-weight: bold;
-            overflow: hidden;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.7;
-            transition: 0.3s;
-        }
-        .gallery-item:hover img { opacity: 1; transform: scale(1.05); }
+        /* --- SKETCHBOOK --- */
+        .sketch-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+        .sketch-item { aspect-ratio: 1/1; overflow: hidden; cursor: zoom-in; position: relative; border: 1px solid rgba(0,0,0,0.1); }
+        .sketch-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; filter: grayscale(100%); }
+        .sketch-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
 
-        /* --- CONTACT --- */
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 8px;
-            align-items: center;
-        }
+        /* --- CONTATO --- */
+        #contact-view { text-align: center; padding-top: 4rem; max-width: 500px; margin: 0 auto; }
+        .profile-pic { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; background: #ccc; margin-bottom: 2rem; border: 1px solid #999; }
+        .contact-text { font-size: 1.2rem; font-family: var(--serif); color: #333; margin-bottom: 3rem; }
         
-        .contact-info div { margin-bottom: 1rem; }
-        .contact-info strong { color: var(--accent); }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #555;
-            font-size: 0.8rem;
-            border-top: 1px solid #222;
-            margin-top: 2rem;
+        .btn-cv {
+            display: inline-block; padding: 12px 30px; background: #222; color: #fff;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 2rem;
+            text-decoration: none; transition: 0.3s; font-weight: bold;
         }
+        .btn-cv:hover { background: #555; }
+        .social-icons { display: flex; gap: 20px; justify-content: center; margin-top: 2rem; }
+        .social-icon { width: 24px; height: 24px; fill: #222; transition: 0.3s; }
+        .social-icon:hover { fill: #666; transform: scale(1.1); }
 
-        /* --- MOBILE --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            nav { display: none; } /* Simplificação para mobile */
-            .contact-container { flex-direction: column; }
+        /* --- EDITOR --- */
+        #editor-panel {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: #fff; border-top: 2px solid var(--highlight); padding: 10px 20px;
+            display: flex; gap: 10px; align-items: center; z-index: 9999;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05); font-family: sans-serif; flex-wrap: wrap;
+        }
+        .btn { padding: 8px 12px; border: 1px solid #ccc; font-weight: bold; cursor: pointer; border-radius: 2px; text-transform: uppercase; font-size: 0.7rem; background: #f9f9f9; }
+        .btn-main { background: var(--highlight); color: #fff; border: none; }
+        .delete-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; padding: 5px; z-index: 10; cursor: pointer; display: none; font-size: 10px; border-radius: 3px;}
+
+        /* Estados de Edição */
+        [contenteditable="true"] { outline: 1px dashed #aaa; background: rgba(255,255,0,0.05); cursor: text; }
+        [contenteditable="true"]:focus { outline: 2px solid var(--highlight); background: #fff; }
+        .editable-img:hover { outline: 3px solid var(--highlight); cursor: pointer; opacity: 0.7; }
+        .editable-link.editing { border: 1px dashed var(--highlight); cursor: pointer; background: rgba(0,0,255,0.05); }
+
+        /* LIGHTBOX */
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(244, 244, 240, 0.98); z-index: 5000; display: none; justify-content: center; align-items: center; cursor: zoom-out; }
+        #lightbox img { max-width: 90%; max-height: 90vh; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+
+        @media(max-width: 900px) { 
+            .container { width: 90%; } /* Mobile volta a ser largo */
+            .grid, .art-gallery-grid { grid-template-columns: 1fr 1fr; } 
+            .blog-grid { grid-template-columns: 1fr; }
+            .sketch-grid { grid-template-columns: repeat(3, 1fr); }
+            header { flex-direction: column; align-items: flex-start; gap: 20px; } 
+            nav { gap: 15px; flex-wrap: wrap;} 
         }
     </style>
 </head>
-<body>
+<body class="lang-pt">
 
-    <header>
-        <div class="logo">LUCCA<span>TUELHER</span></div>
-        <nav>
-            <ul>
-                <li><a href="#projects">Projetos</a></li>
-                <li><a href="#sketches">Sketches</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src="" class=""></div>
 
-    <section class="hero">
-        <h1>Storyboard Artist<br>& Visual Storyteller.</h1>
-        <p>Transformando roteiros em narrativas visuais. Especializado em animação, webseries e concepção de cenas.</p>
-        <a href="#projects" class="cta-button">Ver Portfolio</a>
-    </section>
+    <div class="container">
+        
+        <header>
+            <div style="padding-bottom: 5px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <h1 class="edit-text" contenteditable="false">LUCCA TUELHER</h1>
+                    <div class="lang-icons">
+                        <svg class="flag-icon flag-br" onclick="setLang('pt')" viewBox="0 0 640 480"><path fill="#009c3b" d="M0 0h640v480H0z"></path><path fill="#ffdf00" d="m320 42 272 198-272 198L48 240z"></path><circle cx="320" cy="240" r="121" fill="#002776"></circle><path fill="#fff" d="M320 220a133 133 0 0 0-109 59 135 135 0 0 1 230-22c-35-23-77-37-121-37"></path></svg>
+                        <svg class="flag-icon flag-us" onclick="setLang('en')" viewBox="0 0 640 480"><path fill="#bd3d44" d="M0 0h640v480H0"></path><path stroke="#fff" stroke-width="37" d="M0 55h640M0 129h640M0 203h640M0 277h640M0 351h640M0 425h640"></path><path fill="#192f5d" d="M0 0h288v259H0"></path><marker id="a" markerHeight="30" markerWidth="30"><path fill="#fff" d="m14 0 9 27L0 10h28L5 27z"></path></marker><path fill="none" marker-mid="url(#a)" d="m0 0 16 11h16 16 16 16 16l-80 20 16 11h16 16 16 16 16l-80 20 16 11h16 16 16 16 16l-80 20 16 11h16 16 16 16 16l-80 20 16 11h16 16 16 16 16"></path></svg>
+                    </div>
+                </div>
+                <h2 class="edit-text" contenteditable="false">Storyboard Artist &amp; Visual Storyteller</h2>
+            </div>
 
-    <section id="projects">
-        <h2 class="section-title">Projetos Selecionados</h2>
-        <div class="project-grid">
+            <nav>
+                <a onclick="goHome()" class="nav-link active" id="nav-work">Projects</a>
+                <a onclick="goGallery()" class="nav-link" id="nav-gallery">Art Gallery</a>
+                <a onclick="goBlog()" class="nav-link" id="nav-blog">Notes</a>
+                <a onclick="togglePrivate()" class="nav-link private-btn" id="nav-private">Restricted</a>
+                <a onclick="goToContact()" class="nav-link" id="nav-contact">Contact</a>
+            </nav>
+        </header>
+
+        <div id="home-view" class="">
+            <div class="banner-container">
+                <img src="https://via.placeholder.com/1600x450/ccc/555" class="banner-img" alt="Banner">
+            </div>
+
+            <div id="video-area" style="margin-bottom: 80px;">
+                <div class="embed-area edit-embed" style="border: medium;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <span class="pt-only edit-text" contenteditable="false">Projetos Selecionados</span>
+                <span class="en-only edit-text" contenteditable="false">Selected Projects</span>
+            </div>
             
-            <div class="project-card">
-                <div class="card-image">
-                    <img src="https://via.placeholder.com/600x400/333/555?text=Deadlock+Tales" alt="Deadlock Tales">
+            <div id="public-grid" class="grid">
                 </div>
-                <div class="card-content">
-                    <span class="card-tag">Webseries</span>
-                    <h3 class="card-title">Deadlock Tales</h3>
-                    <p class="card-desc">Inspirado nos personagens do jogo Deadlock. Acompanhe o assalto a banco de Shiv e Infernus tentando mudar de vida.</p>
-                </div>
+
+            <div class="section-title">
+                <span class="pt-only edit-text" contenteditable="false">Sketchbook</span>
+                <span class="en-only edit-text" contenteditable="false">Sketchbook</span>
             </div>
 
-            <div class="project-card">
-                <div class="card-image">
-                    <img src="https://via.placeholder.com/600x400/333/555?text=Rina+e+Coelhao" alt="Rina e Coelhão">
+            <div id="sketch-grid" class="sketch-grid">
                 </div>
-                <div class="card-content">
-                    <span class="card-tag">Animatic</span>
-                    <h3 class="card-title">Rina e Coelhão</h3>
-                    <p class="card-desc">IP criada por Ricardo Sasaki. Um animatic de corrida feito para workshop. Quem vencerá?</p>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="card-image">
-                    <img src="https://via.placeholder.com/600x400/333/555?text=Dungeon+Catty" alt="Dungeon Catty">
-                </div>
-                <div class="card-content">
-                    <span class="card-tag">3D Shortfilm</span>
-                    <h3 class="card-title">Dungeon Catty</h3>
-                    <p class="card-desc">As aventuras de um gato corajoso procurando sua próxima refeição em uma masmorra.</p>
-                </div>
-            </div>
-
         </div>
-    </section>
 
-    <section id="sketches">
-        <h2 class="section-title">Sketchbook & Estudos</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/222/444?text=Study+1" alt="Sketch"></div>
-            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/222/444?text=Study+2" alt="Sketch"></div>
-            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/222/444?text=Study+3" alt="Sketch"></div>
-            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/222/444?text=Study+4" alt="Sketch"></div>
-            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/222/444?text=Study+5" alt="Sketch"></div>
-            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/222/444?text=Study+6" alt="Sketch"></div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2 class="section-title">Vamos trabalhar juntos?</h2>
-        <div class="contact-container">
-            <div style="flex: 1;">
-                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Lucca Tuelher</h3>
-                <p style="color: #ccc; margin-bottom: 2rem;">
-                    Storyteller visual focado em composição, atuação e clareza narrativa. 
-                    Disponível para projetos freelance e estúdios.
-                </p>
-                <div class="contact-info">
-                    <div><strong>Email:</strong> luccatuelher@yahoo.com</div>
-                    <div><strong>Telefone:</strong> +55 (48) 99120-4688</div>
-                    <div><strong>Social:</strong> <a href="https://www.linkedin.com/in/lucca-tuelher-757a08253/" target="_blank" style="text-decoration: underline;">LinkedIn</a></div>
-                </div>
+        <div id="gallery-view" class="hidden">
+            <div style="margin-top: 4rem; text-align: center; margin-bottom: 4rem;">
+                <h1 class="pt-only">Galeria de Arte</h1>
+                <h1 class="en-only">Art Gallery</h1>
+                <p style="color:var(--muted); font-family:var(--serif); margin-top:10px;" class="edit-text" contenteditable="false">Coleção de ilustrações e processos.</p>
             </div>
-            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                <div style="width: 200px; height: 200px; background: #333; border-radius: 50%; overflow: hidden; border: 4px solid var(--accent);">
-                    <img src="https://via.placeholder.com/200?text=Lucca" alt="Lucca Tuelher" style="width: 100%; height: 100%; object-fit: cover;">
+            
+            <div id="art-gallery-container" class="art-gallery-grid">
                 </div>
+        </div>
+
+        <div id="blog-view" class="hidden">
+            <div style="margin-top: 4rem; text-align: center; margin-bottom: 4rem;">
+                <h1 class="pt-only">Notas</h1>
+                <h1 class="en-only">Notes</h1>
+            </div>
+            <div id="blog-grid-container" class="blog-grid"></div>
+        </div>
+
+        <div id="private-view" class="hidden">
+            <div style="margin-top: 4rem; text-align: center; margin-bottom: 4rem;">
+                <h1 style="color: #d68c00;">NDA / Private</h1>
+            </div>
+            <div id="private-grid" class="grid"></div>
+        </div>
+
+        <div id="detail-view" class="hidden project-detail">
+            <div onclick="goBack()" class="back-btn" style="margin-top: 20px;">
+                <span class="pt-only">← Voltar</span><span class="en-only">← Back</span>
+            </div>
+            <div id="detail-content" class="detail-container"></div>
+        </div>
+
+        <div id="contact-view" class="hidden">
+            <img src="https://via.placeholder.com/150" class="profile-pic" alt="Profile">
+            <div class="contact-text">
+                <div class="edit-text pt-only" contenteditable="false">Disponível para Freelance.</div>
+                <div class="edit-text en-only" contenteditable="false">Available for Freelance.</div>
+                <div class="edit-text" contenteditable="false" style="margin-top: 10px; font-weight: bold;">luccatuelher@yahoo.com</div>
+            </div>
+            <a href="cv.pdf" class="btn-cv editable-link" target="_blank"><span class="pt-only">Baixar CV</span><span class="en-only">Download CV</span></a>
+            <div class="social-icons">
+                <a href="#" class="editable-link"><svg class="social-icon" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg></a>
+                <a href="#" class="editable-link"><svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg></a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 Lucca Tuelher. Todos os direitos reservados.</p>
-    </footer>
+    <div id="editor-panel">
+        <strong style="color:#222;">EDITOR:</strong>
+        <button onclick="toggleEdit()" id="btn-toggle" class="btn btn-main" style="background: var(--highlight);">ATIVAR EDIÇÃO</button>
+        <div id="edit-tools" style="display: none; gap: 10px; align-items: center;">
+            <span style="color:#ccc;">|</span>
+            <button onclick="addProject('public')" class="btn">+ Public Proj</button>
+            <button onclick="addProject('private')" class="btn" style="color:#d68c00;">+ Private Proj</button>
+            <button onclick="addPost()" class="btn">+ Post</button>
+            <button onclick="addGalleryItem()" class="btn">+ Gallery Art</button>
+            <button onclick="addSketch()" class="btn">+ Sketch</button>
+            <span style="color:#ccc;">|</span>
+            <button onclick="addBlock('text')" class="btn btn-main" style="background:#555;">+ TXT</button>
+            <button onclick="addBlock('image')" class="btn btn-main" style="background:#555;">+ IMG</button>
+            <span style="color:#ccc;">|</span>
+            <button onclick="exportJSON()" class="btn">Backup</button>
+            <button onclick="importJSON()" class="btn">Restaurar</button>
+            <button onclick="downloadSite()" class="btn btn-main" style="background:#222;">💾 SALVAR</button>
+        </div>
+    </div>
 
-</body>
-</html>
+    <input type="file" id="file-input" style="display:none;">
+    <input type="file" id="json-input" style="display:none;" accept=".json">
+
+    <script>
+        const SITE_PASSWORD = "nda";
+        let isEditing = false, currentImg = null, currentLang = 'pt', previousView = 'home';
+
+        const views = { home: document.getElementById('home-view'), blog: document.getElementById('blog-view'), gallery: document.getElementById('gallery-view'), private: document.getElementById('private-view'), detail: document.getElementById('detail-view'), contact: document.getElementById('contact-view') };
+        const navs = { work: document.getElementById('nav-work'), blog: document.getElementById('nav-blog'), gallery: document.getElementById('nav-gallery'), private: document.getElementById('nav-private'), contact: document.getElementById('nav-contact') };
+
+        function setLang(lang) { currentLang = lang; document.body.className = 'lang-' + currentLang; }
+        function resetViews() { Object.values(views).forEach(el => el.classList.add('hidden')); Object.values(navs).forEach(el => el.classList.remove('active')); window.scrollTo(0,0); }
+        function goHome() { resetViews(); views.home.classList.remove('hidden'); navs.work.classList.add('active'); previousView = 'home'; }
+        function goBlog() { resetViews(); views.blog.classList.remove('hidden'); navs.blog.classList.add('active'); previousView = 'blog'; }
+        function goGallery() { resetViews(); views.gallery.classList.remove('hidden'); navs.gallery.classList.add('active'); previousView = 'gallery'; }
+        function goToContact() { resetViews(); views.contact.classList.remove('hidden'); navs.contact.classList.add('active'); }
+        function togglePrivate() { if(isEditing) { resetViews(); views.private.classList.remove('hidden'); return; } if (views.private.classList.contains('hidden')) { const pass = prompt("Senha / Password:"); if(pass === SITE_PASSWORD) { resetViews(); views.private.classList.remove('hidden'); navs.private.classList.add('active'); previousView = 'private'; } else { alert("Acesso Negado."); } } }
+        function goBack() { if(previousView === 'blog') goBlog(); else if(previousView === 'gallery') goGallery(); else if(previousView === 'private') { resetViews(); views.private.classList.remove('hidden'); navs.private.classList.add('active'); } else goHome(); }
+        
+        // Abre um item detalhado e MOVE o conteúdo para a view de detalhe
+        function openItem(id) { 
+            const contentDiv = document.getElementById('detail-content'); 
+            const sourceContent = document.getElementById('data-' + id); 
+            resetViews(); 
+            views.detail.classList.remove('hidden'); 
+            // Movemos o elemento real para preservar as edições
+            contentDiv.innerHTML = ""; 
+            sourceContent.classList.remove('hidden'); 
+            contentDiv.appendChild(sourceContent); 
+        }
+
+        function toggleEdit() {
+            isEditing = !isEditing;
+            const btn = document.getElementById('btn-toggle');
+            const tools = document.getElementById('edit-tools');
+            if(isEditing) { btn.innerText = "PARAR"; btn.style.background = "#ccc"; tools.style.display = 'flex'; document.body.classList.add('editing-mode'); enableEditing(true); } 
+            else { btn.innerText = "ATIVAR EDIÇÃO"; btn.style.background = "var(--highlight)"; tools.style.display = 'none'; document.body.classList.remove('editing-mode'); enableEditing(false); }
+        }
+
+        function enableEditing(enable) {
+            document.querySelectorAll('.edit-text').forEach(el => el.contentEditable = enable);
+            document.querySelectorAll('img').forEach(img => {
+                if(enable) { img.classList.add('editable-img'); img.onclick = function() { uploadImg(this); }; } 
+                else { img.classList.remove('editable-img'); 
+                    if(img.parentElement.classList.contains('sketch-item')) { img.onclick = function() { document.getElementById('lightbox-img').src = this.src; document.getElementById('lightbox').style.display = 'flex'; }; }
+                    else img.onclick = null; }
+            });
+            document.querySelectorAll('.edit-embed').forEach(div => {
+                if(enable) { div.onclick = function() { const code = prompt("Embed Code / Link:", ""); if(code) { if(code.includes('<iframe')) div.innerHTML = code; else { let embedSrc = code.replace('watch?v=', 'embed/'); div.innerHTML = `<iframe width="560" height="315" src="${embedSrc}" frameborder="0" allowfullscreen></iframe>`; } } }; div.style.border = "1px dashed blue"; } else { div.onclick = null; div.style.border = "none"; }
+            });
+            document.querySelectorAll('.delete-btn').forEach(btn => { btn.style.display = enable ? 'block' : 'none'; });
+            document.querySelectorAll('.editable-link').forEach(link => { if(enable) { link.classList.add('editing'); link.onclick = (e) => { e.preventDefault(); const newUrl = prompt("Novo Link:", link.href); if(newUrl) link.href = newUrl; }; } else { link.classList.remove('editing'); link.onclick = null; } });
+        }
+
+        function uploadImg(imgElement) { if(!isEditing) return; currentImg = imgElement; document.getElementById('file-input').click(); }
+        document.getElementById('file-input').addEventListener('change', function(e){ if(e.target.files && e.target.files[0]) { currentImg.src = e.target.files[0].name; alert("Imagem definida. Mova o arquivo para a pasta."); } });
+
+        function createWrapper(id, innerHTML) { const wrapper = document.createElement('div'); wrapper.id = `data-${id}`; wrapper.className = 'hidden'; wrapper.innerHTML = innerHTML; document.body.appendChild(wrapper); }
+
+        function addProject(type) {
+            const id = 'proj_' + Date.now();
+            const grid = type === 'public' ? document.getElementById('public-grid') : document.getElementById('private-grid');
+            const card = document.createElement('div'); card.className = 'project-card'; card.setAttribute('onclick', `openItem('${id}')`);
+            card.innerHTML = `<button class="delete-btn" onclick="event.stopPropagation(); this.parentElement.remove(); document.getElementById('data-${id}').remove();">X</button><img src="https://via.placeholder.com/600x338" class="thumb"><div class="card-info"><h4 class="edit-text pt-only" contenteditable="true">Novo Projeto</h4><h4 class="edit-text en-only" contenteditable="true">New Project</h4><p class="edit-text pt-only" contenteditable="true">Categoria</p><p class="edit-text en-only" contenteditable="true">Category</p></div>`;
+            const content = `<div class="detail-header"><h1 class="detail-title edit-text pt-only" contenteditable="true">Título PT</h1><h1 class="detail-title edit-text en-only" contenteditable="true">Title EN</h1><div class="detail-desc edit-text pt-only" contenteditable="true">Descrição...</div><div class="detail-desc edit-text en-only" contenteditable="true">Description...</div></div><div class="embed-area edit-embed" style="color:#aaa;">[ Embed Code / Video ]</div><div class="generic-block"><button class="delete-btn" onclick="this.parentElement.remove();">X</button><img src="https://via.placeholder.com/1000x600" class="generic-img editable-img"></div>`;
+            createWrapper(id, content); grid.appendChild(card); if(isEditing) enableEditing(true);
+        }
+
+        function addPost() {
+            const id = 'post_' + Date.now();
+            const grid = document.getElementById('blog-grid-container');
+            const item = document.createElement('div'); item.className = 'blog-item'; item.setAttribute('onclick', `openItem('${id}')`);
+            item.innerHTML = `<button class="delete-btn" onclick="event.stopPropagation(); this.parentElement.remove(); document.getElementById('data-${id}').remove();">X</button><img src="https://via.placeholder.com/400x250" class="blog-thumb editable-img"><span class="blog-date edit-text" contenteditable="true">01 JAN 2026</span><h3 class="blog-title edit-text pt-only" contenteditable="true">Título do Post (PT)</h3><h3 class="blog-title edit-text en-only" contenteditable="true">Post Title (EN)</h3><div class="blog-excerpt edit-text pt-only" contenteditable="true">Resumo...</div><div class="blog-excerpt edit-text en-only" contenteditable="true">Excerpt...</div>`;
+            const content = `<div class="detail-header"><h1 class="detail-title edit-text pt-only" contenteditable="true">Título Completo PT</h1><h1 class="detail-title edit-text en-only" contenteditable="true">Full Title EN</h1><br><div class="detail-desc edit-text pt-only" contenteditable="true"><p>Texto em português...</p></div><div class="detail-desc edit-text en-only" contenteditable="true"><p>Text in English...</p></div></div><div class="generic-block"><button class="delete-btn" onclick="this.parentElement.remove();">X</button><img src="https://via.placeholder.com/1000x600" class="generic-img editable-img"></div>`;
+            createWrapper(id, content); grid.prepend(item); if(isEditing) enableEditing(true);
+        }
+
+        function addGalleryItem() {
+            const grid = document.getElementById('art-gallery-container');
+            const item = document.createElement('div'); item.className = 'art-item';
+            item.innerHTML = `<button class="delete-btn" onclick="this.parentElement.remove();">X</button><img src="https://via.placeholder.com/400x600" class="art-img editable-img"><div class="art-desc edit-text pt-only" contenteditable="true">Descrição da arte...</div><div class="art-desc edit-text en-only" contenteditable="true">Art description...</div>`;
+            grid.appendChild(item); if(isEditing) enableEditing(true);
+        }
+
+        function addSketch() { const grid = document.getElementById('sketch-grid'); const item = document.createElement('div'); item.className = 'sketch-item'; item.innerHTML = `<button class="delete-btn" onclick="this.parentElement.remove()">X</button><img src="https://via.placeholder.com/400">`; grid.appendChild(item); if(isEditing) enableEditing(true); }
+
+        // --- FUNÇÕES DE BLOCO GENÉRICO (+ IMG / + TXT) ---
+        function getActiveContainer() {
+            // Verifica se está dentro de um projeto/post
+            if (!views.detail.classList.contains('hidden')) {
+                // Encontra o wrapper de dados atual dentro da view de detalhe
+                return document.querySelector('#detail-content > div[id^="data-"]'); 
+            }
+            // Verifica se está na galeria de arte
+            if (!views.gallery.classList.contains('hidden')) {
+                return document.getElementById('art-gallery-container');
+            }
+            return null;
+        }
+
+        function addBlock(type) {
+            const container = getActiveContainer();
+            if(!container) {
+                alert("Abra um Projeto, Post ou a Galeria de Arte para adicionar conteúdo.");
+                return;
+            }
+
+            const div = document.createElement('div');
+            
+            if(type === 'image') {
+                if(container.id === 'art-gallery-container') {
+                    // Se for na Galeria de Arte, usa o formato Masonry
+                    div.className = 'art-item';
+                    div.innerHTML = `<button class="delete-btn" onclick="this.parentElement.remove();">X</button><img src="https://via.placeholder.com/400x600" class="art-img editable-img"><div class="art-desc edit-text pt-only" contenteditable="true">Descrição...</div><div class="art-desc edit-text en-only" contenteditable="true">Description...</div>`;
+                } else {
+                    // Se for Projeto/Post, usa bloco genérico full width
+                    div.className = 'generic-block';
+                    div.innerHTML = `<button class="delete-btn" onclick="this.parentElement.remove();">X</button><img src="https://via.placeholder.com/1000x600" class="generic-img editable-img">`;
+                }
+            } else if (type === 'text') {
+                 if(container.id === 'art-gallery-container') {
+                    alert("A Galeria de Arte suporta apenas imagens com legendas. Use um Projeto para textos longos.");
+                    return;
+                 }
+                 div.className = 'generic-block';
+                 div.innerHTML = `<button class="delete-btn" onclick="this.parentElement.remove();">X</button><div class="generic-text edit-text" contenteditable="true">Novo bloco de texto. Clique para editar.</div>`;
+            }
+
+            container.appendChild(div);
+            if(isEditing) enableEditing(true);
+        }
+
+        function downloadSite() { if(isEditing) toggleEdit(); goHome(); const html = document.documentElement.outerHTML; const blob = new Blob([html], {type: 'text/html'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'index.html'; a.click(); }
+        function exportJSON() { const data = { publicGrid: document.getElementById('public-grid').innerHTML, privateGrid: document.getElementById('private-grid').innerHTML, blogGrid: document.getElementById('blog-grid-container').innerHTML, artGrid: document.getElementById('art-gallery-container').innerHTML, sketchGrid: document.getElementById('sketch-grid').innerHTML, hiddenData: Array.from(document.querySelectorAll('body > div[id^="data-"]')).map(el => el.outerHTML).join('') }; const blob = new Blob([JSON.stringify(data)], {type: 'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'portfolio_data.json'; a.click(); }
+        function importJSON() { document.getElementById('json-input').click(); }
+        document.getElementById('json-input').addEventListener('change', function(e) { 
+            const reader = new FileReader(); reader.onload = function(e) { 
+                const data = JSON.parse(e.target.result); 
+                document.getElementById('public-grid').innerHTML = data.publicGrid; 
+                document.getElementById('private-grid').innerHTML = data.privateGrid; 
+                document.getElementById('blog-grid-container').innerHTML = data.blogGrid || ""; 
+                document.getElementById('art-gallery-container').innerHTML = data.artGrid || ""; 
+                document.getElementById('sketch-grid').innerHTML = data.sketchGrid; 
+                document.querySelectorAll('body > div[id^="data-"]').forEach(el => el.remove()); 
+                const temp = document.createElement('div'); temp.innerHTML = data.hiddenData; Array.from(temp.children).forEach(child => document.body.appendChild(child)); 
+                alert("Dados restaurados!"); 
+            }; reader.readAsText(e.target.files[0]); 
+        });
+    </script>
+
+</body></html>
