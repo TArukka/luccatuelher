@@ -731,6 +731,59 @@
         }
 
         /* EDITOR-ONLY-START */
+        /* Star / feature button on project cards */
+        .star-btn {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid var(--rule);
+            border-radius: 2px;
+            width: 28px;
+            height: 28px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-pale);
+            z-index: 5;
+            transition: color 0.2s, background 0.2s;
+            line-height: 1;
+            padding: 0;
+        }
+        .star-btn:hover { color: #c8a000; background: #fff; }
+        .star-btn.star-on { color: #c8a000; background: #fffbe6; border-color: #c8a000; }
+
+        /* Show star button only in editing mode */
+        body.editing-mode .star-btn { display: flex; }
+
+        /* Hint shown only in editing mode */
+        .editor-only-el { display: none; }
+        body.editing-mode .editor-only-el { display: block; }
+
+        /* Embed edit button */
+        .embed-edit-btn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--ink);
+            color: var(--white);
+            border: none;
+            padding: 6px 12px;
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            z-index: 20;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.15s;
+        }
+        .embed-edit-btn:hover { background: var(--accent2); }
+
         /* ========================================
            FREE BLOCKS — drag, resize, toolbar
            ======================================== */
@@ -1272,8 +1325,8 @@
         <!-- HEADER -->
         <header>
             <div class="header-identity">
-                <div class="header-name edit-text" contenteditable="false">Lucca Tuelher</div>
-                <div class="header-role edit-text" contenteditable="false">Storyboard Artist &amp; Visual Storyteller</div>
+                <div class="header-name edit-text" contenteditable="false" data-save-id="header-name">Lucca Tuelher</div>
+                <div class="header-role edit-text" contenteditable="false" data-save-id="header-role">Storyboard Artist &amp; Visual Storyteller</div>
             </div>
             <div class="header-right">
                 <div class="lang-icons">
@@ -1282,8 +1335,12 @@
                 </div>
                 <nav>
                     <a onclick="goHome()" class="nav-link active" id="nav-work">
+                        <span class="pt-only">Home</span>
+                        <span class="en-only">Home</span>
+                    </a>
+                    <a onclick="goProjects()" class="nav-link" id="nav-projects">
                         <span class="pt-only">Projetos</span>
-                        <span class="en-only">Work</span>
+                        <span class="en-only">Projects</span>
                     </a>
                     <a onclick="goGallery()" class="nav-link" id="nav-gallery">
                         <span class="pt-only">Galeria</span>
@@ -1326,13 +1383,14 @@
             </div>
 
             <div class="section-title">
-                <span class="section-label pt-only">Projetos Selecionados</span>
-                <span class="section-label en-only">Selected Work</span>
+                <span class="section-label pt-only">Selecionados</span>
+                <span class="section-label en-only">Featured</span>
                 <div class="section-rule"></div>
                 <span class="section-num" id="proj-count">—</span>
             </div>
 
-            <div id="public-grid" class="project-grid"></div>
+            <!-- Home shows only featured cards (max 3), populated by renderFeatured() -->
+            <div id="featured-grid" class="project-grid"></div>
 
             <div class="section-title">
                 <span class="section-label">Sketchbook</span>
@@ -1342,6 +1400,20 @@
 
             <div id="sketch-grid" class="sketch-grid"></div>
 
+        </div>
+
+        <!-- PROJECTS VIEW — all projects, with featured picker -->
+        <div id="projects-view" class="hidden">
+            <div class="section-title" style="margin-top: 3rem;">
+                <span class="section-label pt-only">Todos os Projetos</span>
+                <span class="section-label en-only">All Projects</span>
+                <div class="section-rule"></div>
+                <span class="section-num" id="all-proj-count">—</span>
+            </div>
+            <p id="featured-hint" style="font-family:var(--mono);font-size:0.7rem;color:var(--ink-pale);letter-spacing:0.08em;margin-bottom:28px;" class="editor-only-el">
+                Clique em ★ para destacar na Home (máx. 3) / Click ★ to feature on Home (max 3)
+            </p>
+            <div id="public-grid" class="project-grid"></div>
         </div>
 
         <!-- GALLERY VIEW -->
@@ -1399,7 +1471,7 @@
                 <div class="contact-body edit-text en-only" contenteditable="false">
                     Available for freelance projects in storyboard, animation, and visual development.
                 </div>
-                <a href="mailto:luccatuelher@yahoo.com" class="contact-email editable-link">luccatuelher@yahoo.com</a>
+                <a href="/cdn-cgi/l/email-protection#543821373735202131383c3126142d353c3b3b7a373b39" class="contact-email editable-link"><span class="__cf_email__" data-cfemail="d5b9a0b6b6b4a1a0b0b9bdb0a795acb4bdbabafbb6bab8">[email&#160;protected]</span></a>
                 <div style="margin-top: 32px;">
                     <a href="cv.pdf" class="btn-cv editable-link" target="_blank">
                         <span class="pt-only">Baixar CV</span>
@@ -1440,7 +1512,7 @@
             <button onclick="openSyncModal()" class="btn" id="btn-sync" style="display:flex;align-items:center;gap:5px;">
                 <span class="sync-dot" id="sync-dot"></span>☁ Gist Sync
             </button>
-            <button onclick="downloadSite()" class="btn btn-save" title="Salva o arquivo editor.html com todas as funções de edição">💾 Salvar Editor</button>
+            <button onclick="downloadSite()" id="btn-save" class="btn btn-save" title="Salva no navegador (localStorage) — sem precisar baixar arquivo">💾 Salvar</button>
             <button onclick="publishSite()" class="btn" style="background:var(--accent);border-color:var(--accent);color:#fff;" title="Gera portfolio-publico.html sem modo de edição">🚀 Publicar Agora</button>
         </div>
     </div>
@@ -1525,7 +1597,7 @@
     <input type="file" id="file-input" style="display:none;" accept="image/*">
     <input type="file" id="json-input" style="display:none;" accept=".json">
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // ============================================
         // CONSTANTS & STATE
         // ============================================
@@ -1537,19 +1609,21 @@
 
         // DOM refs
         const views = {
-            home: document.getElementById('home-view'),
-            blog: document.getElementById('blog-view'),
-            gallery: document.getElementById('gallery-view'),
-            private: document.getElementById('private-view'),
-            detail: document.getElementById('detail-view'),
-            contact: document.getElementById('contact-view')
+            home:     document.getElementById('home-view'),
+            projects: document.getElementById('projects-view'),
+            blog:     document.getElementById('blog-view'),
+            gallery:  document.getElementById('gallery-view'),
+            private:  document.getElementById('private-view'),
+            detail:   document.getElementById('detail-view'),
+            contact:  document.getElementById('contact-view')
         };
         const navs = {
-            work: document.getElementById('nav-work'),
-            blog: document.getElementById('nav-blog'),
-            gallery: document.getElementById('nav-gallery'),
-            private: document.getElementById('nav-private'),
-            contact: document.getElementById('nav-contact')
+            work:     document.getElementById('nav-work'),
+            projects: document.getElementById('nav-projects'),
+            blog:     document.getElementById('nav-blog'),
+            gallery:  document.getElementById('nav-gallery'),
+            private:  document.getElementById('nav-private'),
+            contact:  document.getElementById('nav-contact')
         };
 
         // ============================================
@@ -1565,6 +1639,17 @@
                 img.onclick = () => openLightbox(img.src);
             });
 
+            // Restore star states from localStorage
+            const featured = getFeaturedIds();
+            document.querySelectorAll('.star-btn').forEach(btn => {
+                const card = btn.closest('.project-card');
+                if (card && featured.includes(card.dataset.itemId)) {
+                    btn.classList.add('star-on');
+                    btn.title = 'Remover destaque';
+                }
+            });
+
+            renderFeatured();
             updateCounts();
         }
 
@@ -1594,9 +1679,10 @@
             if (navKey && navs[navKey]) navs[navKey].classList.add('active');
         }
 
-        function goHome()      { showView('home', 'work');       previousView = 'home'; updateCounts(); }
-        function goBlog()      { showView('blog', 'blog');       previousView = 'blog'; updateCounts(); }
-        function goGallery()   { showView('gallery', 'gallery'); previousView = 'gallery'; }
+        function goHome()      { showView('home', 'work');         previousView = 'home'; renderFeatured(); updateCounts(); }
+        function goProjects()  { showView('projects', 'projects'); previousView = 'projects'; updateCounts(); }
+        function goBlog()      { showView('blog', 'blog');         previousView = 'blog'; updateCounts(); }
+        function goGallery()   { showView('gallery', 'gallery');   previousView = 'gallery'; }
         function goToContact() { showView('contact', 'contact'); }
 
         function togglePrivate() {
@@ -1612,10 +1698,72 @@
         }
 
         function goBack() {
-            if (previousView === 'blog')    goBlog();
-            else if (previousView === 'gallery') goGallery();
-            else if (previousView === 'private') { showView('private', 'private'); }
+            if (previousView === 'blog')         goBlog();
+            else if (previousView === 'gallery')  goGallery();
+            else if (previousView === 'projects') goProjects();
+            else if (previousView === 'private')  { showView('private', 'private'); }
             else goHome();
+        }
+
+        // ============================================
+        // FEATURED PROJECTS (Home shows max 3)
+        // ============================================
+
+        // Returns array of featured project IDs (stored in localStorage)
+        function getFeaturedIds() {
+            try { return JSON.parse(localStorage.getItem('portfolio_featured') || '[]'); }
+            catch(e) { return []; }
+        }
+        function saveFeaturedIds(ids) {
+            localStorage.setItem('portfolio_featured', JSON.stringify(ids));
+        }
+
+        // Toggle featured state of a project card
+        function toggleFeatured(id, btn) {
+            let featured = getFeaturedIds();
+            if (featured.includes(id)) {
+                featured = featured.filter(f => f !== id);
+                btn.classList.remove('star-on');
+                btn.title = 'Destacar na Home';
+            } else {
+                if (featured.length >= 3) {
+                    alert('Máximo 3 projetos em destaque na Home.\nRemova um antes de adicionar outro.');
+                    return;
+                }
+                featured.push(id);
+                btn.classList.add('star-on');
+                btn.title = 'Remover destaque';
+            }
+            saveFeaturedIds(featured);
+            renderFeatured();
+            updateCounts();
+        }
+
+        // Rebuild the featured-grid on Home from the full public-grid
+        function renderFeatured() {
+            const featuredGrid = document.getElementById('featured-grid');
+            if (!featuredGrid) return;
+            const featured = getFeaturedIds();
+            const allCards = Array.from(document.querySelectorAll('#public-grid .project-card'));
+
+            featuredGrid.innerHTML = '';
+
+            // If no featured set yet, show the first 3 cards
+            const toShow = featured.length > 0
+                ? allCards.filter(c => featured.includes(c.dataset.itemId))
+                : allCards.slice(0, 3);
+
+            toShow.forEach(originalCard => {
+                // Clone the card (visual copy only, no star button)
+                const clone = originalCard.cloneNode(true);
+                clone.querySelectorAll('.delete-btn, .star-btn').forEach(el => el.remove());
+                // Re-attach click delegation via data-item-id
+                featuredGrid.appendChild(clone);
+            });
+
+            // Update featured count label
+            const pc = document.getElementById('proj-count');
+            if (pc) pc.textContent = toShow.length > 0 ? String(toShow.length).padStart(2,'0') : '—';
         }
 
         function openItem(id) {
@@ -1645,17 +1793,19 @@
         // COUNTS
         // ============================================
         function updateCounts() {
-            const projCount = document.querySelectorAll('#public-grid .project-card').length;
-            const sketchCount = document.querySelectorAll('#sketch-grid .sketch-item').length;
-            const blogCount = document.querySelectorAll('#blog-grid-container .blog-item').length;
+            const allProjCount   = document.querySelectorAll('#public-grid .project-card').length;
+            const sketchCount    = document.querySelectorAll('#sketch-grid .sketch-item').length;
+            const blogCount      = document.querySelectorAll('#blog-grid-container .blog-item').length;
 
-            const pc = document.getElementById('proj-count');
-            const sc = document.getElementById('sketch-count');
-            const bc = document.getElementById('blog-count');
+            const apc = document.getElementById('all-proj-count');
+            const sc  = document.getElementById('sketch-count');
+            const bc  = document.getElementById('blog-count');
 
-            if (pc) pc.textContent = projCount > 0 ? String(projCount).padStart(2, '0') : '—';
-            if (sc) sc.textContent = sketchCount > 0 ? String(sketchCount).padStart(2, '0') : '—';
-            if (bc) bc.textContent = blogCount > 0 ? String(blogCount).padStart(2, '0') : '—';
+            if (apc) apc.textContent = allProjCount > 0 ? String(allProjCount).padStart(2,'0') : '—';
+            if (sc)  sc.textContent  = sketchCount  > 0 ? String(sketchCount).padStart(2,'0')  : '—';
+            if (bc)  bc.textContent  = blogCount     > 0 ? String(blogCount).padStart(2,'0')    : '—';
+
+            // proj-count on home is set by renderFeatured()
         }
 
         // ============================================
@@ -1702,25 +1852,22 @@
                 }
             });
 
-            // Embeds
+            // Embeds — show/hide the edit-embed-btn overlay
             document.querySelectorAll('.edit-embed').forEach(div => {
+                let btn = div.parentElement.querySelector('.embed-edit-btn');
                 if (enable) {
-                    div.style.outline = '2px dashed rgba(45,90,142,0.5)';
-                    div.style.cursor = 'pointer';
-                    div.onclick = () => {
-                        const code = prompt("Cole o Embed Code ou URL do YouTube:", "");
-                        if (!code) return;
-                        if (code.includes('<iframe')) {
-                            div.innerHTML = code;
-                        } else {
-                            const src = code.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/');
-                            div.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
-                        }
-                    };
+                    div.style.outline = '2px dashed rgba(45,90,142,0.4)';
+                    if (!btn) {
+                        btn = document.createElement('button');
+                        btn.className = 'embed-edit-btn';
+                        btn.innerHTML = '✏ Editar vídeo';
+                        btn.onclick = () => promptEmbed(div);
+                        div.parentElement.appendChild(btn);
+                    }
+                    btn.style.display = 'flex';
                 } else {
                     div.style.outline = '';
-                    div.style.cursor = '';
-                    div.onclick = null;
+                    if (btn) btn.style.display = 'none';
                 }
             });
 
@@ -1743,6 +1890,21 @@
                     link.onclick = null;
                 }
             });
+        }
+
+        function promptEmbed(div) {
+            const current = div.querySelector('iframe')?.src || '';
+            const code = prompt("Cole a URL do YouTube ou embed code:", current);
+            if (!code) return;
+            if (code.includes('<iframe')) {
+                div.innerHTML = code;
+            } else {
+                const src = code
+                    .replace('watch?v=', 'embed/')
+                    .replace('youtu.be/', 'www.youtube.com/embed/');
+                div.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+            }
+            autoSave();
         }
 
         // ============================================
@@ -1783,22 +1945,22 @@
                 ? document.getElementById('public-grid')
                 : document.getElementById('private-grid');
 
-            // Card
             const card = document.createElement('div');
             card.className = 'project-card';
-            card.setAttribute('onclick', `openItem('${id}')`);
+            card.dataset.itemId = id;
             card.innerHTML = `
-                <button class="delete-btn" onclick="event.stopPropagation(); this.parentElement.remove(); const d=document.getElementById('data-${id}'); if(d) d.remove(); updateCounts();">DEL</button>
+                <button class="delete-btn" onclick="event.stopPropagation(); this.closest('.project-card').remove(); const d=document.getElementById('data-${id}'); if(d) d.remove(); saveFeaturedIds(getFeaturedIds().filter(x=>x!=='${id}')); renderFeatured(); updateCounts();">DEL</button>
+                ${type === 'public' ? `<button class="star-btn" onclick="event.stopPropagation(); toggleFeatured('${id}', this);" title="Destacar na Home">★</button>` : ''}
                 <div class="card-thumb-wrap">
                     <img src="https://via.placeholder.com/600x450/e8e4db/5a574f" class="card-thumb">
                 </div>
                 <div class="card-tag edit-text pt-only" contenteditable="true">Categoria</div>
                 <div class="card-tag edit-text en-only" contenteditable="true">Category</div>
-                <div class="card-title edit-text pt-only" contenteditable="true">Novo Projeto <span class="card-arrow">→</span></div>
-                <div class="card-title edit-text en-only" contenteditable="true">New Project <span class="card-arrow">→</span></div>`;
+                <h4 class="card-title edit-text pt-only" contenteditable="true">Novo Projeto</h4>
+                <h4 class="card-title edit-text en-only" contenteditable="true">New Project</h4>
+                <span class="card-arrow">→</span>`;
             grid.appendChild(card);
 
-            // Data
             createDataWrapper(id, `
                 <div class="detail-header">
                     <div class="detail-tag edit-text" contenteditable="true">Storyboard</div>
@@ -1807,22 +1969,15 @@
                     <div class="detail-desc edit-text pt-only" contenteditable="true">Descrição curta do projeto, contexto e objetivos.</div>
                     <div class="detail-desc edit-text en-only" contenteditable="true">Short description of the project, context and goals.</div>
                     <div class="detail-meta">
-                        <div class="meta-item">
-                            <div class="meta-label">Ano</div>
-                            <div class="meta-value edit-text" contenteditable="true">2025</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Cliente</div>
-                            <div class="meta-value edit-text" contenteditable="true">—</div>
-                        </div>
-                        <div class="meta-item">
-                            <div class="meta-label">Tipo</div>
-                            <div class="meta-value edit-text" contenteditable="true">Storyboard</div>
-                        </div>
+                        <div class="meta-item"><div class="meta-label">Ano</div><div class="meta-value edit-text" contenteditable="true">2025</div></div>
+                        <div class="meta-item"><div class="meta-label">Cliente</div><div class="meta-value edit-text" contenteditable="true">—</div></div>
+                        <div class="meta-item"><div class="meta-label">Tipo</div><div class="meta-value edit-text" contenteditable="true">Storyboard</div></div>
                     </div>
                 </div>
-                <div class="embed-area edit-embed" style="aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-                    <span style="color:#555; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.1em;">[ CLIQUE PARA ADICIONAR VÍDEO ]</span>
+                <div class="embed-wrapper" style="margin-bottom:28px;">
+                    <div class="embed-area edit-embed" style="aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+                        <span style="color:#888; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.1em;">[ Ative a edição e clique em "✏ Editar vídeo" ]</span>
+                    </div>
                 </div>
                 <div class="generic-block">
                     <button class="delete-btn" onclick="this.parentElement.remove();">DEL</button>
@@ -1830,8 +1985,16 @@
                 </div>`);
 
             updateCounts();
+            renderFeatured();
             if (isEditing) enableEditing(true);
         }
+
+        // Event delegation — works even after contenteditable rename
+        document.addEventListener('click', function(e) {
+            if (isEditing) return;
+            const card = e.target.closest('.project-card[data-item-id], .blog-item[data-item-id]');
+            if (card) openItem(card.dataset.itemId);
+        });
 
         function addPost() {
             const id = 'post_' + Date.now();
@@ -1839,7 +2002,7 @@
 
             const item = document.createElement('div');
             item.className = 'blog-item';
-            item.setAttribute('onclick', `openItem('${id}')`);
+            item.dataset.itemId = id;
             item.innerHTML = `
                 <button class="delete-btn" onclick="event.stopPropagation(); this.parentElement.remove(); const d=document.getElementById('data-${id}'); if(d) d.remove(); updateCounts();">DEL</button>
                 <span class="blog-date edit-text" contenteditable="true">01 JAN 2025</span>
@@ -2139,8 +2302,13 @@
         function publishSite() {
             if (isEditing) toggleEdit();
 
-            // Certifica que todos os dados estão no DOM (não em detail-view)
-            // Move hidden wrappers de volta ao body se estiverem em detail-content
+            // Bake featured state into cards as data-featured attribute before clone
+            const featuredIds = getFeaturedIds();
+            document.querySelectorAll('#public-grid .project-card[data-item-id]').forEach(card => {
+                card.dataset.featured = featuredIds.includes(card.dataset.itemId) ? 'true' : 'false';
+            });
+
+            // Certifica que todos os dados estão no DOM
             const detailContent = document.getElementById('detail-content');
             if (detailContent && detailContent.children.length) {
                 Array.from(detailContent.children).forEach(child => {
@@ -2206,7 +2374,7 @@
             // (os onclick de navegação como openItem, goHome, etc. devem permanecer)
 
             // ---- 8. Mostrar home, esconder outras views ----
-            const viewIds = ['home-view', 'blog-view', 'gallery-view', 'detail-view', 'contact-view'];
+            const viewIds = ['home-view', 'projects-view', 'blog-view', 'gallery-view', 'detail-view', 'contact-view'];
             viewIds.forEach(id => {
                 const el = doc.getElementById(id);
                 if (!el) return;
@@ -2279,17 +2447,19 @@
             var previousView = 'home';
 
             var views = {
-                home:    document.getElementById('home-view'),
-                blog:    document.getElementById('blog-view'),
-                gallery: document.getElementById('gallery-view'),
-                detail:  document.getElementById('detail-view'),
-                contact: document.getElementById('contact-view')
+                home:     document.getElementById('home-view'),
+                projects: document.getElementById('projects-view'),
+                blog:     document.getElementById('blog-view'),
+                gallery:  document.getElementById('gallery-view'),
+                detail:   document.getElementById('detail-view'),
+                contact:  document.getElementById('contact-view')
             };
             var navs = {
-                work:    document.getElementById('nav-work'),
-                blog:    document.getElementById('nav-blog'),
-                gallery: document.getElementById('nav-gallery'),
-                contact: document.getElementById('nav-contact')
+                work:     document.getElementById('nav-work'),
+                projects: document.getElementById('nav-projects'),
+                blog:     document.getElementById('nav-blog'),
+                gallery:  document.getElementById('nav-gallery'),
+                contact:  document.getElementById('nav-contact')
             };
 
             // ---- Lang ----
@@ -2315,16 +2485,7 @@
                 if (navKey && navs[navKey]) navs[navKey].classList.add('active');
             }
 
-            window.goHome    = function() { showView('home',    'work');    previousView = 'home'; };
-            window.goBlog    = function() { showView('blog',    'blog');    previousView = 'blog'; };
-            window.goGallery = function() { showView('gallery', 'gallery'); previousView = 'gallery'; };
-            window.goToContact = function() { showView('contact', 'contact'); };
-
-            window.goBack = function() {
-                if (previousView === 'blog')    goBlog();
-                else if (previousView === 'gallery') goGallery();
-                else goHome();
-            };
+            window.goHome    = function() { showView('home',     'work');     previousView = 'home';     renderFeatured(); };\n            window.goProjects= function() { showView('projects', 'projects'); previousView = 'projects'; };\n            window.goBlog    = function() { showView('blog',     'blog');     previousView = 'blog'; };\n            window.goGallery = function() { showView('gallery',  'gallery');  previousView = 'gallery'; };\n            window.goToContact = function() { showView('contact', 'contact'); };\n\n            window.goBack = function() {\n                if (previousView === 'blog')         goBlog();\n                else if (previousView === 'gallery')  goGallery();\n                else if (previousView === 'projects') goProjects();\n                else goHome();\n            };\n\n            // ---- Featured (public site reads from data-featured attr set at publish time) ----\n            function renderFeatured() {\n                var featuredGrid = document.getElementById('featured-grid');\n                if (!featuredGrid) return;\n                var allCards = Array.from(document.querySelectorAll('#public-grid .project-card'));\n                var featured = allCards.filter(function(c) { return c.dataset.featured === 'true'; });\n                var toShow = featured.length > 0 ? featured : allCards.slice(0, 3);\n                featuredGrid.innerHTML = '';\n                toShow.forEach(function(orig) {\n                    var clone = orig.cloneNode(true);\n                    clone.querySelectorAll('.delete-btn,.star-btn').forEach(function(el){ el.remove(); });\n                    featuredGrid.appendChild(clone);\n                });\n                var pc = document.getElementById('proj-count');\n                if (pc) pc.textContent = toShow.length > 0 ? String(toShow.length).padStart(2,'0') : '—';\n            }
 
             window.openItem = function(id) {
                 var contentDiv = document.getElementById('detail-content');
@@ -2364,20 +2525,27 @@
 
             // ---- Counts ----
             function updateCounts() {
-                var pc = document.getElementById('proj-count');
-                var sc = document.getElementById('sketch-count');
-                var bc = document.getElementById('blog-count');
-                var pn = document.querySelectorAll('#public-grid .project-card').length;
+                var apc = document.getElementById('all-proj-count');
+                var sc  = document.getElementById('sketch-count');
+                var bc  = document.getElementById('blog-count');
+                var an = document.querySelectorAll('#public-grid .project-card').length;
                 var sn = document.querySelectorAll('#sketch-grid .sketch-item').length;
                 var bn = document.querySelectorAll('#blog-grid-container .blog-item').length;
-                if (pc) pc.textContent = pn > 0 ? String(pn).padStart(2,'0') : '—';
-                if (sc) sc.textContent = sn > 0 ? String(sn).padStart(2,'0') : '—';
-                if (bc) bc.textContent = bn > 0 ? String(bn).padStart(2,'0') : '—';
+                if (apc) apc.textContent = an > 0 ? String(an).padStart(2,'0') : '—';
+                if (sc)  sc.textContent  = sn > 0 ? String(sn).padStart(2,'0') : '—';
+                if (bc)  bc.textContent  = bn > 0 ? String(bn).padStart(2,'0') : '—';
             }
+
+            // ---- Click delegation for cards ----
+            document.addEventListener('click', function(e) {
+                var card = e.target.closest('.project-card[data-item-id], .blog-item[data-item-id]');
+                if (card) openItem(card.dataset.itemId);
+            });
 
             // ---- Init ----
             attachSketchHandlers();
             updateCounts();
+            renderFeatured();
             goHome();
         })();
             `;
@@ -2387,17 +2555,16 @@
         // SAVE / BACKUP (editor — salva o editor completo)
         // ============================================
         function downloadSite() {
-            if (isEditing) toggleEdit();
-            goHome();
-            setTimeout(() => {
-                const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-                const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-                const a = document.createElement('a');
-                a.href = URL.createObjectURL(blob);
-                a.download = 'editor.html';
-                a.click();
-                URL.revokeObjectURL(a.href);
-            }, 300);
+            // Now just saves to localStorage — no file download needed
+            autoSave();
+            const btn = document.getElementById('btn-save');
+            if (btn) {
+                const orig = btn.innerHTML;
+                btn.innerHTML = '✓ Salvo';
+                btn.style.background = '#3a8a3a';
+                btn.style.borderColor = '#3a8a3a';
+                setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.borderColor = ''; }, 1800);
+            }
         }
 
         function exportJSON() {
@@ -2498,47 +2665,46 @@
         }
 
         function collectData() {
-            // Collect free blocks per view
             const freeBlocks = {};
-            ['home-view','blog-view','gallery-view','private-view','detail-view','contact-view'].forEach(id => {
+            ['home-view','projects-view','blog-view','gallery-view','private-view','detail-view','contact-view'].forEach(id => {
                 const el = document.getElementById(id);
                 if (!el) return;
                 const blocks = Array.from(el.querySelectorAll(':scope > .free-block'));
                 if (blocks.length) {
                     freeBlocks[id] = blocks.map(b => ({
-                        type:   b.dataset.type,
-                        left:   b.style.left,
-                        top:    b.style.top,
-                        width:  b.style.width,
-                        height: b.style.height,
-                        html:   b.querySelector('.fb-content')?.innerHTML || '',
+                        type:       b.dataset.type,
+                        left:       b.style.left,
+                        top:        b.style.top,
+                        width:      b.style.width,
+                        height:     b.style.height,
+                        html:       b.querySelector('.fb-content')?.innerHTML || '',
                         fontSize:   b.querySelector('.fb-content')?.style.fontSize || '',
                         fontFamily: b.querySelector('.fb-content')?.style.fontFamily || '',
-                        imgSrc: b.querySelector('img')?.src || ''
+                        imgSrc:     b.querySelector('img')?.src || ''
                     }));
                 }
             });
 
             return {
-                version: 3,
-                exported: new Date().toISOString(),
-                publicGrid:   document.getElementById('public-grid').innerHTML,
-                privateGrid:  document.getElementById('private-grid').innerHTML,
-                blogGrid:     document.getElementById('blog-grid-container').innerHTML,
-                artGrid:      document.getElementById('art-gallery-container').innerHTML,
-                sketchGrid:   document.getElementById('sketch-grid').innerHTML,
-                hiddenData:   Array.from(document.querySelectorAll('body > div[id^="data-"]'))
-                                   .map(el => el.outerHTML).join(''),
+                version: 4,
+                exported:    new Date().toISOString(),
+                publicGrid:  document.getElementById('public-grid').innerHTML,
+                privateGrid: document.getElementById('private-grid').innerHTML,
+                blogGrid:    document.getElementById('blog-grid-container').innerHTML,
+                artGrid:     document.getElementById('art-gallery-container').innerHTML,
+                sketchGrid:  document.getElementById('sketch-grid').innerHTML,
+                hiddenData:  Array.from(document.querySelectorAll('body > div[id^="data-"]'))
+                                  .map(el => el.outerHTML).join(''),
                 freeBlocks
             };
         }
 
         function applyData(data) {
-            document.getElementById('public-grid').innerHTML            = data.publicGrid  || '';
-            document.getElementById('private-grid').innerHTML           = data.privateGrid || '';
-            document.getElementById('blog-grid-container').innerHTML    = data.blogGrid    || '';
-            document.getElementById('art-gallery-container').innerHTML  = data.artGrid     || '';
-            document.getElementById('sketch-grid').innerHTML            = data.sketchGrid  || '';
+            document.getElementById('public-grid').innerHTML           = data.publicGrid  || '';
+            document.getElementById('private-grid').innerHTML          = data.privateGrid || '';
+            document.getElementById('blog-grid-container').innerHTML   = data.blogGrid    || '';
+            document.getElementById('art-gallery-container').innerHTML = data.artGrid     || '';
+            document.getElementById('sketch-grid').innerHTML           = data.sketchGrid  || '';
 
             document.querySelectorAll('body > div[id^="data-"]').forEach(el => el.remove());
             if (data.hiddenData) {
@@ -2547,28 +2713,31 @@
                 Array.from(temp.children).forEach(child => document.body.appendChild(child));
             }
 
-            // Restore free blocks
             if (data.freeBlocks) {
-                // Remove existing free blocks first
                 document.querySelectorAll('.free-block').forEach(b => b.remove());
                 Object.entries(data.freeBlocks).forEach(([viewId, blocks]) => {
                     const view = document.getElementById(viewId);
                     if (!view) return;
-                    blocks.forEach(bd => {
-                        // Temporarily enable editing to use addBlock, then restore
-                        const savedEdit = isEditing;
-                        isEditing = true;
-                        // Activate the view briefly so addBlock places it correctly
-                        const block = _restoreFreeBlock(view, bd);
-                        isEditing = savedEdit;
-                    });
+                    blocks.forEach(bd => _restoreFreeBlock(view, bd));
                 });
             }
 
+            // Restore sketch lightbox handlers
             document.querySelectorAll('.sketch-item img').forEach(img => {
                 img.onclick = () => openLightbox(img.src);
             });
 
+            // Restore star states
+            const featured = getFeaturedIds();
+            document.querySelectorAll('.star-btn').forEach(btn => {
+                const card = btn.closest('.project-card');
+                if (card && featured.includes(card.dataset.itemId)) {
+                    btn.classList.add('star-on');
+                    btn.title = 'Remover destaque';
+                }
+            });
+
+            renderFeatured();
             updateCounts();
         }
 
@@ -2918,10 +3087,70 @@
             }
         }
 
-        // --- On load: restore dot state ---
         function initSyncDot() {
             const cfg = loadSyncConfig();
             if (cfg.gistId && cfg.lastPush) syncSetDot('synced');
+        }
+
+        // ============================================
+        // AUTO-SAVE TO LOCALSTORAGE
+        // ============================================
+        const LS_KEY = 'portfolio_autosave';
+
+        function autoSave() {
+            try {
+                const data = collectData();
+
+                // Save static editable text (header name, role, contact, etc.)
+                data._staticText = {};
+                document.querySelectorAll('[data-save-id]').forEach(el => {
+                    data._staticText[el.dataset.saveId] = el.innerHTML;
+                });
+
+                // Save embed iframes — keyed by position index within home-view only
+                // (project-level embeds are inside hiddenData)
+                data._homeEmbed = document.querySelector('#home-view .edit-embed iframe')?.src || null;
+
+                localStorage.setItem(LS_KEY, JSON.stringify(data));
+            } catch(e) { console.warn('AutoSave failed:', e); }
+        }
+
+        function autoLoad() {
+            try {
+                const raw = localStorage.getItem(LS_KEY);
+                if (!raw) return false;
+                const data = JSON.parse(raw);
+                applyData(data);
+
+                // Restore static text
+                if (data._staticText) {
+                    Object.entries(data._staticText).forEach(([id, html]) => {
+                        const el = document.querySelector(`[data-save-id="${id}"]`);
+                        if (el) el.innerHTML = html;
+                    });
+                }
+
+                // Restore home embed
+                if (data._homeEmbed) {
+                    const homeEmbed = document.querySelector('#home-view .edit-embed');
+                    if (homeEmbed) homeEmbed.innerHTML = `<iframe src="${data._homeEmbed}" allowfullscreen></iframe>`;
+                }
+
+                return true;
+            } catch(e) { console.warn('AutoLoad failed:', e); return false; }
+        }
+
+        function startAutoSaveObserver() {
+            const targets = ['home-view','projects-view','blog-view','gallery-view','private-view','contact-view'];
+            const observer = new MutationObserver(() => {
+                clearTimeout(window._autoSaveTimer);
+                window._autoSaveTimer = setTimeout(autoSave, 800);
+            });
+            targets.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el, { childList: true, subtree: true, characterData: true });
+            });
+            observer.observe(document.body, { childList: true });
         }
 
         // ============================================
@@ -2929,6 +3158,8 @@
         // ============================================
         init();
         initSyncDot();
+        autoLoad();
+        startAutoSaveObserver();
     </script>
 </body>
 </html>
