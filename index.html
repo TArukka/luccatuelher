@@ -77,7 +77,7 @@
            HEADER
            ======================================== */
         header {
-            padding: 2.5rem 0 2rem;
+            padding: 1.8rem 0 1.4rem;
             border-bottom: 1.5px solid var(--ink);
             margin-bottom: 0;
             display: grid;
@@ -184,7 +184,7 @@
             align-items: center;
             padding: 8px 0;
             border-bottom: 1px solid var(--rule);
-            margin-bottom: 70px;
+            margin-bottom: 0;
         }
 
         .issue-text {
@@ -228,22 +228,23 @@
         }
 
         /* ========================================
-           BANNER
+           BANNER HERO
            ======================================== */
         .banner-container {
             width: 100%;
-            height: clamp(250px, 40vw, 420px);
+            height: clamp(280px, 42vw, 460px);
             overflow: hidden;
             position: relative;
             background: var(--bg2);
-            margin-bottom: 60px;
+            margin-bottom: 0;
         }
 
         .banner-container::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent 60%, rgba(28,27,24,0.15));
+            background: linear-gradient(135deg, rgba(28,27,24,0.55) 0%, rgba(28,27,24,0.1) 60%, transparent 100%);
+            pointer-events: none;
         }
 
         .banner-img {
@@ -255,14 +256,304 @@
         }
 
         .banner-container:hover .banner-img {
-            transform: scale(1.03);
+            transform: scale(1.025);
+        }
+
+        .banner-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 40px 48px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .banner-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(250,250,247,0.65);
+            margin-bottom: 10px;
+            pointer-events: all;
+        }
+
+        .banner-title {
+            font-family: var(--serif);
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            pointer-events: all;
         }
 
         /* ========================================
-           VIDEO EMBED
+           HOME YOUTUBE EMBED
            ======================================== */
+        .home-yt-wrap {
+            margin: 32px 0 0;
+            position: relative;
+        }
+
+        /* ========================================
+           HOME PROJECT SECTIONS — stacked full-width
+           ======================================== */
+
+        #featured-sections {
+            margin-top: 0;
+        }
+
+        /* Each project = one block, full width, stacked */
+        .home-proj-section {
+            border-top: 1px solid var(--rule);
+            padding: 52px 0;
+            position: relative;
+        }
+
+        /* no border after last project section */
+
+        /* Top row: just the text info, no grid needed */
+        .hps-top {
+            margin-bottom: 32px;
+        }
+
+        .hps-left { }
+
+        .hps-index {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            color: var(--ink-pale);
+            letter-spacing: 0.15em;
+            margin-bottom: 20px;
+        }
+
+        .hps-tag {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hps-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            line-height: 1.05;
+            color: var(--ink);
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .hps-subtitle {
+            font-size: 1rem;
+            color: var(--ink-soft);
+            line-height: 1.65;
+            font-style: italic;
+            margin-bottom: 28px;
+            max-width: 44ch;
+        }
+
+        .hps-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 2px;
+            transition: color 0.2s, border-color 0.2s;
+            cursor: pointer;
+            width: fit-content;
+        }
+        .hps-link:hover { color: var(--accent); border-color: var(--accent); }
+
+        /* Main thumb — right column of top row */
+        .hps-right {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            background: var(--bg2);
+        }
+
+        .hps-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s var(--ease-out);
+            position: absolute;
+            inset: 0;
+        }
+
+        .home-proj-section:hover .hps-thumb {
+            transform: scale(1.025);
+        }
+
+        .hps-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            opacity: 0;
+            mix-blend-mode: multiply;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .home-proj-section:hover .hps-thumb-overlay {
+            opacity: 0.05;
+        }
+
+        /* SpeakerDeck embed */
+        .hps-embed-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .hps-embed-label {
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-pale);
+            margin-bottom: 8px;
+        }
+
+        .hps-embed {
+            width: 100%;
+            background: var(--ink);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hps-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            position: absolute;
+            inset: 0;
+        }
+
+        .hps-embed-placeholder {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.1em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* 3 preview images */
+        .hps-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 0;
+        }
+
+        .hps-img-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--bg2);
+            cursor: pointer;
+        }
+
+        .hps-img-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s var(--ease-out);
+        }
+
+        .hps-img-item:hover img { transform: scale(1.06); }
+
+        /* Footer row with ver projeto link */
+        .hps-footer {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid var(--rule);
+        }
+
+        /* ========================================
+           BOTTOM BANNER
+           ======================================== */
+        .bottom-banner {
+            width: 100%;
+            height: clamp(200px, 28vw, 320px);
+            position: relative;
+            overflow: hidden;
+            margin-top: 90px;
+            background: var(--ink);
+            cursor: pointer;
+        }
+
+        .bottom-banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.45);
+            transition: transform 8s var(--ease-out), filter 0.4s;
+        }
+
+        .bottom-banner:hover .bottom-banner-img {
+            transform: scale(1.025);
+            filter: brightness(0.38);
+        }
+
+        .bottom-banner-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            z-index: 2;
+        }
+
+        .bottom-banner-text {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+            color: var(--white);
+            font-weight: 400;
+            text-align: center;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+        }
+
+        .bottom-banner-cta {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(250,250,247,0.7);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(250,250,247,0.4);
+            padding-bottom: 3px;
+            transition: color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .bottom-banner-cta:hover { color: var(--white); border-color: var(--white); }
+
+        /* VIDEO EMBED (used inside project detail pages) */
         .embed-wrapper {
-            margin-bottom: 70px;
+            margin-bottom: 28px;
             position: relative;
         }
 
@@ -371,13 +662,13 @@
            ======================================== */
         .sketch-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
             margin-bottom: 4rem;
+            align-items: start;
         }
 
         .sketch-item {
-            aspect-ratio: 1/1;
             overflow: hidden;
             cursor: zoom-in;
             position: relative;
@@ -386,15 +677,13 @@
 
         .sketch-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             display: block;
-            transition: all 0.4s var(--ease);
-            filter: grayscale(80%);
+            transition: filter 0.4s var(--ease);
+            filter: grayscale(60%);
         }
 
         .sketch-item:hover img {
-            transform: scale(1.08);
             filter: grayscale(0%);
         }
 
@@ -938,33 +1227,380 @@
         .fb-toolbar * { user-select: none; }
 
         /* ========================================
-           EDITOR PANEL
+           EDITOR — PROFESSIONAL UI v2
            ======================================== */
-        #editor-panel {
+
+        /* ── Activate pill (view mode only) ── */
+        #editor-activate {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--ink);
-            color: var(--white);
-            padding: 12px 24px;
+            bottom: 24px;
+            right: 24px;
+            z-index: 8000;
             display: flex;
-            gap: 8px;
             align-items: center;
-            z-index: 7000;
-            flex-wrap: wrap;
-            border-top: 2px solid var(--accent);
+            gap: 10px;
+            background: #111;
+            color: #fff;
+            border: none;
+            padding: 11px 18px 11px 14px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 40px;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.28);
+            transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+        }
+        #editor-activate:hover {
+            background: #2a2a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 36px rgba(0,0,0,0.34);
+        }
+        #editor-activate .ea-icon {
+            width: 22px; height: 22px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        body.editing-mode #editor-activate { display: none; }
+
+        /* ── Top bar (edit mode) ── */
+        #editor-topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 52px;
+            background: #111;
+            color: #fff;
+            z-index: 9000;
+            display: none;
+            align-items: center;
+            padding: 0 16px;
+            gap: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-family: var(--mono);
+        }
+        body.editing-mode #editor-topbar { display: flex; }
+        body.editing-mode { padding-top: 52px; }
+        body.editing-mode .container { margin-left: 0; }
+
+        /* Topbar sections */
+        .etb-brand {
+            display: flex; align-items: center; gap: 8px;
+            padding-right: 20px;
+            border-right: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        .etb-brand-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(193,68,14,0.6);
+        }
+        .etb-brand-name {
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+        .etb-brand-name span { color: rgba(255,255,255,0.85); }
+
+        /* Context breadcrumb */
+        .etb-context {
+            flex: 1;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .etb-context-page {
+            font-size: 0.62rem;
+            color: rgba(255,255,255,0.28);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .etb-context-sep { color: rgba(255,255,255,0.15); font-size: 0.65rem; }
+        .etb-context-current {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 0.08em;
+        }
+        .etb-editing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(193,68,14,0.18);
+            border: 1px solid rgba(193,68,14,0.35);
+            color: #e06030;
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-left: 8px;
+        }
+        .etb-editing-badge::before {
+            content: '';
+            width: 5px; height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-dot 1.4s infinite;
         }
 
-        .editor-label {
+        /* Topbar right actions */
+        .etb-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding-left: 16px;
+            border-left: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        .etb-btn {
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 13px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.04);
+            color: rgba(255,255,255,0.65);
             font-family: var(--mono);
-            font-size: 0.65rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .etb-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border-color: rgba(255,255,255,0.3);
+        }
+        .etb-btn-save {
+            background: rgba(45,90,142,0.3);
+            border-color: rgba(45,90,142,0.5);
+            color: #7aabdb;
+        }
+        .etb-btn-save:hover {
+            background: rgba(45,90,142,0.55);
+            color: #c4dff5;
+            border-color: rgba(45,90,142,0.8);
+        }
+        .etb-btn-exit {
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.4);
+        }
+        .etb-btn-exit:hover { background: rgba(255,255,255,0.09); color: #fff; }
+        .etb-btn-publish {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+        .etb-btn-publish:hover { background: #a33608; border-color: #a33608; }
+
+        /* Topbar status */
+        .etb-status {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0 16px;
+            border-right: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        .etb-status-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #3cb370;
+            box-shadow: 0 0 6px rgba(60,179,112,0.5);
+            transition: background 0.3s;
+        }
+        .etb-status-dot.pending {
+            background: #c8a000;
+            box-shadow: 0 0 6px rgba(200,160,0,0.5);
+            animation: pulse-dot 1.2s infinite;
+        }
+        .etb-status-dot.error { background: var(--accent); box-shadow: none; }
+        .etb-status-label {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.28);
+            letter-spacing: 0.08em;
+        }
+
+        /* ── Add panel — slides in from bottom ── */
+        #editor-add-panel {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%) translateY(0);
+            bottom: 16px;
+            z-index: 8500;
+            display: none;
+            align-items: center;
+            gap: 4px;
+            background: #1a1a1c;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 40px;
+            padding: 6px 8px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+            font-family: var(--mono);
+            backdrop-filter: blur(8px);
+        }
+        body.editing-mode #editor-add-panel { display: flex; }
+
+        .eap-btn {
+            display: flex; align-items: center; gap: 6px;
+            padding: 7px 14px;
+            border: none;
+            background: rgba(255,255,255,0.0);
+            color: rgba(255,255,255,0.55);
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.07em;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: background 0.15s, color 0.15s;
+            white-space: nowrap;
+        }
+        .eap-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .eap-btn.eap-active { background: rgba(255,255,255,0.08); color: #fff; }
+        .eap-sep {
+            width: 1px; height: 20px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 2px;
+            flex-shrink: 0;
+        }
+        .eap-btn-accent {
+            background: rgba(193,68,14,0.15);
+            color: #e06030;
+        }
+        .eap-btn-accent:hover { background: rgba(193,68,14,0.28); color: #f07040; }
+
+        /* ── Right panel — contextual add blocks (only in detail view) ── */
+        #editor-right-panel {
+            position: fixed;
+            top: 52px; right: 0;
+            width: 220px;
+            height: calc(100vh - 52px);
+            background: #111;
+            border-left: 1px solid rgba(255,255,255,0.07);
+            z-index: 8000;
+            display: none;
+            flex-direction: column;
+            font-family: var(--mono);
+            overflow-y: auto;
+            transition: opacity 0.2s;
+        }
+        body.editing-mode.detail-open #editor-right-panel { display: flex; }
+        body.editing-mode.detail-open .container { padding-right: 240px; }
+
+        .erp-header {
+            padding: 14px 14px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            flex-shrink: 0;
+        }
+        .erp-group { padding: 12px 12px 6px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .erp-label {
+            font-size: 0.52rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--ink-pale);
-            margin-right: 4px;
+            color: rgba(255,255,255,0.18);
+            margin-bottom: 6px;
+        }
+        .erp-btn {
+            display: flex; align-items: center; gap: 8px;
+            width: 100%;
+            padding: 8px 8px;
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.55);
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 1px;
+            transition: background 0.12s, color 0.12s;
+        }
+        .erp-btn:hover { background: rgba(255,255,255,0.07); color: #fff; }
+        .erp-icon {
+            width: 26px; height: 26px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
         }
 
+        /* ── Sync dot (legacy, used in some older calls) ── */
+        .sync-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #3a8a3a; display: inline-block;
+            transition: background 0.3s;
+        }
+        .sync-dot.pending { background: #c19a0e; animation: pulse-dot 1.2s infinite; }
+        .sync-dot.error   { background: var(--accent); }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+
+        /* ── Editing state indicators ── */
+        body.editing-mode { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+        [contenteditable="true"] {
+            outline: 1.5px dashed rgba(193,68,14,0.4);
+            background: rgba(193,68,14,0.03);
+            border-radius: 2px;
+            cursor: text;
+            transition: outline 0.12s, background 0.12s;
+        }
+        [contenteditable="true"]:hover { outline-color: rgba(193,68,14,0.75); }
+        [contenteditable="true"]:focus {
+            outline: 2px solid var(--accent);
+            background: rgba(255,255,255,0.65);
+        }
+
+        .editable-img:hover {
+            outline: 2.5px solid var(--accent);
+            cursor: pointer;
+            opacity: 0.82;
+        }
+
+        .editable-link.editing {
+            outline: 1px dashed var(--accent2);
+            cursor: pointer;
+            background: rgba(45,90,142,0.06);
+        }
+
+        /* Delete button — appears on hover of parent */
+        .delete-btn {
+            position: absolute;
+            top: 8px; right: 8px;
+            background: rgba(15,12,18,0.85);
+            color: #ff7c60;
+            border: 1px solid rgba(255,124,96,0.35);
+            padding: 4px 9px;
+            z-index: 20;
+            cursor: pointer;
+            display: none;
+            font-family: var(--mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .delete-btn:hover {
+            background: rgba(193,68,14,0.9);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* Legacy .btn for gist modal */
         .btn {
             padding: 7px 14px;
             background: transparent;
@@ -977,109 +1613,19 @@
             cursor: pointer;
             transition: all 0.15s;
         }
+        .btn:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+        .btn-main { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .btn-main:hover { background: #a33608; }
+        .btn-save { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+        .btn-save:hover { background: #234a75; }
+        .editor-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.1); margin: 0 4px; }
 
-        .btn:hover {
-            border-color: rgba(255,255,255,0.7);
-            color: var(--white);
-        }
+        /* Editor-only elements */
+        .editor-only-el { display: none; }
+        body.editing-mode .editor-only-el { display: block; }
 
-        .btn-main {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: var(--white);
-        }
-
-        .btn-main:hover {
-            background: #a33608;
-            border-color: #a33608;
-        }
-
-        .btn-save {
-            background: var(--accent2);
-            border-color: var(--accent2);
-            color: var(--white);
-        }
-
-        .btn-save:hover {
-            background: #234a75;
-            border-color: #234a75;
-        }
-
-        .editor-divider {
-            width: 1px;
-            height: 20px;
-            background: rgba(255,255,255,0.1);
-            margin: 0 4px;
-        }
-
-        #edit-tools {
-            display: none;
-            gap: 6px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        /* Edit states */
-        [contenteditable="true"] {
-            outline: 1.5px dashed rgba(193,68,14,0.4);
-            background: rgba(193,68,14,0.03);
-            border-radius: 1px;
-            cursor: text;
-        }
-
-        [contenteditable="true"]:focus {
-            outline: 2px solid var(--accent);
-            background: rgba(255,255,255,0.5);
-        }
-
-        .editable-img:hover {
-            outline: 2px solid var(--accent);
-            cursor: pointer;
-            opacity: 0.8;
-        }
-
-        .editable-link.editing {
-            outline: 1px dashed var(--accent2);
-            cursor: pointer;
-            background: rgba(45,90,142,0.05);
-        }
-
-        .delete-btn {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            z-index: 10;
-            cursor: pointer;
-            display: none;
-            font-family: var(--mono);
-            font-size: 0.6rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        /* Sync indicator no editor panel */
-        .sync-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--ink-pale);
-            display: inline-block;
-            margin-right: 4px;
-            transition: background 0.3s;
-        }
-        .sync-dot.synced  { background: #3a8a3a; }
-        .sync-dot.pending { background: #c19a0e; animation: pulse-dot 1.2s infinite; }
-        .sync-dot.error   { background: var(--accent); }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0.3; }
-        }
         /* EDITOR-ONLY-END */
+
 
         /* ========================================
            RESPONSIVE
@@ -1095,12 +1641,21 @@
             .sketch-grid { grid-template-columns: repeat(3, 1fr); }
             #contact-view { grid-template-columns: 1fr; gap: 40px; }
             nav { flex-wrap: wrap; gap: 0; }
+
+            /* Home sections stack on mobile */
+            .hps-top { grid-template-columns: 1fr; }
+            .hps-bottom { grid-template-columns: 1fr; }
+            .hps-images { grid-template-columns: repeat(3, 1fr); }
+            .hps-right { aspect-ratio: 16/9; min-height: unset; }
+            .banner-title { font-size: 2rem; }
+            .banner-text { padding: 24px; }
         }
 
         @media (max-width: 600px) {
             .project-grid { grid-template-columns: 1fr; }
             .art-gallery-grid { grid-template-columns: 1fr; }
             .sketch-grid { grid-template-columns: repeat(3, 1fr); }
+            .bottom-banner { height: 180px; }
         }
 
         /* EDITOR-ONLY-START */
@@ -1364,41 +1919,52 @@
 
         <!-- Issue bar -->
         <div class="issue-bar">
-            <span class="issue-text pt-only">Portfolio — Visual Development &amp; Storyboard</span>
-            <span class="issue-text en-only">Portfolio — Visual Development &amp; Storyboard</span>
+            <span class="issue-text pt-only edit-text" contenteditable="false" data-save-id="issue-text-pt">Portfolio — Visual Development &amp; Storyboard</span>
+            <span class="issue-text en-only edit-text" contenteditable="false" data-save-id="issue-text-en">Portfolio — Visual Development &amp; Storyboard</span>
             <span class="issue-text" id="issue-date"></span>
         </div>
 
         <!-- HOME VIEW -->
         <div id="home-view">
 
+            <!-- HERO BANNER -->
             <div class="banner-container">
                 <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80" class="banner-img" alt="Banner">
+                <div class="banner-text">
+                    <div class="banner-label edit-text" contenteditable="false" data-save-id="banner-label">Storyboard & Visual Development</div>
+                    <div class="banner-title edit-text" contenteditable="false" data-save-id="banner-title">Selected<br>Work</div>
+                </div>
             </div>
 
-            <div class="embed-wrapper">
+            <!-- YOUTUBE EMBED -->
+            <div class="home-yt-wrap">
                 <div class="embed-area edit-embed">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="section-title">
-                <span class="section-label pt-only">Selecionados</span>
-                <span class="section-label en-only">Featured</span>
-                <div class="section-rule"></div>
-                <span class="section-num" id="proj-count">—</span>
-            </div>
+            <!-- FEATURED PROJECT SECTIONS (renderFeatured popula aqui) -->
+            <div id="featured-sections"></div>
 
-            <!-- Home shows only featured cards (max 3), populated by renderFeatured() -->
-            <div id="featured-grid" class="project-grid"></div>
-
-            <div class="section-title">
+            <!-- SKETCHBOOK -->
+            <div class="section-title" style="margin-top: 80px;">
                 <span class="section-label">Sketchbook</span>
                 <div class="section-rule"></div>
                 <span class="section-num" id="sketch-count">—</span>
             </div>
-
             <div id="sketch-grid" class="sketch-grid"></div>
+
+            <!-- BANNER DE RODAPÉ -->
+            <div class="bottom-banner">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80" class="bottom-banner-img editable-img" alt="Bottom Banner">
+                <div class="bottom-banner-overlay">
+                    <div class="bottom-banner-text edit-text" contenteditable="false" data-save-id="bottom-banner-text">Disponível para projetos freelance</div>
+                    <a onclick="goToContact()" class="bottom-banner-cta">
+                        <span class="pt-only">Entre em contato →</span>
+                        <span class="en-only">Get in touch →</span>
+                    </a>
+                </div>
+            </div>
 
         </div>
 
@@ -1491,31 +2057,87 @@
 
     </div><!-- /container -->
 
-    <!-- EDITOR PANEL -->
-    <div id="editor-panel">
-        <span class="editor-label">Editor</span>
-        <button onclick="toggleEdit()" id="btn-toggle" class="btn btn-main">Ativar Edição</button>
-        <div id="edit-tools" style="display:none; gap:6px; align-items:center; flex-wrap:wrap;">
-            <div class="editor-divider"></div>
-            <button onclick="addProject('public')" class="btn">+ Projeto</button>
-            <button onclick="addProject('private')" class="btn" style="color: #f5a87a; border-color: rgba(245,168,122,0.4);">+ Privado</button>
-            <button onclick="addPost()" class="btn">+ Post</button>
-            <button onclick="addGalleryItem()" class="btn">+ Arte</button>
-            <button onclick="addSketch()" class="btn">+ Sketch</button>
-            <div class="editor-divider"></div>
-            <button onclick="addBlock('text')" class="btn">+ Texto</button>
-            <button onclick="addBlock('image')" class="btn">+ Imagem</button>
-            <div class="editor-divider"></div>
-            <button onclick="exportJSON()" class="btn">Backup</button>
-            <button onclick="importJSON()" class="btn">Restaurar</button>
-            <div class="editor-divider"></div>
-            <button onclick="openSyncModal()" class="btn" id="btn-sync" style="display:flex;align-items:center;gap:5px;">
-                <span class="sync-dot" id="sync-dot"></span>☁ Gist Sync
+    <!-- EDITOR ACTIVATE PILL (view mode) -->
+    <button id="editor-activate" onclick="toggleEdit()">
+        <span class="ea-icon">✦</span>
+        Editar Site
+    </button>
+
+    <!-- EDITOR TOP BAR (edit mode) -->
+    <div id="editor-topbar">
+        <div class="etb-brand">
+            <div class="etb-brand-dot"></div>
+            <span class="etb-brand-name"><span>Editor</span> · Lucca Tuelher</span>
+        </div>
+
+        <div class="etb-context">
+            <span class="etb-context-page" id="etb-page-name">Home</span>
+            <span class="etb-editing-badge">Editando</span>
+        </div>
+
+        <div class="etb-status">
+            <div class="etb-status-dot" id="esb-status-dot"></div>
+            <span class="etb-status-label" id="esb-status-text">Salvo</span>
+        </div>
+
+        <div class="etb-actions">
+            <button class="etb-btn" onclick="openSyncModal()" title="Sincronizar via GitHub Gist">
+                <span class="sync-dot" id="sync-dot"></span> ☁ Gist Sync
             </button>
-            <button onclick="downloadSite()" id="btn-save" class="btn btn-save" title="Salva no navegador (localStorage) — sem precisar baixar arquivo">💾 Salvar</button>
-            <button onclick="publishSite()" class="btn" style="background:var(--accent);border-color:var(--accent);color:#fff;" title="Gera portfolio-publico.html sem modo de edição">🚀 Publicar Agora</button>
+            <button class="etb-btn" onclick="exportJSON()" title="Exportar backup .json">↓ Backup</button>
+            <button class="etb-btn" onclick="importJSON()" title="Restaurar de .json">↑ Restaurar</button>
+            <button class="etb-btn etb-btn-save" onclick="autoSave()" title="Salvar no navegador">💾 Salvar</button>
+            <button class="etb-btn etb-btn-publish" onclick="publishSite()" title="Gerar site público">🚀 Publicar</button>
+            <button class="etb-btn etb-btn-exit" onclick="toggleEdit()" title="Sair da edição">✕ Sair</button>
         </div>
     </div>
+
+    <!-- ADD PANEL — floating pill at bottom (edit mode) -->
+    <div id="editor-add-panel">
+        <button class="eap-btn" onclick="addProject('public')" title="Adiciona projeto público com SpeakerDeck">
+            + Projeto
+        </button>
+        <button class="eap-btn eap-btn-accent" onclick="addProject('private')" title="Projeto NDA com vídeo">
+            🔒 Privado
+        </button>
+        <div class="eap-sep"></div>
+        <button class="eap-btn" onclick="addPost()">+ Nota</button>
+        <button class="eap-btn" onclick="addGalleryItem()">+ Arte</button>
+        <button class="eap-btn" onclick="addSketch()">+ Sketch</button>
+        <div class="eap-sep"></div>
+        <button class="eap-btn" id="eap-txt-btn" onclick="addBlock('text')" title="Dentro de projeto aberto">+ Texto</button>
+        <button class="eap-btn" id="eap-img-btn" onclick="addBlock('image')" title="Dentro de projeto aberto">+ Imagem</button>
+    </div>
+
+    <!-- RIGHT PANEL — contextual blocks (detail view only) -->
+    <div id="editor-right-panel">
+        <div class="erp-header">Blocos</div>
+        <div class="erp-group">
+            <div class="erp-label">Adicionar ao projeto</div>
+            <button class="erp-btn" onclick="addBlock('text')">
+                <span class="erp-icon">T</span> Bloco de Texto
+            </button>
+            <button class="erp-btn" onclick="addBlock('image')">
+                <span class="erp-icon">⬜</span> Imagem
+            </button>
+        </div>
+        <div class="erp-group">
+            <div class="erp-label">Dica</div>
+            <div style="font-size:0.58rem;color:rgba(255,255,255,0.2);line-height:1.5;padding:2px 4px;">
+                Clique em qualquer texto para editar.<br>
+                Clique em qualquer imagem para trocar.<br>
+                Clique em ✏ para editar embeds.
+            </div>
+        </div>
+        <div class="erp-group">
+            <div class="erp-label">Destaque na Home</div>
+            <div style="font-size:0.58rem;color:rgba(255,255,255,0.2);line-height:1.5;padding:2px 4px;">
+                Vá em Projetos e clique ★ para escolher até 3 projetos na home.
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- GIST SYNC MODAL -->
     <div id="sync-modal-backdrop">
@@ -1634,10 +2256,15 @@
             const d = new Date();
             document.getElementById('issue-date').textContent = d.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long' });
 
-            // Sketch click handlers
-            document.querySelectorAll('.sketch-item img').forEach(img => {
-                img.onclick = () => openLightbox(img.src);
-            });
+            // Sketch click handlers (lightbox when not editing)
+            function attachSketchHandlers() {
+                document.querySelectorAll('.sketch-item img').forEach(img => {
+                    img.style.cursor = 'zoom-in';
+                    img.onclick = () => openLightbox(img.src);
+                });
+            }
+            attachSketchHandlers();
+            window.attachSketchHandlers = attachSketchHandlers;
 
             // Restore star states from localStorage
             const featured = getFeaturedIds();
@@ -1677,6 +2304,7 @@
             views[viewKey].classList.add('fade-in');
             setTimeout(() => views[viewKey].classList.remove('fade-in'), 500);
             if (navKey && navs[navKey]) navs[navKey].classList.add('active');
+            if (isEditing) { document.body.classList.remove('detail-open'); updateTopbarContext(); }
         }
 
         function goHome()      { showView('home', 'work');         previousView = 'home'; renderFeatured(); updateCounts(); }
@@ -1739,31 +2367,86 @@
             updateCounts();
         }
 
-        // Rebuild the featured-grid on Home from the full public-grid
+        // Rebuild the Home featured sections from the full public-grid
         function renderFeatured() {
-            const featuredGrid = document.getElementById('featured-grid');
-            if (!featuredGrid) return;
-            const featured = getFeaturedIds();
-            const allCards = Array.from(document.querySelectorAll('#public-grid .project-card'));
+            const sectionsEl = document.getElementById('featured-sections');
+            if (!sectionsEl) return;
+            const featured   = getFeaturedIds();
+            const allCards   = Array.from(document.querySelectorAll('#public-grid .project-card'));
 
-            featuredGrid.innerHTML = '';
-
-            // If no featured set yet, show the first 3 cards
             const toShow = featured.length > 0
                 ? allCards.filter(c => featured.includes(c.dataset.itemId))
                 : allCards.slice(0, 3);
 
-            toShow.forEach(originalCard => {
-                // Clone the card (visual copy only, no star button)
-                const clone = originalCard.cloneNode(true);
-                clone.querySelectorAll('.delete-btn, .star-btn').forEach(el => el.remove());
-                // Re-attach click delegation via data-item-id
-                featuredGrid.appendChild(clone);
+            sectionsEl.innerHTML = '';
+
+            toShow.forEach((card, idx) => {
+                const id      = card.dataset.itemId;
+                const thumbSrc= card.querySelector('.card-thumb')?.src || '';
+                const titlePT = card.querySelector('.card-title.pt-only')?.textContent.trim() || 'Projeto';
+                const titleEN = card.querySelector('.card-title.en-only')?.textContent.trim()  || 'Project';
+                const tagPT   = card.querySelector('.card-tag.pt-only')?.textContent.trim()    || '';
+                const tagEN   = card.querySelector('.card-tag.en-only')?.textContent.trim()    || '';
+                const sdSrc   = card.dataset.sdSrc || '';
+                // Get 3 preview images (stored in card dataset as JSON array)
+                let previewImgs = [];
+                try { previewImgs = JSON.parse(card.dataset.previewImgs || '[]'); } catch(e) {}
+                // Pad to 3
+                while (previewImgs.length < 3) previewImgs.push('');
+
+                const num = String(idx + 1).padStart(2, '0');
+
+                const embedContent = sdSrc
+                    ? `<iframe src="${sdSrc}" allowfullscreen scrolling="no" allow="autoplay; fullscreen"></iframe>`
+                    : `<div class="hps-embed-placeholder">
+                           <div style="font-size:1.6rem;margin-bottom:8px;opacity:0.25;">▶</div>
+                           <div class="pt-only" style="font-size:0.6rem;">Editar → clique em ✏ Embed</div>
+                           <div class="en-only"  style="font-size:0.6rem;">Edit → click ✏ Embed</div>
+                       </div>`;
+
+                const imgItems = previewImgs.map((src, i) => {
+                    const placeholder = 'https://via.placeholder.com/400x300/e8e4db/a09c93';
+                    return `<div class="hps-img-item" data-proj-id="${id}" data-img-idx="${i}">
+                        <img src="${src || placeholder}" class="hps-preview-img" alt="">
+                    </div>`;
+                }).join('');
+
+                const section = document.createElement('div');
+                section.className = 'home-proj-section';
+                section.dataset.itemId = id;
+
+                section.innerHTML = `
+                    <!-- TOP: title + subtitle -->
+                    <div class="hps-top">
+                        <div class="hps-left">
+                            <div class="hps-index">${num}</div>
+                            <div class="hps-tag pt-only">${tagPT}</div>
+                            <div class="hps-tag en-only">${tagEN}</div>
+                            <div class="hps-title pt-only">${titlePT}</div>
+                            <div class="hps-title en-only">${titleEN}</div>
+                            <div class="hps-subtitle edit-text pt-only" contenteditable="false" data-save-id="hps-sub-pt-${id}">Subtítulo ou descrição breve do projeto.</div>
+                            <div class="hps-subtitle edit-text en-only" contenteditable="false" data-save-id="hps-sub-en-${id}">Brief project subtitle or description.</div>
+                        </div>
+                    </div>
+                    <!-- SPEAKERDECK -->
+                    <div class="hps-embed-wrap">
+                        <div class="hps-embed-label">SpeakerDeck / Embed</div>
+                        <div class="hps-embed edit-sd-embed" data-proj-id="${id}">${embedContent}</div>
+                    </div>
+                    <!-- 3 IMAGES -->
+                    <div class="hps-images" data-proj-id="${id}">${imgItems}</div>
+                    <!-- LINK -->
+                    <div class="hps-footer">
+                        <a class="hps-link" data-item-id="${id}">
+                            <span class="pt-only">Ver projeto →</span>
+                            <span class="en-only">View project →</span>
+                        </a>
+                    </div>`;
+
+                sectionsEl.appendChild(section);
             });
 
-            // Update featured count label
-            const pc = document.getElementById('proj-count');
-            if (pc) pc.textContent = toShow.length > 0 ? String(toShow.length).padStart(2,'0') : '—';
+            if (isEditing) enableEditing(true);
         }
 
         function openItem(id) {
@@ -1775,6 +2458,7 @@
             contentDiv.innerHTML = '';
             source.classList.remove('hidden');
             contentDiv.appendChild(source);
+            if (isEditing) { document.body.classList.add('detail-open'); updateTopbarContext(); enableEditing(true); }
         }
 
         // ============================================
@@ -1813,46 +2497,77 @@
         // ============================================
         function toggleEdit() {
             isEditing = !isEditing;
-            const btn = document.getElementById('btn-toggle');
-            const tools = document.getElementById('edit-tools');
-
             if (isEditing) {
-                btn.textContent = 'Parar Edição';
-                btn.className = 'btn';
-                btn.style.borderColor = 'rgba(255,255,255,0.4)';
-                tools.style.display = 'flex';
+                document.body.classList.add('editing-mode');
                 enableEditing(true);
+                updateTopbarContext();
+                setEditorStatus('saved');
             } else {
-                btn.textContent = 'Ativar Edição';
-                btn.className = 'btn btn-main';
-                btn.style.borderColor = '';
-                tools.style.display = 'none';
+                document.body.classList.remove('editing-mode');
+                document.body.classList.remove('detail-open');
                 enableEditing(false);
+                autoSave();
+            }
+        }
+
+        function setEditorStatus(state, msg) {
+            const dot  = document.getElementById('esb-status-dot');
+            const text = document.getElementById('esb-status-text');
+            if (!dot || !text) return;
+            dot.className = 'etb-status-dot';
+            if (state === 'saving') {
+                dot.classList.add('pending');
+                text.textContent = msg || 'Salvando…';
+            } else if (state === 'saved') {
+                text.textContent = msg || 'Salvo';
+            } else if (state === 'error') {
+                dot.classList.add('error');
+                text.textContent = msg || 'Erro ao salvar';
+            }
+        }
+
+        function updateTopbarContext() {
+            const label = document.getElementById('etb-page-name');
+            if (!label) return;
+            const active = document.querySelector('nav .nav-link.active');
+            const isDetail = !views.detail.classList.contains('hidden');
+            if (isDetail) {
+                const title = document.querySelector('#detail-content .detail-title');
+                label.textContent = title ? (title.textContent.trim() || 'Projeto') : 'Projeto';
+                document.body.classList.add('detail-open');
+            } else {
+                label.textContent = active ? active.textContent.trim() : 'Home';
+                document.body.classList.remove('detail-open');
             }
         }
 
         function enableEditing(enable) {
-            // Text
+            // ---- Text ----
             document.querySelectorAll('.edit-text').forEach(el => {
                 el.contentEditable = enable;
             });
 
-            // Images
+            // ---- Images (skip sketch items — handled separately) ----
             document.querySelectorAll('img').forEach(img => {
+                if (img.closest('.sketch-item')) return; // skip sketch
                 if (enable) {
                     img.classList.add('editable-img');
                     img.onclick = () => uploadImg(img);
                 } else {
                     img.classList.remove('editable-img');
-                    if (img.closest('.sketch-item')) {
-                        img.onclick = () => openLightbox(img.src);
-                    } else {
-                        img.onclick = null;
-                    }
+                    img.onclick = null;
                 }
             });
 
-            // Embeds — show/hide the edit-embed-btn overlay
+            // ---- Sketch images: upload in edit mode, lightbox otherwise ----
+            document.querySelectorAll('.sketch-item img').forEach(img => {
+                img.style.cursor = enable ? 'pointer' : 'zoom-in';
+                img.onclick = enable
+                    ? (e) => { e.stopPropagation(); uploadImg(img); }
+                    : () => openLightbox(img.src);
+            });
+
+            // ---- Detail-page video embeds (edit-embed) ----
             document.querySelectorAll('.edit-embed').forEach(div => {
                 let btn = div.parentElement.querySelector('.embed-edit-btn');
                 if (enable) {
@@ -1871,12 +2586,87 @@
                 }
             });
 
-            // Delete buttons
+            // ---- Home YouTube embed ----
+            const ytDiv = document.querySelector('.home-yt-wrap .edit-embed');
+            if (ytDiv) {
+                let ytBtn = document.querySelector('.home-yt-wrap .embed-edit-btn');
+                if (enable) {
+                    ytDiv.style.outline = '2px dashed rgba(45,90,142,0.4)';
+                    if (!ytBtn) {
+                        ytBtn = document.createElement('button');
+                        ytBtn.className = 'embed-edit-btn';
+                        ytBtn.innerHTML = '✏ Editar vídeo';
+                        ytBtn.onclick = () => promptEmbed(ytDiv);
+                        document.querySelector('.home-yt-wrap').appendChild(ytBtn);
+                    }
+                    ytBtn.style.display = 'flex';
+                } else {
+                    ytDiv.style.outline = '';
+                    if (ytBtn) ytBtn.style.display = 'none';
+                }
+            }
+
+            // ---- Home section SpeakerDeck embeds ----
+            document.querySelectorAll('.hps-embed.edit-sd-embed').forEach(div => {
+                let btn = div.parentElement.querySelector('.sd-edit-btn');
+                if (enable) {
+                    div.style.outline = '2px dashed rgba(45,90,142,0.4)';
+                    if (!btn) {
+                        btn = document.createElement('button');
+                        btn.className = 'embed-edit-btn sd-edit-btn';
+                        btn.style.cssText = 'top:6px;right:6px;';
+                        btn.innerHTML = '✏ Embed';
+                        btn.onclick = () => promptSdEmbed(div);
+                        div.parentElement.style.position = 'relative';
+                        div.parentElement.appendChild(btn);
+                    }
+                    btn.style.display = 'flex';
+                } else {
+                    div.style.outline = '';
+                    if (btn) btn.style.display = 'none';
+                }
+            });
+
+            // ---- Home section 3 preview images ----
+            document.querySelectorAll('.hps-img-item img.hps-preview-img').forEach(img => {
+                if (enable) {
+                    img.classList.add('editable-img');
+                    img.onclick = (e) => {
+                        e.stopPropagation();
+                        const item    = img.closest('.hps-img-item');
+                        const projId  = item?.dataset.projId;
+                        const imgIdx  = parseInt(item?.dataset.imgIdx ?? -1);
+                        currentImg = img;
+                        // After upload we also save to card dataset
+                        window._pendingImgMeta = { projId, imgIdx };
+                        document.getElementById('file-input').click();
+                    };
+                } else {
+                    img.classList.remove('editable-img');
+                    img.onclick = () => openLightbox(img.src);
+                }
+            });
+
+            // ---- Bottom banner image ----
+            const bbImg = document.querySelector('.bottom-banner .bottom-banner-img');
+            if (bbImg) {
+                if (enable) {
+                    bbImg.style.outline = '2px dashed rgba(45,90,142,0.4)';
+                    bbImg.style.cursor = 'pointer';
+                    bbImg.onclick = () => uploadImg(bbImg);
+                } else {
+                    bbImg.style.outline = '';
+                    bbImg.style.cursor = '';
+                    bbImg.onclick = null;
+                }
+            }
+
+            // ---- Delete buttons ----
             document.querySelectorAll('.delete-btn').forEach(btn => {
                 btn.style.display = enable ? 'block' : 'none';
             });
 
-            // Links
+            // ---- Editable links ----
             document.querySelectorAll('.editable-link').forEach(link => {
                 if (enable) {
                     link.classList.add('editing');
@@ -1907,6 +2697,44 @@
             autoSave();
         }
 
+        function promptSdEmbed(div) {
+            const projId = div.dataset.projId;
+            const currentIframe = div.querySelector('iframe');
+            const current = currentIframe?.src || '';
+            const code = prompt(
+                "Cole a URL ou embed code do SpeakerDeck:\n\nExemplo URL: https://speakerdeck.com/player/abc123\nOu cole o <iframe> do SpeakerDeck completo",
+                current
+            );
+            if (code === null) return; // cancelled
+            if (!code.trim()) {
+                // Clear embed
+                div.innerHTML = `<div class="hps-embed-placeholder"><div style="font-size:1.4rem;margin-bottom:8px;opacity:0.3;">▶</div><div>Sem embed</div></div>`;
+                if (projId) updateCardSdSrc(projId, '');
+                autoSave();
+                return;
+            }
+            if (code.includes('<iframe') || code.includes('<script')) {
+                div.innerHTML = code;
+            } else {
+                // Treat as URL — convert various SpeakerDeck formats
+                let src = code.trim();
+                // speakerdeck.com/username/slug → player URL
+                if (src.includes('speakerdeck.com') && !src.includes('/player/')) {
+                    const m = src.match(/speakerdeck\.com\/[^/]+\/([^/?#]+)/);
+                    if (m) src = `https://speakerdeck.com/player/${m[1]}`;
+                }
+                div.innerHTML = `<iframe src="${src}" allowfullscreen scrolling="no" allow="autoplay; fullscreen"></iframe>`;
+            }
+            if (projId) updateCardSdSrc(projId, div.querySelector('iframe')?.src || '');
+            autoSave();
+        }
+
+        // Saves the SpeakerDeck src back to the source project card so it persists
+        function updateCardSdSrc(projId, src) {
+            const card = document.querySelector(`#public-grid .project-card[data-item-id="${projId}"]`);
+            if (card) card.dataset.sdSrc = src;
+        }
+
         // ============================================
         // IMAGE UPLOAD
         // ============================================
@@ -1920,10 +2748,25 @@
             if (!e.target.files || !e.target.files[0]) return;
             const reader = new FileReader();
             reader.onload = ev => {
-                if (currentImg) currentImg.src = ev.target.result;
+                if (currentImg) {
+                    currentImg.src = ev.target.result;
+                    // If this is a home section preview image, save back to the card
+                    const meta = window._pendingImgMeta;
+                    if (meta && meta.projId && meta.imgIdx >= 0) {
+                        const card = document.querySelector(`#public-grid .project-card[data-item-id="${meta.projId}"]`);
+                        if (card) {
+                            let imgs = [];
+                            try { imgs = JSON.parse(card.dataset.previewImgs || '[]'); } catch(e2) {}
+                            while (imgs.length < 3) imgs.push('');
+                            imgs[meta.imgIdx] = ev.target.result;
+                            card.dataset.previewImgs = JSON.stringify(imgs);
+                        }
+                        window._pendingImgMeta = null;
+                    }
+                }
+                autoSave();
             };
             reader.readAsDataURL(e.target.files[0]);
-            // Reset input
             this.value = '';
         });
 
@@ -1961,6 +2804,19 @@
                 <span class="card-arrow">→</span>`;
             grid.appendChild(card);
 
+            const detailEmbed = type === 'private'
+                ? `<div class="embed-wrapper" style="margin-bottom:28px;">
+                    <div class="embed-area edit-embed" style="aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+                        <span style="color:#888; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.1em;">[ Ative edição → clique ✏ Editar vídeo ]</span>
+                    </div>
+                   </div>`
+                : `<div class="hps-embed-wrap" style="margin-bottom:28px;">
+                    <div class="hps-embed-label">SpeakerDeck</div>
+                    <div class="hps-embed edit-sd-embed" data-proj-id="${id}" style="aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+                        <div class="hps-embed-placeholder"><div style="font-size:1.4rem;margin-bottom:8px;opacity:0.3;">▶</div><div style="font-size:0.6rem;">Ative edição → clique ✏ Embed</div></div>
+                    </div>
+                   </div>`;
+
             createDataWrapper(id, `
                 <div class="detail-header">
                     <div class="detail-tag edit-text" contenteditable="true">Storyboard</div>
@@ -1974,11 +2830,7 @@
                         <div class="meta-item"><div class="meta-label">Tipo</div><div class="meta-value edit-text" contenteditable="true">Storyboard</div></div>
                     </div>
                 </div>
-                <div class="embed-wrapper" style="margin-bottom:28px;">
-                    <div class="embed-area edit-embed" style="aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
-                        <span style="color:#888; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.1em;">[ Ative a edição e clique em "✏ Editar vídeo" ]</span>
-                    </div>
-                </div>
+                ${detailEmbed}
                 <div class="generic-block">
                     <button class="delete-btn" onclick="this.parentElement.remove();">DEL</button>
                     <img src="https://via.placeholder.com/1200x700/e8e4db/5a574f" class="generic-img editable-img">
@@ -1992,8 +2844,18 @@
         // Event delegation — works even after contenteditable rename
         document.addEventListener('click', function(e) {
             if (isEditing) return;
+            // Project/blog cards in grid
             const card = e.target.closest('.project-card[data-item-id], .blog-item[data-item-id]');
-            if (card) openItem(card.dataset.itemId);
+            if (card) { openItem(card.dataset.itemId); return; }
+            // "Ver projeto completo" link in home sections
+            const hpsLink = e.target.closest('.hps-link[data-item-id]');
+            if (hpsLink) { openItem(hpsLink.dataset.itemId); return; }
+            // Click on the right thumb of a home section opens project
+            const hpsRight = e.target.closest('.hps-right');
+            if (hpsRight) {
+                const section = hpsRight.closest('.home-proj-section[data-item-id]');
+                if (section) openItem(section.dataset.itemId);
+            }
         });
 
         function addPost() {
@@ -2055,7 +2917,12 @@
                 <button class="delete-btn" onclick="this.parentElement.remove(); updateCounts();">DEL</button>
                 <img src="https://via.placeholder.com/400x400/e8e4db/5a574f">`;
             grid.appendChild(item);
-            if (isEditing) enableEditing(true);
+            // In edit mode the new img gets upload handler; in view mode lightbox
+            if (isEditing) {
+                const img = item.querySelector('img');
+                img.style.cursor = 'pointer';
+                img.onclick = (e) => { e.stopPropagation(); uploadImg(img); };
+            }
             updateCounts();
         }
 
@@ -2485,7 +3352,7 @@
                 if (navKey && navs[navKey]) navs[navKey].classList.add('active');
             }
 
-            window.goHome    = function() { showView('home',     'work');     previousView = 'home';     renderFeatured(); };\n            window.goProjects= function() { showView('projects', 'projects'); previousView = 'projects'; };\n            window.goBlog    = function() { showView('blog',     'blog');     previousView = 'blog'; };\n            window.goGallery = function() { showView('gallery',  'gallery');  previousView = 'gallery'; };\n            window.goToContact = function() { showView('contact', 'contact'); };\n\n            window.goBack = function() {\n                if (previousView === 'blog')         goBlog();\n                else if (previousView === 'gallery')  goGallery();\n                else if (previousView === 'projects') goProjects();\n                else goHome();\n            };\n\n            // ---- Featured (public site reads from data-featured attr set at publish time) ----\n            function renderFeatured() {\n                var featuredGrid = document.getElementById('featured-grid');\n                if (!featuredGrid) return;\n                var allCards = Array.from(document.querySelectorAll('#public-grid .project-card'));\n                var featured = allCards.filter(function(c) { return c.dataset.featured === 'true'; });\n                var toShow = featured.length > 0 ? featured : allCards.slice(0, 3);\n                featuredGrid.innerHTML = '';\n                toShow.forEach(function(orig) {\n                    var clone = orig.cloneNode(true);\n                    clone.querySelectorAll('.delete-btn,.star-btn').forEach(function(el){ el.remove(); });\n                    featuredGrid.appendChild(clone);\n                });\n                var pc = document.getElementById('proj-count');\n                if (pc) pc.textContent = toShow.length > 0 ? String(toShow.length).padStart(2,'0') : '—';\n            }
+            window.goHome    = function() { showView('home',     'work');     previousView = 'home';     renderFeatured(); };\n            window.goProjects= function() { showView('projects', 'projects'); previousView = 'projects'; };\n            window.goBlog    = function() { showView('blog',     'blog');     previousView = 'blog'; };\n            window.goGallery = function() { showView('gallery',  'gallery');  previousView = 'gallery'; };\n            window.goToContact = function() { showView('contact', 'contact'); };\n\n            window.goBack = function() {\n                if (previousView === 'blog')         goBlog();\n                else if (previousView === 'gallery')  goGallery();\n                else if (previousView === 'projects') goProjects();\n                else goHome();\n            };\n\n            // ---- Featured sections (title+subtitle | thumb, SpeakerDeck + 3 images) ----\n            function renderFeatured() {\n                var sectionsEl = document.getElementById('featured-sections');\n                if (!sectionsEl) return;\n                var allCards = Array.from(document.querySelectorAll('#public-grid .project-card'));\n                var featured = allCards.filter(function(c) { return c.dataset.featured === 'true'; });\n                var toShow = featured.length > 0 ? featured : allCards.slice(0, 3);\n                sectionsEl.innerHTML = '';\n                toShow.forEach(function(card, idx) {\n                    var id       = card.dataset.itemId;\n                    var thumb    = card.querySelector('.card-thumb');\n                    var thumbSrc = thumb ? thumb.src : '';\n                    var titlePT  = (card.querySelector('.card-title.pt-only') || {textContent:''}).textContent.trim() || 'Projeto';\n                    var titleEN  = (card.querySelector('.card-title.en-only') || {textContent:''}).textContent.trim() || 'Project';\n                    var tagPT    = (card.querySelector('.card-tag.pt-only')   || {textContent:''}).textContent.trim();\n                    var tagEN    = (card.querySelector('.card-tag.en-only')   || {textContent:''}).textContent.trim();\n                    var sdSrc    = card.dataset.sdSrc || '';\n                    var num      = String(idx + 1).padStart(2, '0');\n                    var previewImgs = [];\n                    try { previewImgs = JSON.parse(card.dataset.previewImgs || '[]'); } catch(e2) {}\n                    while (previewImgs.length < 3) previewImgs.push('');\n                    var ph = 'https://via.placeholder.com/400x300/e8e4db/a09c93';\n                    var imgItems = previewImgs.map(function(src, i) {\n                        return '<div class=\"hps-img-item\" data-proj-id=\"' + id + '\" data-img-idx=\"' + i + '\"><img src=\"' + (src || ph) + '\" class=\"hps-preview-img\" alt=\"\"></div>';\n                    }).join('');\n                    var embedContent = sdSrc\n                        ? '<iframe src=\"' + sdSrc + '\" allowfullscreen scrolling=\"no\" allow=\"autoplay; fullscreen\"></iframe>'\n                        : '<div class=\"hps-embed-placeholder\"><div style=\"font-size:1.4rem;margin-bottom:8px;opacity:0.3;\">&#9654;</div></div>';\n                    var section = document.createElement('div');\n                    section.className = 'home-proj-section';\n                    section.dataset.itemId = id;\n                    section.innerHTML =\n                        '<div class=\"hps-top\">' +\n                        '<div class=\"hps-left\">' +\n                        '<div class=\"hps-index\">' + num + '</div>' +\n                        '<div class=\"hps-tag pt-only\">' + tagPT + '</div>' +\n                        '<div class=\"hps-tag en-only\">' + tagEN + '</div>' +\n                        '<div class=\"hps-title pt-only\">' + titlePT + '</div>' +\n                        '<div class=\"hps-title en-only\">' + titleEN + '</div>' +\n                        '</div>' +\n                        '</div>' +\n                        '<div class=\"hps-embed-wrap\"><div class=\"hps-embed-label\">SpeakerDeck / Embed</div><div class=\"hps-embed\">' + embedContent + '</div></div>' +\n                        '<div class=\"hps-images\">' + imgItems + '</div>' +\n                        '<div class=\"hps-footer\"><a class=\"hps-link\" data-item-id=\"' + id + '\"><span class=\"pt-only\">Ver projeto \u2192</span><span class=\"en-only\">View project \u2192</span></a></div>';\n                    sectionsEl.appendChild(section);\n                });\n            }
 
             window.openItem = function(id) {
                 var contentDiv = document.getElementById('detail-content');
@@ -2536,10 +3403,14 @@
                 if (bc)  bc.textContent  = bn > 0 ? String(bn).padStart(2,'0') : '—';
             }
 
-            // ---- Click delegation for cards ----
+            // ---- Click delegation for cards & home sections ----
             document.addEventListener('click', function(e) {
                 var card = e.target.closest('.project-card[data-item-id], .blog-item[data-item-id]');
-                if (card) openItem(card.dataset.itemId);
+                if (card) { openItem(card.dataset.itemId); return; }
+                var hpsLink = e.target.closest('.hps-link[data-item-id]');
+                if (hpsLink) { openItem(hpsLink.dataset.itemId); return; }
+                var hpsRight = e.target.closest('.hps-right');
+                if (hpsRight) { var sec = hpsRight.closest('.home-proj-section[data-item-id]'); if (sec) openItem(sec.dataset.itemId); }
             });
 
             // ---- Init ----
@@ -2613,9 +3484,7 @@
                     }
 
                     // Re-attach sketch lightbox handlers
-                    document.querySelectorAll('.sketch-item img').forEach(img => {
-                        img.onclick = () => openLightbox(img.src);
-                    });
+                    if (window.attachSketchHandlers) attachSketchHandlers();
 
                     updateCounts();
                     alert("✓ Dados restaurados com sucesso!");
@@ -2723,9 +3592,7 @@
             }
 
             // Restore sketch lightbox handlers
-            document.querySelectorAll('.sketch-item img').forEach(img => {
-                img.onclick = () => openLightbox(img.src);
-            });
+            if (window.attachSketchHandlers) attachSketchHandlers();
 
             // Restore star states
             const featured = getFeaturedIds();
@@ -3098,21 +3965,37 @@
         const LS_KEY = 'portfolio_autosave';
 
         function autoSave() {
+            setEditorStatus('saving');
             try {
                 const data = collectData();
 
-                // Save static editable text (header name, role, contact, etc.)
+                // Static editable text
                 data._staticText = {};
                 document.querySelectorAll('[data-save-id]').forEach(el => {
                     data._staticText[el.dataset.saveId] = el.innerHTML;
                 });
 
-                // Save embed iframes — keyed by position index within home-view only
-                // (project-level embeds are inside hiddenData)
-                data._homeEmbed = document.querySelector('#home-view .edit-embed iframe')?.src || null;
+                // Home YouTube embed
+                data._homeYT = document.querySelector('.home-yt-wrap .edit-embed iframe')?.src || null;
+
+                // Bottom banner image
+                data._bottomBannerImg = document.querySelector('.bottom-banner-img')?.src || null;
+
+                // SpeakerDeck embeds per card
+                data._sdEmbeds = {};
+                document.querySelectorAll('#public-grid .project-card[data-item-id]').forEach(card => {
+                    if (card.dataset.sdSrc) data._sdEmbeds[card.dataset.itemId] = card.dataset.sdSrc;
+                });
+
+                // Preview images (3 per card)
+                data._previewImgs = {};
+                document.querySelectorAll('#public-grid .project-card[data-item-id]').forEach(card => {
+                    if (card.dataset.previewImgs) data._previewImgs[card.dataset.itemId] = card.dataset.previewImgs;
+                });
 
                 localStorage.setItem(LS_KEY, JSON.stringify(data));
-            } catch(e) { console.warn('AutoSave failed:', e); }
+                setEditorStatus('saved');
+            } catch(e) { setEditorStatus('error'); console.warn('AutoSave failed:', e); }
         }
 
         function autoLoad() {
@@ -3124,16 +4007,54 @@
 
                 // Restore static text
                 if (data._staticText) {
-                    Object.entries(data._staticText).forEach(([id, html]) => {
+                    Object.entries(data._staticText).forEach(([id, html_]) => {
                         const el = document.querySelector(`[data-save-id="${id}"]`);
-                        if (el) el.innerHTML = html;
+                        if (el) el.innerHTML = html_;
                     });
                 }
 
-                // Restore home embed
-                if (data._homeEmbed) {
-                    const homeEmbed = document.querySelector('#home-view .edit-embed');
-                    if (homeEmbed) homeEmbed.innerHTML = `<iframe src="${data._homeEmbed}" allowfullscreen></iframe>`;
+                // Restore home YouTube embed
+                if (data._homeYT) {
+                    const ytEl = document.querySelector('.home-yt-wrap .edit-embed');
+                    if (ytEl) ytEl.innerHTML = `<iframe src="${data._homeYT}" allowfullscreen></iframe>`;
+                }
+                // Legacy: old saves used _homeEmbed
+                if (!data._homeYT && data._homeEmbed) {
+                    const ytEl = document.querySelector('.home-yt-wrap .edit-embed');
+                    if (ytEl) ytEl.innerHTML = `<iframe src="${data._homeEmbed}" allowfullscreen></iframe>`;
+                }
+
+                // Restore bottom banner image
+                if (data._bottomBannerImg) {
+                    const bbImg = document.querySelector('.bottom-banner-img');
+                    if (bbImg) bbImg.src = data._bottomBannerImg;
+                }
+
+                // Restore SD embeds on cards
+                if (data._sdEmbeds) {
+                    Object.entries(data._sdEmbeds).forEach(([projId, src]) => {
+                        const card = document.querySelector(`#public-grid .project-card[data-item-id="${projId}"]`);
+                        if (card) card.dataset.sdSrc = src;
+                    });
+                }
+
+                // Restore preview images on cards
+                if (data._previewImgs) {
+                    Object.entries(data._previewImgs).forEach(([projId, imgs]) => {
+                        const card = document.querySelector(`#public-grid .project-card[data-item-id="${projId}"]`);
+                        if (card) card.dataset.previewImgs = imgs;
+                    });
+                }
+
+                // Re-render home sections (picks up SD + preview images)
+                renderFeatured();
+
+                // Re-restore static text that lives inside rendered featured-sections
+                if (data._staticText) {
+                    Object.entries(data._staticText).forEach(([id, html_]) => {
+                        const el = document.querySelector(`[data-save-id="${id}"]`);
+                        if (el) el.innerHTML = html_;
+                    });
                 }
 
                 return true;
