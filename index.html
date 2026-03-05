@@ -8,22 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
   <style>
-    /* ========== DESIGN SYSTEM ========== */
     :root {
-      --bg:       #F2EFE8;
-      --bg2:      #E8E4DB;
-      --ink:      #1C1B18;
-      --ink-soft: #5A574F;
-      --ink-pale: #A09C93;
-      --rule:     #C8C4BB;
-      --accent:   #C1440E;
-      --accent2:  #2D5A8E;
-      --white:    #FAFAF7;
-      --serif: 'DM Serif Display', Georgia, serif;
-      --sans:  'DM Sans', Helvetica, sans-serif;
-      --mono:  'DM Mono', 'Courier New', monospace;
-      --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
-      --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+      --bg:#F2EFE8;--bg2:#E8E4DB;--ink:#1C1B18;--ink-soft:#5A574F;--ink-pale:#A09C93;
+      --rule:#C8C4BB;--accent:#C1440E;--accent2:#2D5A8E;--white:#FAFAF7;
+      --serif:'DM Serif Display',Georgia,serif;--sans:'DM Sans',Helvetica,sans-serif;
+      --mono:'DM Mono','Courier New',monospace;
+      --ease:cubic-bezier(0.25,0.1,0.25,1);--ease-out:cubic-bezier(0.0,0.0,0.2,1);
     }
     *{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
@@ -31,16 +21,10 @@
     body.lang-pt .en-only{display:none!important;}
     body.lang-en .pt-only{display:none!important;}
     .hidden{display:none!important;}
-
-    /* Grain */
     body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.018;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-repeat:repeat;background-size:256px;}
-
-    /* Layout */
     .container{width:min(70%,1100px);min-width:320px;margin:0 auto;padding:0 24px;}
-
-    /* Header */
     header{padding:2.5rem 0 2rem;border-bottom:1.5px solid var(--ink);display:grid;grid-template-columns:1fr auto;align-items:end;gap:20px;}
     .header-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:400;letter-spacing:-.02em;line-height:1;}
     .header-role{font-family:var(--sans);font-size:.78rem;font-weight:400;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase;margin-top:6px;}
@@ -54,29 +38,18 @@
     .nav-link{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--ink-soft);text-decoration:none;cursor:pointer;padding:6px 14px;border:1px solid transparent;letter-spacing:.08em;text-transform:uppercase;transition:all .2s var(--ease);user-select:none;white-space:nowrap;}
     .nav-link:hover{color:var(--ink);border-color:var(--rule);}
     .nav-link.active{color:var(--ink);border-color:var(--ink);}
-
-    /* Issue bar */
     .issue-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule);margin-bottom:70px;}
     .issue-text{font-family:var(--mono);font-size:.65rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;}
-
-    /* Section title */
     .section-title{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;margin:80px 0 50px;}
     .section-label{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;}
     .section-rule{height:1px;background:var(--rule);}
     .section-num{font-family:var(--mono);font-size:.65rem;color:var(--ink-pale);}
-
-    /* Banner */
     .banner-container{width:100%;height:clamp(250px,40vw,420px);overflow:hidden;position:relative;background:var(--bg2);margin-bottom:60px;}
     .banner-container::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(28,27,24,.15));}
     .banner-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s var(--ease-out);}
     .banner-container:hover .banner-img{transform:scale(1.03);}
-
-    /* Embed */
-    .embed-wrapper{margin-bottom:70px;}
     .embed-area{width:100%;background:var(--ink);position:relative;overflow:hidden;}
     .embed-area iframe{width:100%;aspect-ratio:16/9;display:block;border:none;}
-
-    /* Project grid */
     .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:0;}
     .project-card{cursor:pointer;position:relative;}
     .card-thumb-wrap{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);margin-bottom:14px;position:relative;}
@@ -90,14 +63,10 @@
     .card-arrow{display:inline-block;margin-left:6px;opacity:0;transform:translateX(-4px);transition:all .2s var(--ease);}
     .project-card:hover .card-arrow{opacity:1;transform:translateX(0);}
     .card-draft{position:absolute;top:8px;left:8px;background:var(--accent);color:white;font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;}
-
-    /* Sketch */
     .sketch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:4rem;}
     .sketch-item{aspect-ratio:1/1;overflow:hidden;cursor:zoom-in;position:relative;background:var(--bg2);}
     .sketch-item img{width:100%;height:100%;object-fit:cover;display:block;transition:all .4s var(--ease);filter:grayscale(80%);}
     .sketch-item:hover img{transform:scale(1.08);filter:grayscale(0%);}
-
-    /* Blog */
     .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1.5px solid var(--ink);margin-bottom:4rem;}
     .blog-item{padding:32px 24px 32px 0;border-bottom:1px solid var(--rule);cursor:pointer;transition:background .2s;}
     .blog-item:nth-child(even){padding-left:24px;padding-right:0;border-left:1px solid var(--rule);}
@@ -107,8 +76,6 @@
     .blog-item:hover .blog-thumb{opacity:.9;}
     .blog-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;line-height:1.2;margin-bottom:12px;}
     .blog-excerpt{font-size:.85rem;color:var(--ink-soft);line-height:1.6;font-style:italic;}
-
-    /* Gallery */
     .gallery-header{margin:4rem 0 3rem;display:grid;grid-template-columns:1fr auto;align-items:end;border-bottom:1.5px solid var(--ink);padding-bottom:20px;}
     .gallery-h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:400;line-height:1;}
     .gallery-sub{font-family:var(--mono);font-size:.7rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;}
@@ -117,12 +84,8 @@
     .art-img{width:100%;height:auto;display:block;background:var(--bg2);transition:opacity .3s;cursor:zoom-in;}
     .art-item:hover .art-img{opacity:.9;}
     .art-caption{font-family:var(--mono);font-size:.65rem;color:var(--ink-pale);letter-spacing:.08em;padding:10px 0 0;text-transform:uppercase;}
-
-    /* Back btn */
     .back-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;padding:20px 0;transition:color .2s;user-select:none;}
     .back-btn:hover{color:var(--ink);}
-
-    /* Detail */
     .detail-container{display:flex;flex-direction:column;gap:0;}
     .detail-header{border-bottom:1.5px solid var(--ink);padding-bottom:32px;margin-bottom:48px;}
     .detail-tag{font-family:var(--mono);font-size:.68rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
@@ -131,10 +94,7 @@
     .detail-meta{display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;}
     .meta-label{font-family:var(--mono);font-size:.62rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
     .meta-value{font-size:.85rem;color:var(--ink);}
-
-    /* Detail blocks */
     .detail-embed{margin-bottom:48px;}
-    .detail-embed .embed-area{background:var(--ink);}
     .detail-embed .embed-area iframe{width:100%;aspect-ratio:16/9;display:block;border:none;}
     .detail-images{margin-bottom:48px;}
     .detail-images-grid{display:grid;gap:16px;}
@@ -143,8 +103,6 @@
     .detail-images-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
     .detail-img{width:100%;height:auto;display:block;cursor:zoom-in;background:var(--bg2);}
     .detail-text{font-family:var(--sans);font-size:1rem;line-height:1.85;color:var(--ink-soft);white-space:pre-wrap;margin-bottom:48px;max-width:72ch;}
-
-    /* Contact */
     #contact-view{padding:5rem 0;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
     .contact-h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:400;line-height:1.1;margin-bottom:24px;}
     .contact-body{font-size:1rem;color:var(--ink-soft);line-height:1.7;font-style:italic;margin-bottom:32px;}
@@ -156,108 +114,121 @@
     .social-row{display:flex;gap:16px;align-items:center;}
     .social-link{font-family:var(--mono);font-size:.68rem;color:var(--ink-soft);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
     .social-link:hover{color:var(--accent);}
-
-    /* Lightbox */
     #lightbox{position:fixed;inset:0;background:rgba(28,27,24,.97);z-index:8000;display:none;justify-content:center;align-items:center;cursor:zoom-out;}
     #lightbox.open{display:flex;}
     #lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;}
-
-    /* Fade */
     .fade-in{animation:fadeUp .4s var(--ease-out) both;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-
-    /* ==========================================
-       ADMIN PANEL
-       ========================================== */
-    #admin-panel{position:fixed;inset:0;z-index:9500;display:none;}
-    #admin-panel.open{display:flex;}
-    .admin-overlay{position:absolute;inset:0;background:rgba(28,27,24,.5);backdrop-filter:blur(3px);}
-    .admin-sidebar{position:relative;width:min(560px,100vw);height:100%;background:var(--white);overflow-y:auto;box-shadow:4px 0 40px rgba(0,0,0,.2);display:flex;flex-direction:column;}
-    .admin-header{padding:28px 28px 20px;border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:10;}
-    .admin-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;}
-    .admin-close{background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--ink-pale);transition:color .2s;padding:4px;}
-    .admin-close:hover{color:var(--ink);}
-    .admin-sync-bar{padding:12px 28px;background:var(--bg2);border-bottom:1px solid var(--rule);display:flex;gap:10px;align-items:center;}
-    .sync-btn{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border:1px solid var(--ink);background:none;cursor:pointer;color:var(--ink);transition:all .2s;white-space:nowrap;}
+    #editor-fab-wrap{position:fixed;bottom:28px;right:28px;z-index:9400;display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+    .editor-fab{width:52px;height:52px;border-radius:50%;background:var(--ink);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,.35);transition:all .25s var(--ease);}
+    .editor-fab:hover{background:var(--accent);transform:scale(1.08);}
+    .editor-fab svg{flex-shrink:0;}
+    .editor-toast{background:var(--ink);color:var(--white);font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;padding:8px 16px;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;border-radius:2px;}
+    .editor-toast.show{opacity:1;}
+    #editor-panel{position:fixed;inset:0;z-index:9500;display:none;pointer-events:none;}
+    #editor-panel.open{display:flex;pointer-events:all;}
+    .editor-overlay{position:absolute;inset:0;background:rgba(28,27,24,.45);backdrop-filter:blur(4px);}
+    .editor-drawer{position:relative;width:min(680px,100vw);height:100%;background:var(--white);overflow:hidden;box-shadow:8px 0 60px rgba(0,0,0,.25);display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .35s var(--ease-out);}
+    #editor-panel.open .editor-drawer{transform:translateX(0);}
+    .ed-header{padding:24px 28px 18px;border-bottom:1.5px solid var(--ink);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--white);}
+    .ed-header-left{display:flex;align-items:baseline;gap:14px;}
+    .ed-title{font-family:var(--serif);font-size:1.5rem;font-weight:400;letter-spacing:-.01em;}
+    .ed-subtitle{font-family:var(--mono);font-size:.6rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;}
+    .ed-close{background:none;border:none;cursor:pointer;color:var(--ink-pale);font-size:1rem;padding:6px;transition:color .2s;line-height:1;}
+    .ed-close:hover{color:var(--accent);}
+    .ed-sync{padding:10px 28px;background:var(--bg2);border-bottom:1px solid var(--rule);display:flex;gap:8px;align-items:center;flex-shrink:0;}
+    .sync-btn{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border:1px solid var(--ink);background:none;cursor:pointer;color:var(--ink);transition:all .2s;white-space:nowrap;}
     .sync-btn:hover{background:var(--ink);color:var(--white);}
-    .sync-btn.save{background:var(--accent);color:white;border-color:var(--accent);}
-    .sync-btn.save:hover{background:#9e3409;}
-    .sync-status{font-family:var(--mono);font-size:.6rem;color:var(--ink-pale);flex:1;text-align:right;}
-    .admin-tabs{display:flex;border-bottom:1px solid var(--rule);padding:0 28px;}
-    .admin-tab{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;cursor:pointer;border-bottom:2px solid transparent;color:var(--ink-pale);transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;}
-    .admin-tab.active{color:var(--ink);border-bottom-color:var(--ink);}
-    .admin-body{flex:1;padding:24px 28px;}
-
-    /* Item list */
-    .item-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
-    .item-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--bg);border:1px solid var(--rule);cursor:pointer;transition:border-color .2s;}
+    .sync-btn.primary{background:var(--accent);color:white;border-color:var(--accent);}
+    .sync-btn.primary:hover{background:#9e3409;}
+    .sync-btn.blue{background:var(--accent2);color:white;border-color:var(--accent2);}
+    .sync-btn.blue:hover{background:#1e3f63;}
+    .ed-sync-status{font-family:var(--mono);font-size:.58rem;color:var(--ink-pale);flex:1;text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .ed-tabs{display:flex;border-bottom:1px solid var(--rule);padding:0 28px;flex-shrink:0;background:var(--white);overflow-x:auto;}
+    .ed-tab{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 14px;cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;color:var(--ink-pale);transition:all .18s;white-space:nowrap;}
+    .ed-tab:hover{color:var(--ink-soft);}
+    .ed-tab.active{color:var(--ink);border-bottom-color:var(--ink);}
+    .ed-body{flex:1;overflow-y:auto;padding:0;}
+    .ed-section{padding:20px 28px;}
+    .ed-section+.ed-section{border-top:1px solid var(--rule);}
+    .ed-section-heading{font-family:var(--mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-pale);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--rule);}
+    .item-list{display:flex;flex-direction:column;gap:6px;}
+    .item-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--rule);cursor:pointer;transition:border-color .15s;user-select:none;}
     .item-row:hover{border-color:var(--ink-soft);}
     .item-row.active-edit{border-color:var(--accent);background:rgba(193,68,14,.04);}
-    .item-row-thumb{width:44px;height:34px;object-fit:cover;background:var(--bg2);flex-shrink:0;}
-    .item-row-info{flex:1;min-width:0;}
-    .item-row-title{font-size:.82rem;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .item-row-sub{font-family:var(--mono);font-size:.6rem;color:var(--ink-pale);margin-top:2px;}
-    .item-row-actions{display:flex;gap:6px;flex-shrink:0;}
-    .row-btn{background:none;border:none;cursor:pointer;font-size:.75rem;color:var(--ink-pale);padding:4px;transition:color .2s;}
-    .row-btn:hover{color:var(--ink);}
-    .row-btn.del:hover{color:var(--accent);}
-    .draft-badge{font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;background:var(--rule);color:var(--ink-soft);}
-
-    /* Form */
-    .edit-form{background:var(--bg);border:1px solid var(--rule);padding:20px;margin-bottom:20px;}
-    .form-row{margin-bottom:16px;}
-    .form-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:6px;}
-    .form-input,.form-textarea,.form-select{width:100%;padding:10px 12px;border:1px solid var(--rule);background:var(--white);font-family:var(--sans);font-size:.85rem;color:var(--ink);transition:border-color .2s;outline:none;}
+    .item-thumb{width:42px;height:32px;object-fit:cover;background:var(--bg2);flex-shrink:0;display:block;}
+    .item-thumb-sq{width:32px;height:32px;object-fit:cover;background:var(--bg2);flex-shrink:0;display:block;}
+    .item-info{flex:1;min-width:0;}
+    .item-title{font-size:.8rem;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .item-sub{font-family:var(--mono);font-size:.58rem;color:var(--ink-pale);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .item-actions{display:flex;gap:4px;flex-shrink:0;align-items:center;}
+    .ord-btn{background:none;border:none;cursor:pointer;color:var(--ink-pale);font-size:.65rem;padding:2px 3px;transition:color .15s;line-height:1;}
+    .ord-btn:hover{color:var(--ink);}
+    .del-btn{background:none;border:none;cursor:pointer;font-size:.7rem;color:var(--ink-pale);padding:4px;transition:color .15s;}
+    .del-btn:hover{color:var(--accent);}
+    .draft-pill{font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;background:var(--rule);color:var(--ink-soft);flex-shrink:0;}
+    .add-btn{width:100%;margin-top:10px;padding:11px;border:1.5px dashed var(--rule);background:none;cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-pale);transition:all .18s;}
+    .add-btn:hover{border-color:var(--ink);color:var(--ink);}
+    .edit-form{background:var(--bg);border-top:2px solid var(--accent);padding:22px 28px 28px;}
+    .edit-form-title{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+    .edit-form-title::after{content:'';flex:1;height:1px;background:var(--rule);}
+    .form-row{margin-bottom:14px;}
+    .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+    .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;}
+    .form-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:5px;}
+    .form-hint{font-family:var(--mono);font-size:.55rem;color:var(--ink-pale);margin-top:3px;}
+    .form-input,.form-textarea,.form-select{width:100%;padding:9px 11px;border:1px solid var(--rule);background:var(--white);font-family:var(--sans);font-size:.83rem;color:var(--ink);transition:border-color .15s;outline:none;}
     .form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--ink);}
-    .form-textarea{min-height:90px;resize:vertical;line-height:1.6;}
-    .form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-    .form-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;}
-    .btn-primary{padding:10px 22px;background:var(--ink);color:var(--white);border:none;cursor:pointer;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;}
-    .btn-primary:hover{background:var(--accent);}
-    .btn-secondary{padding:10px 22px;background:none;color:var(--ink-soft);border:1px solid var(--rule);cursor:pointer;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;}
-    .btn-secondary:hover{border-color:var(--ink);color:var(--ink);}
-    .btn-danger{padding:10px 22px;background:none;color:var(--accent);border:1px solid var(--accent);cursor:pointer;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;}
-    .btn-danger:hover{background:var(--accent);color:white;}
-    .add-new-btn{width:100%;padding:12px;border:1px dashed var(--rule);background:none;cursor:pointer;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-pale);transition:all .2s;}
-    .add-new-btn:hover{border-color:var(--ink);color:var(--ink);}
-
-    /* Embed list in form */
-    .embed-list{display:flex;flex-direction:column;gap:8px;margin-bottom:8px;}
-    .embed-row{display:flex;gap:8px;align-items:center;}
-    .embed-type{width:120px;flex-shrink:0;}
-    .embed-id{flex:1;}
-    .embed-remove{background:none;border:none;cursor:pointer;color:var(--accent);font-size:.9rem;padding:0 4px;}
-    .images-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
-    .image-row{display:flex;gap:8px;align-items:center;}
-    .image-url{flex:1;}
-    .image-remove{background:none;border:none;cursor:pointer;color:var(--accent);font-size:.9rem;padding:0 4px;}
-    .toggle-row{display:flex;align-items:center;gap:12px;}
-    .toggle{position:relative;display:inline-block;width:40px;height:22px;}
+    .form-textarea{min-height:70px;resize:vertical;line-height:1.6;}
+    .toggle-row{display:flex;align-items:center;gap:10px;}
+    .toggle{position:relative;display:inline-block;width:38px;height:20px;flex-shrink:0;}
     .toggle input{opacity:0;width:0;height:0;}
-    .slider{position:absolute;cursor:pointer;inset:0;background:var(--rule);transition:.3s;border-radius:22px;}
-    .slider::before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:white;transition:.3s;border-radius:50%;}
+    .slider{position:absolute;cursor:pointer;inset:0;background:var(--rule);transition:.25s;border-radius:20px;}
+    .slider::before{content:'';position:absolute;height:14px;width:14px;left:3px;bottom:3px;background:white;transition:.25s;border-radius:50%;}
     input:checked+.slider{background:var(--accent2);}
     input:checked+.slider::before{transform:translateX(18px);}
-
-    /* Reorder arrows */
-    .order-btns{display:flex;flex-direction:column;gap:2px;}
-    .ord-btn{background:none;border:none;cursor:pointer;color:var(--ink-pale);font-size:.7rem;line-height:1;padding:1px 3px;transition:color .2s;}
-    .ord-btn:hover{color:var(--ink);}
-
-    /* Firebase indicator */
-    #fb-indicator{position:fixed;bottom:24px;right:24px;z-index:9400;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-    .fb-fab{width:48px;height:48px;border-radius:50%;background:var(--ink);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:all .2s;}
-    .fb-fab:hover{background:var(--accent);transform:scale(1.08);}
-    .fb-fab svg{transition:transform .3s;}
-    .fb-fab.loading svg{animation:spin 1s linear infinite;}
-    @keyframes spin{to{transform:rotate(360deg);}}
-    .fb-toast{background:var(--ink);color:var(--white);font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;padding:8px 16px;opacity:0;transition:opacity .3s;pointer-events:none;text-align:right;max-width:220px;}
-    .fb-toast.show{opacity:1;}
-
-    /* Meta tab */
-    .meta-preview-img{width:100%;aspect-ratio:16/5;object-fit:cover;background:var(--bg2);display:block;margin-top:8px;}
-
-    /* Responsive */
+    .form-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+    .btn-save{padding:9px 20px;background:var(--ink);color:var(--white);border:none;cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;transition:background .18s;}
+    .btn-save:hover{background:var(--accent);}
+    .btn-cancel{padding:9px 20px;background:none;color:var(--ink-soft);border:1px solid var(--rule);cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;transition:all .18s;}
+    .btn-cancel:hover{border-color:var(--ink);color:var(--ink);}
+    .btn-del{padding:9px 20px;background:none;color:var(--accent);border:1px solid var(--accent);cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;transition:all .18s;}
+    .btn-del:hover{background:var(--accent);color:white;}
+    .btn-sm{padding:6px 12px;font-size:.58rem;}
+    .img-upload-zone{position:relative;border:1.5px dashed var(--rule);background:var(--white);padding:16px;transition:all .2s;cursor:pointer;}
+    .img-upload-zone:hover,.img-upload-zone.drag-over{border-color:var(--accent);background:rgba(193,68,14,.03);}
+    .img-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+    .img-upload-hint{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 0;pointer-events:none;}
+    .img-upload-hint svg{color:var(--ink-pale);}
+    .img-upload-hint span{font-family:var(--mono);font-size:.6rem;color:var(--ink-pale);letter-spacing:.08em;text-transform:uppercase;text-align:center;}
+    .img-upload-hint strong{color:var(--ink-soft);}
+    .img-preview-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+    .img-preview-item{position:relative;width:72px;height:56px;flex-shrink:0;}
+    .img-preview-item img{width:100%;height:100%;object-fit:cover;display:block;background:var(--bg2);}
+    .img-preview-item .img-remove{position:absolute;top:2px;right:2px;background:rgba(28,27,24,.8);color:white;border:none;cursor:pointer;font-size:.6rem;width:16px;height:16px;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .15s;}
+    .img-preview-item .img-remove:hover{background:var(--accent);}
+    .thumb-preview{width:100%;aspect-ratio:16/6;object-fit:cover;display:block;background:var(--bg2);margin-top:6px;}
+    .embed-list{display:flex;flex-direction:column;gap:6px;margin-bottom:6px;}
+    .embed-row{display:flex;gap:6px;align-items:center;}
+    .embed-row .form-select{width:110px;flex-shrink:0;padding:8px 8px;}
+    .embed-row .form-input{flex:1;}
+    .embed-row-del{background:none;border:none;cursor:pointer;color:var(--ink-pale);font-size:.8rem;padding:4px;transition:color .15s;flex-shrink:0;}
+    .embed-row-del:hover{color:var(--accent);}
+    .meta-banner-preview{width:100%;aspect-ratio:16/5;object-fit:cover;display:block;background:var(--bg2);margin-top:6px;}
+    #home-media-strip{display:flex;flex-direction:column;gap:0;margin-bottom:60px;}
+    .home-media-item{width:100%;height:clamp(250px,40vw,420px);overflow:hidden;position:relative;background:var(--ink);margin-bottom:20px;}
+    .home-media-item:last-child{margin-bottom:0;}
+    .home-media-item iframe{width:100%;height:100%;display:block;border:none;}
+    .home-image-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+    .home-image-row:last-child{margin-bottom:0;}
+    .home-image-cell{overflow:hidden;background:var(--bg2);cursor:zoom-in;}
+    .home-image-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease-out);}
+    .home-image-cell:hover img{transform:scale(1.04);}
+    #nav-nda::after{content:' 🔒';font-size:.65em;opacity:.5;}
+    #nav-nda.active::after{opacity:1;}
+    #nda-gate{min-height:65vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;}
+    /* bilingual lang badge */
+    .lang-badge{display:inline-block;font-family:var(--mono);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 5px;background:var(--bg2);color:var(--ink-pale);margin-right:4px;vertical-align:middle;}
     @media(max-width:900px){
       .container{width:92%;}
       header{grid-template-columns:1fr;gap:16px;}
@@ -268,50 +239,53 @@
       .sketch-grid{grid-template-columns:repeat(3,1fr);}
       #contact-view{grid-template-columns:1fr;gap:40px;}
       nav{flex-wrap:wrap;}
+      .editor-drawer{width:100vw;}
     }
     @media(max-width:600px){
       .project-grid,.art-gallery-grid{grid-template-columns:1fr;}
       .sketch-grid{grid-template-columns:repeat(3,1fr);}
       .detail-images-grid.cols-2,.detail-images-grid.cols-3{grid-template-columns:1fr;}
+      .form-row-2,.form-row-3{grid-template-columns:1fr;}
     }
   </style>
 </head>
 <body class="lang-pt">
 
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="">
-</div>
+<div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src="" alt=""></div>
 
-<!-- ADMIN PANEL -->
-<div id="admin-panel">
-  <div class="admin-overlay" onclick="closeAdmin()"></div>
-  <div class="admin-sidebar">
-    <div class="admin-header">
-      <div class="admin-title">Editor</div>
-      <button class="admin-close" onclick="closeAdmin()">✕</button>
+<!-- EDITOR PANEL -->
+<div id="editor-panel">
+  <div class="editor-overlay" onclick="closeEditor()"></div>
+  <div class="editor-drawer">
+    <div class="ed-header">
+      <div class="ed-header-left">
+        <div class="ed-title">Editor</div>
+        <div class="ed-subtitle">Portfolio CMS</div>
+      </div>
+      <button class="ed-close" onclick="closeEditor()">✕</button>
     </div>
-    <div class="admin-sync-bar">
+    <div class="ed-sync">
       <button class="sync-btn" onclick="fbLoad()">↓ Load</button>
-      <button class="sync-btn save" onclick="fbSave()">↑ Save</button>
-      <button class="sync-btn" onclick="exportForGit()" title="Download baked HTML for git deploy" style="background:var(--accent2);color:white;border-color:var(--accent2)">↓ Export</button>
-      <span class="sync-status" id="sync-status">Not synced</span>
+      <button class="sync-btn primary" onclick="fbSave()">↑ Save</button>
+      <button class="sync-btn blue" onclick="exportHTML()">↓ Export</button>
+      <span class="ed-sync-status" id="sync-status">—</span>
     </div>
-    <div class="admin-tabs">
-      <button class="admin-tab active" onclick="adminTab('projects')">Projects</button>
-      <button class="admin-tab" onclick="adminTab('blog')">Blog</button>
-      <button class="admin-tab" onclick="adminTab('gallery')">Gallery</button>
-      <button class="admin-tab" onclick="adminTab('sketches')">Sketches</button>
-      <button class="admin-tab" onclick="adminTab('meta')">Site</button>
+    <div class="ed-tabs">
+      <button class="ed-tab active" onclick="edTab('projects')">Projects</button>
+      <button class="ed-tab" onclick="edTab('gallery')">Gallery</button>
+      <button class="ed-tab" onclick="edTab('sketches')">Sketches</button>
+      <button class="ed-tab" onclick="edTab('blog')">Blog</button>
+      <button class="ed-tab" onclick="edTab('texts')">Texts</button>
+      <button class="ed-tab" onclick="edTab('site')">Site</button>
     </div>
-    <div class="admin-body" id="admin-body"></div>
+    <div class="ed-body" id="ed-body"></div>
   </div>
 </div>
 
-<!-- FB FAB -->
-<div id="fb-indicator">
-  <div class="fb-toast" id="fb-toast"></div>
-  <button class="fb-fab" id="fb-fab" onclick="toggleAdmin()" title="Open Editor">
+<!-- EDITOR FAB -->
+<div id="editor-fab-wrap">
+  <div class="editor-toast" id="editor-toast"></div>
+  <button class="editor-fab" onclick="toggleEditor()" title="Abrir Editor">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
       <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
@@ -320,11 +294,10 @@
 </div>
 
 <div class="container">
-  <!-- HEADER -->
   <header>
     <div>
-      <div class="header-name">Lucca Tuelher</div>
-      <div class="header-role">Storyboard Artist &amp; Visual Storyteller</div>
+      <div class="header-name" id="txt-site-name">Lucca Tuelher</div>
+      <div class="header-role" id="txt-site-role">Storyboard Artist &amp; Visual Storyteller</div>
     </div>
     <div class="header-right">
       <div class="lang-icons">
@@ -332,1679 +305,950 @@
         <button class="flag-btn" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
       </div>
       <nav>
-        <a onclick="goHome()" class="nav-link active" id="nav-work">
-          <span class="pt-only">Projetos</span><span class="en-only">Work</span>
+        <a onclick="goHome()" class="nav-link active" id="nav-home"><span id="txt-nav-home">Home</span></a>
+        <a onclick="goProjects()" class="nav-link" id="nav-projects">
+          <span class="pt-only" id="txt-nav-projects-pt">Projetos</span>
+          <span class="en-only" id="txt-nav-projects-en">Projects</span>
         </a>
+        <a onclick="goNDA()" class="nav-link" id="nav-nda">NDA</a>
         <a onclick="goGallery()" class="nav-link" id="nav-gallery">
-          <span class="pt-only">Galeria</span><span class="en-only">Gallery</span>
+          <span class="pt-only" id="txt-nav-gallery-pt">Galeria</span>
+          <span class="en-only" id="txt-nav-gallery-en">Gallery</span>
         </a>
         <a onclick="goBlog()" class="nav-link" id="nav-blog">
-          <span class="pt-only">Notas</span><span class="en-only">Notes</span>
+          <span class="pt-only" id="txt-nav-blog-pt">Notas</span>
+          <span class="en-only" id="txt-nav-blog-en">Notes</span>
         </a>
         <a onclick="goToContact()" class="nav-link" id="nav-contact">
-          <span class="pt-only">Contato</span><span class="en-only">Contact</span>
+          <span class="pt-only" id="txt-nav-contact-pt">Contato</span>
+          <span class="en-only" id="txt-nav-contact-en">Contact</span>
         </a>
       </nav>
     </div>
   </header>
 
-  <!-- Issue bar -->
   <div class="issue-bar">
-    <span class="issue-text">Portfolio — Visual Development &amp; Storyboard</span>
+    <span class="issue-text" id="txt-issue-label">Portfolio — Visual Development &amp; Storyboard</span>
     <span class="issue-text" id="issue-date"></span>
   </div>
 
-  <!-- HOME VIEW -->
+  <!-- HOME -->
   <div id="home-view" style="position:relative;">
-    <div class="banner-container" id="banner-container">
-      <img id="banner-img" class="banner-img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80" alt="Banner">
-    </div>
-    <div class="embed-wrapper" id="home-embed-wrapper">
-      <div class="embed-area" id="home-embed-area"></div>
-    </div>
+    <div class="banner-container"><img id="banner-img" class="banner-img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80" alt="Banner"></div>
     <div class="section-title">
-      <span class="section-label pt-only">Projetos Selecionados</span>
-      <span class="section-label en-only">Selected Work</span>
+      <span class="section-label" id="txt-home-work-label">Selected Work</span>
       <div class="section-rule"></div>
       <span class="section-num" id="proj-count">—</span>
     </div>
     <div id="public-grid" class="project-grid"></div>
+    <div id="home-media-strip"></div>
     <div class="section-title">
-      <span class="section-label">Sketchbook</span>
+      <span class="section-label" id="txt-home-sketch-label">Sketchbook</span>
       <div class="section-rule"></div>
       <span class="section-num" id="sketch-count">—</span>
     </div>
     <div id="sketch-grid" class="sketch-grid"></div>
   </div>
 
-  <!-- GALLERY VIEW -->
+  <!-- PROJECTS -->
+  <div id="projects-view" class="hidden">
+    <div class="section-title" style="margin-top:3rem;">
+      <span class="section-label pt-only" id="txt-all-projects-pt">Todos os Projetos</span>
+      <span class="section-label en-only" id="txt-all-projects-en">All Projects</span>
+      <div class="section-rule"></div>
+      <span class="section-num" id="all-proj-count">—</span>
+    </div>
+    <div id="all-projects-grid" class="project-grid"></div>
+  </div>
+
+  <!-- NDA -->
+  <div id="nda-view" class="hidden">
+    <div id="nda-gate">
+      <div style="font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:-.02em;" id="txt-nda-title">Acesso Restrito</div>
+      <div style="font-family:var(--mono);font-size:.7rem;color:var(--ink-pale);letter-spacing:.12em;text-transform:uppercase;" id="txt-nda-subtitle">Projetos sob acordo de confidencialidade</div>
+      <div style="display:flex;flex-direction:column;gap:10px;width:min(320px,90%);">
+        <input type="password" id="nda-password-input" class="form-input" placeholder="Senha" style="text-align:center;letter-spacing:.2em;font-size:1rem;" onkeydown="if(event.key==='Enter')checkNDA()">
+        <button onclick="checkNDA()" id="txt-nda-btn" style="padding:12px;background:var(--ink);color:var(--white);border:none;cursor:pointer;font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;transition:background .2s;" onmouseover="this.style.background='var(--accent)'" onmouseout="this.style.background='var(--ink)'">Entrar</button>
+        <div id="nda-error" style="font-family:var(--mono);font-size:.62rem;color:var(--accent);text-align:center;opacity:0;transition:opacity .2s;"></div>
+      </div>
+    </div>
+    <div id="nda-content" class="hidden">
+      <div class="section-title" style="margin-top:3rem;">
+        <span class="section-label" id="txt-nda-section-label">NDA — Confidential Work</span>
+        <div class="section-rule"></div>
+        <span class="section-num" id="nda-proj-count">—</span>
+      </div>
+      <div id="nda-projects-grid" class="project-grid"></div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
   <div id="gallery-view" class="hidden">
     <div class="gallery-header">
       <div>
-        <div class="gallery-h1 pt-only">Galeria de Arte</div>
-        <div class="gallery-h1 en-only">Art Gallery</div>
+        <div class="gallery-h1 pt-only" id="txt-gallery-title-pt">Galeria de Arte</div>
+        <div class="gallery-h1 en-only" id="txt-gallery-title-en">Art Gallery</div>
       </div>
       <div class="gallery-sub">
-        <span class="pt-only">Ilustrações &amp; Processo</span>
-        <span class="en-only">Illustrations &amp; Process</span>
+        <span class="pt-only" id="txt-gallery-sub-pt">Ilustrações &amp; Processo</span>
+        <span class="en-only" id="txt-gallery-sub-en">Illustrations &amp; Process</span>
       </div>
     </div>
     <div id="art-gallery-container" class="art-gallery-grid"></div>
   </div>
 
-  <!-- BLOG VIEW -->
+  <!-- BLOG -->
   <div id="blog-view" class="hidden">
     <div class="section-title" style="margin-top:3rem;">
-      <span class="section-label pt-only">Notas &amp; Reflexões</span>
-      <span class="section-label en-only">Notes &amp; Thoughts</span>
+      <span class="section-label pt-only" id="txt-blog-label-pt">Notas &amp; Reflexões</span>
+      <span class="section-label en-only" id="txt-blog-label-en">Notes &amp; Thoughts</span>
       <div class="section-rule"></div>
       <span class="section-num" id="blog-count">—</span>
     </div>
     <div id="blog-grid-container" class="blog-grid"></div>
   </div>
 
-  <!-- DETAIL VIEW -->
+  <!-- DETAIL -->
   <div id="detail-view" class="hidden">
-    <div onclick="goBack()" class="back-btn">
-      ← <span class="pt-only">Voltar</span><span class="en-only">Back</span>
-    </div>
+    <div onclick="goBack()" class="back-btn">← <span class="pt-only" id="txt-back-pt">Voltar</span><span class="en-only" id="txt-back-en">Back</span></div>
     <div id="detail-content" class="detail-container"></div>
   </div>
 
-  <!-- CONTACT VIEW -->
+  <!-- CONTACT -->
   <div id="contact-view" class="hidden">
     <div class="contact-left">
-      <div class="contact-h1 pt-only">Vamos<br>trabalhar<br>juntos.</div>
-      <div class="contact-h1 en-only">Let's<br>work<br>together.</div>
-      <div class="contact-body pt-only">Disponível para projetos freelance em storyboard, animação e desenvolvimento visual.</div>
-      <div class="contact-body en-only">Available for freelance projects in storyboard, animation, and visual development.</div>
-      <a href="/cdn-cgi/l/email-protection#88e4fdebebe9c8edf0e9e5f8e4eda6ebe7e5" class="contact-email"><span class="__cf_email__" data-cfemail="8ae6ffe9e9ebcaeff2ebe7fae6efa4e9e5e7">[email&#160;protected]</span></a>
+      <div class="contact-h1 pt-only" id="txt-contact-heading-pt" style="white-space:pre-line">Vamos
+trabalhar
+juntos.</div>
+      <div class="contact-h1 en-only" id="txt-contact-heading-en" style="white-space:pre-line">Let's
+work
+together.</div>
+      <div class="contact-body pt-only" id="txt-contact-body-pt">Disponível para projetos freelance em storyboard, animação e desenvolvimento visual.</div>
+      <div class="contact-body en-only" id="txt-contact-body-en">Available for freelance projects in storyboard, animation, and visual development.</div>
+      <a id="txt-contact-email-link" href="mailto:contato@luccatuelher.com" class="contact-email" id="contact-email-el">contato@luccatuelher.com</a>
       <div style="margin-top:32px;">
-        <a href="cv.pdf" class="btn-cv" target="_blank">
-          <span class="pt-only">Baixar CV</span><span class="en-only">Download CV</span>
+        <a id="txt-contact-cv-link" href="cv.pdf" class="btn-cv" target="_blank">
+          <span class="pt-only" id="txt-contact-cv-pt">Baixar CV</span>
+          <span class="en-only" id="txt-contact-cv-en">Download CV</span>
         </a>
       </div>
       <div class="social-row" style="margin-top:24px;">
-        <a href="#" class="social-link">LinkedIn</a>
-        <a href="#" class="social-link">Instagram</a>
-        <a href="#" class="social-link">Behance</a>
+        <a id="txt-social-1-link" href="#" class="social-link"><span id="txt-social-1-label">LinkedIn</span></a>
+        <a id="txt-social-2-link" href="#" class="social-link"><span id="txt-social-2-label">Instagram</span></a>
+        <a id="txt-social-3-link" href="#" class="social-link"><span id="txt-social-3-label">Behance</span></a>
       </div>
     </div>
     <div class="contact-right">
-      <img src="https://via.placeholder.com/400x533" class="contact-img" alt="Foto">
+      <img id="txt-contact-img" src="https://via.placeholder.com/400x533" class="contact-img" alt="Foto">
     </div>
   </div>
-</div><!-- /container -->
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-(function() {
-  'use strict';
-
-  // ============================================================
-  // APP STATE
-  // ============================================================
-  var APP = {
-    data: {
-      projects: [],
-      blog: [],
-      gallery: [],
-      sketches: [],
-      meta: {
-        banner: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80',
-        homeEmbed: { type: '', id: '' }
-      }
-    },
-    currentLang: 'pt',
-    previousView: 'home',
-    adminTab: 'projects',
-    editingId: null,  // id of item being edited in admin
-    isAdminOpen: false
-  };
-
-  // ============================================================
-  // FIREBASE CONFIG + REST API
-  // ============================================================
-  var FB = {
-    apiKey:     'AIzaSyBJ-CK1s_ySQqvM98sJbi15SejsIoicVvo',
-    projectId:  'webapps-cbefa',
-    docPath:    'portfolio/content',
-    url: function() {
-      return 'https://firestore.googleapis.com/v1/projects/webapps-cbefa/databases/(default)/documents/portfolio/content?key=AIzaSyBJ-CK1s_ySQqvM98sJbi15SejsIoicVvo';
-    }
-  };
-
-  function toFV(val) {
-    if (val === null || val === undefined) return { nullValue: null };
-    if (typeof val === 'boolean')          return { booleanValue: val };
-    if (typeof val === 'number')           return { doubleValue: val };
-    if (typeof val === 'string')           return { stringValue: val };
-    if (Array.isArray(val))                return { arrayValue: { values: val.map(toFV) } };
-    if (typeof val === 'object') {
-      var f = {};
-      Object.keys(val).forEach(function(k) { f[k] = toFV(val[k]); });
-      return { mapValue: { fields: f } };
-    }
-    return { stringValue: String(val) };
-  }
-
-  function fromFV(fv) {
-    if (!fv) return null;
-    if ('stringValue'  in fv) return fv.stringValue;
-    if ('booleanValue' in fv) return fv.booleanValue;
-    if ('integerValue' in fv) return Number(fv.integerValue);
-    if ('doubleValue'  in fv) return fv.doubleValue;
-    if ('nullValue'    in fv) return null;
-    if ('arrayValue'   in fv) return (fv.arrayValue.values || []).map(fromFV);
-    if ('mapValue'     in fv) {
-      var o = {};
-      Object.keys(fv.mapValue.fields || {}).forEach(function(k) { o[k] = fromFV(fv.mapValue.fields[k]); });
-      return o;
-    }
-    return null;
-  }
-
-  function docToData(doc) {
-    var o = {};
-    Object.keys(doc.fields || {}).forEach(function(k) { o[k] = fromFV(doc.fields[k]); });
-    return o;
-  }
-
-  window.fbLoad = function() {
-    setSyncStatus('Loading…', '#aaa');
-    setFabLoading(true);
-    fetch(FB.url())
-      .then(function(r) {
-        // 404 = document doesn't exist yet (first run) — treat as empty
-        if (r.status === 404) return null;
-        if (!r.ok) return r.json().then(function(e) {
-          throw new Error(e.error ? e.error.message : 'HTTP ' + r.status + ' — check Firestore rules');
-        });
-        return r.json();
-      })
-      .then(function(doc) {
-        if (!doc) {
-          // First time — no data yet, just show a helpful message
-          setSyncStatus('Novo portfolio — adicione conteúdo e clique Save ↑', '#2D7A2D');
-          toast('✓ Pronto! Adicione projetos e salve.');
-          renderAdminBody();
-          return;
-        }
-        var loaded = docToData(doc);
-        if (loaded.projects) APP.data.projects = loaded.projects;
-        if (loaded.blog)     APP.data.blog     = loaded.blog;
-        if (loaded.gallery)  APP.data.gallery  = loaded.gallery;
-        if (loaded.sketches) APP.data.sketches = loaded.sketches;
-        if (loaded.meta)     APP.data.meta     = Object.assign({}, APP.data.meta, loaded.meta);
-        renderAll();
-        renderAdminBody();
-        var ts = loaded.updatedAt ? new Date(loaded.updatedAt).toLocaleString('pt-BR') : 'now';
-        setSyncStatus('Loaded · ' + ts, '#2D7A2D');
-        toast('✓ Portfolio carregado');
-      })
-      .catch(function(e) {
-        setSyncStatus('Erro: ' + e.message, '#C1440E');
-        toast('✗ ' + e.message);
-      })
-      .finally(function() { setFabLoading(false); });
-  };
-
-  window.fbSave = function() {
-    setSyncStatus('Saving…', '#aaa');
-    setFabLoading(true);
-    var payload = Object.assign({}, APP.data, { updatedAt: new Date().toISOString() });
-    var fields = {};
-    Object.keys(payload).forEach(function(k) { fields[k] = toFV(payload[k]); });
-    fetch(FB.url(), {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fields: fields })
-    })
-    .then(function(r) {
-      if (!r.ok) return r.json().then(function(e) { throw new Error(e.error ? e.error.message : 'HTTP ' + r.status); });
-      return r.json();
-    })
-    .then(function() {
-      setSyncStatus('Saved · ' + new Date().toLocaleString('pt-BR'), '#2D7A2D');
-      toast('✓ Salvo no Firebase');
-    })
-    .catch(function(e) {
-      setSyncStatus('Save error: ' + e.message, '#C1440E');
-      toast('✗ ' + e.message);
-    })
-    .finally(function() { setFabLoading(false); });
-  };
-
-  function setSyncStatus(msg, color) {
-    var el = document.getElementById('sync-status');
-    if (el) { el.textContent = msg; el.style.color = color || 'var(--ink-pale)'; }
-  }
-
-  function setFabLoading(on) {
-    var fab = document.getElementById('fb-fab');
-    if (fab) { if (on) fab.classList.add('loading'); else fab.classList.remove('loading'); }
-  }
-
-  function toast(msg) {
-    var el = document.getElementById('fb-toast');
-    if (!el) return;
-    el.textContent = msg;
-    el.classList.add('show');
-    clearTimeout(el._t);
-    el._t = setTimeout(function() { el.classList.remove('show'); }, 3000);
-  }
-
-  // ============================================================
-  // ID GENERATOR
-  // ============================================================
-  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
-
-  // ============================================================
-  // LANG
-  // ============================================================
-  window.setLang = function(lang) {
-    APP.currentLang = lang;
-    document.body.className = 'lang-' + lang;
-  };
-
-  // ============================================================
-  // VIEWS
-  // ============================================================
-  var VIEWS = ['home','blog','gallery','detail','contact'];
-  var NAV_KEYS = { home:'work', blog:'blog', gallery:'gallery', contact:'contact' };
-
-  function resetViews() {
-    VIEWS.forEach(function(k) {
-      var el = document.getElementById(k + '-view');
-      if (el) el.classList.add('hidden');
-    });
-    ['work','blog','gallery','contact'].forEach(function(k) {
-      var el = document.getElementById('nav-' + k);
-      if (el) el.classList.remove('active');
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function showView(key) {
-    resetViews();
-    var el = document.getElementById(key + '-view');
-    if (el) { el.classList.remove('hidden'); el.classList.add('fade-in'); setTimeout(function(){ el.classList.remove('fade-in'); }, 500); }
-    var nk = NAV_KEYS[key];
-    if (nk) { var n = document.getElementById('nav-' + nk); if(n) n.classList.add('active'); }
-  }
-
-  window.goHome    = function() { showView('home');    APP.previousView = 'home'; };
-  window.goBlog    = function() { showView('blog');    APP.previousView = 'blog'; };
-  window.goGallery = function() { showView('gallery'); APP.previousView = 'gallery'; };
-  window.goToContact = function() { showView('contact'); };
-  window.goBack    = function() {
-    if (APP.previousView === 'blog') goBlog();
-    else if (APP.previousView === 'gallery') goGallery();
-    else goHome();
-  };
-
-  // ============================================================
-  // EMBED BUILDER
-  // ============================================================
-  function buildEmbedIframe(embed) {
-    if (!embed || !embed.type || !embed.id) return '';
-    var src = '';
-    if (embed.type === 'youtube')     src = 'https://www.youtube.com/embed/' + embed.id + '?rel=0';
-    if (embed.type === 'vimeo')       src = 'https://player.vimeo.com/video/' + embed.id + '?color=C1440E&title=0&byline=0';
-    if (embed.type === 'speakerdeck') src = 'https://speakerdeck.com/player/' + embed.id;
-    if (!src) return '';
-    return '<div class="embed-area"><iframe src="' + src + '" allowfullscreen allow="autoplay; fullscreen"></iframe></div>';
-  }
-
-  // ============================================================
-  // RENDERERS
-  // ============================================================
-  function renderAll() {
-    renderMeta();
-    renderProjects();
-    renderSketches();
-    renderBlog();
-    renderGallery();
-    updateCounts();
-  }
-
-  function renderMeta() {
-    var m = APP.data.meta || {};
-    // Banner
-    var img = document.getElementById('banner-img');
-    if (img && m.banner) img.src = m.banner;
-    // Home embed
-    var area = document.getElementById('home-embed-area');
-    var wrapper = document.getElementById('home-embed-wrapper');
-    if (area) {
-      var html = buildEmbedIframe(m.homeEmbed);
-      area.innerHTML = html;
-      if (wrapper) wrapper.style.display = html ? '' : 'none';
-    }
-  }
-
-  function renderProjects() {
-    var grid = document.getElementById('public-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    var list = (APP.data.projects || []).slice().sort(function(a,b){ return (a.order||0)-(b.order||0); });
-    list.forEach(function(p) {
-      if (!p.published && !APP.isAdminOpen) return; // hide drafts from public
-      var card = document.createElement('div');
-      card.className = 'project-card';
-      card.innerHTML =
-        '<div class="card-thumb-wrap">' +
-          '<img class="card-thumb" src="' + (p.thumb || 'https://via.placeholder.com/400x300') + '" alt="' + esc(p.title||'') + '" onerror="this.src=\'https://via.placeholder.com/400x300\'">' +
-          (!p.published ? '<div class="card-draft">Draft</div>' : '') +
-        '</div>' +
-        '<div class="card-tag">' + esc(p.tag||'') + '</div>' +
-        '<div class="card-title">' + esc(p.title||'Sem título') + '<span class="card-arrow">→</span></div>';
-      card.onclick = function() { openDetail(p.id, 'project'); };
-      grid.appendChild(card);
-    });
-  }
-
-  function renderSketches() {
-    var grid = document.getElementById('sketch-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    (APP.data.sketches || []).forEach(function(s) {
-      var item = document.createElement('div');
-      item.className = 'sketch-item';
-      var img = document.createElement('img');
-      img.src = s.src || 'https://via.placeholder.com/200x200';
-      img.alt = s.alt || '';
-      img.onerror = function(){ this.src='https://via.placeholder.com/200x200'; };
-      img.onclick = function() { openLightbox(img.src); };
-      item.appendChild(img);
-      grid.appendChild(item);
-    });
-  }
-
-  function renderBlog() {
-    var grid = document.getElementById('blog-grid-container');
-    if (!grid) return;
-    grid.innerHTML = '';
-    var list = (APP.data.blog || []).slice().sort(function(a,b){ return (a.order||0)-(b.order||0); });
-    list.forEach(function(p) {
-      if (!p.published && !APP.isAdminOpen) return;
-      var item = document.createElement('div');
-      item.className = 'blog-item';
-      item.innerHTML =
-        '<span class="blog-date">' + esc(p.date||'') + '</span>' +
-        (p.thumb ? '<img class="blog-thumb" src="' + esc(p.thumb) + '" alt="" onerror="this.style.display=\'none\'">' : '') +
-        '<div class="blog-title">' + esc(p.title||'Sem título') + (!p.published ? ' <span class="draft-badge">draft</span>':'') + '</div>' +
-        '<div class="blog-excerpt">' + esc(p.excerpt||'') + '</div>';
-      item.onclick = function() { APP.previousView = 'blog'; openDetail(p.id, 'blog'); };
-      grid.appendChild(item);
-    });
-  }
-
-  function renderGallery() {
-    var container = document.getElementById('art-gallery-container');
-    if (!container) return;
-    container.innerHTML = '';
-    (APP.data.gallery || []).forEach(function(a) {
-      var div = document.createElement('div');
-      div.className = 'art-item';
-      div.innerHTML =
-        '<img class="art-img" src="' + esc(a.src||'https://via.placeholder.com/400x500') + '" alt="' + esc(a.caption||'') + '" onerror="this.src=\'https://via.placeholder.com/400x500\'">' +
-        '<div class="art-caption">' + esc(a.caption||'') + '</div>';
-      div.querySelector('.art-img').onclick = function() { openLightbox(a.src); };
-      container.appendChild(div);
-    });
-  }
-
-  function updateCounts() {
-    var sets = [
-      { id:'proj-count',    items: (APP.data.projects||[]).filter(function(p){return p.published||APP.isAdminOpen;}) },
-      { id:'sketch-count',  items: APP.data.sketches||[] },
-      { id:'blog-count',    items: (APP.data.blog||[]).filter(function(p){return p.published||APP.isAdminOpen;}) }
-    ];
-    sets.forEach(function(s) {
-      var el = document.getElementById(s.id);
-      if (el) el.textContent = s.items.length > 0 ? String(s.items.length).padStart(2,'0') : '—';
-    });
-  }
-
-  // ============================================================
-  // DETAIL VIEW (project or blog post, fully data-driven)
-  // ============================================================
-  function openDetail(id, type) {
-    var item = null;
-    if (type === 'project') item = (APP.data.projects||[]).find(function(p){ return p.id === id; });
-    if (type === 'blog')    item = (APP.data.blog||[]).find(function(p){ return p.id === id; });
-    if (!item) return;
-
-    var contentDiv = document.getElementById('detail-content');
-    contentDiv.innerHTML = buildDetailHTML(item, type);
-
-    // Attach lightbox to detail images
-    contentDiv.querySelectorAll('.detail-img').forEach(function(img) {
-      img.onclick = function() { openLightbox(img.src); };
-    });
-
-    resetViews();
-    document.getElementById('detail-view').classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function buildDetailHTML(item, type) {
-    var html = '';
-
-    // Header
-    html += '<div class="detail-header">';
-    html += '<div class="detail-tag">' + esc(item.tag || type) + '</div>';
-    html += '<div class="detail-title">' + esc(item.title || '') + '</div>';
-    html += '<div class="detail-desc">' + esc(item.description || item.excerpt || '') + '</div>';
-
-    // Meta row
-    var metas = [];
-    if (item.year)   metas.push({ l: 'Ano / Year',    v: item.year });
-    if (item.client) metas.push({ l: 'Cliente / Client', v: item.client });
-    if (item.role)   metas.push({ l: 'Função / Role',  v: item.role });
-    if (item.date)   metas.push({ l: 'Data',           v: item.date });
-    if (metas.length) {
-      html += '<div class="detail-meta">';
-      metas.forEach(function(m) {
-        html += '<div class="meta-item"><div class="meta-label">' + esc(m.l) + '</div><div class="meta-value">' + esc(m.v) + '</div></div>';
-      });
-      html += '</div>';
-    }
-    html += '</div>'; // /detail-header
-
-    // Embeds
-    (item.embeds || []).forEach(function(embed) {
-      var ihtml = buildEmbedIframe(embed);
-      if (ihtml) html += '<div class="detail-embed">' + ihtml + '</div>';
-    });
-
-    // Images
-    var imgs = item.images || (item.thumb ? [item.thumb] : []);
-    if (imgs.length) {
-      var cols = imgs.length === 1 ? 'cols-1' : imgs.length === 2 ? 'cols-2' : 'cols-3';
-      html += '<div class="detail-images"><div class="detail-images-grid ' + cols + '">';
-      imgs.forEach(function(src) {
-        html += '<img class="detail-img" src="' + esc(src) + '" alt="" onerror="this.src=\'https://via.placeholder.com/800x600\'">';
-      });
-      html += '</div></div>';
-    }
-
-    // Body text
-    if (item.text || item.content) {
-      html += '<div class="detail-text">' + esc(item.text || item.content || '') + '</div>';
-    }
-
-    return html;
-  }
-
-  // ============================================================
-  // LIGHTBOX
-  // ============================================================
-  window.openLightbox = function(src) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox').classList.add('open');
-  };
-  window.closeLightbox = function() {
-    document.getElementById('lightbox').classList.remove('open');
-  };
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') { closeLightbox(); if(APP.isAdminOpen) closeAdmin(); }
-  });
-
-  // ============================================================
-  // ADMIN PANEL
-  // ============================================================
-  window.toggleAdmin = function() {
-    if (APP.isAdminOpen) closeAdmin(); else openAdmin();
-  };
-  window.openAdmin = function() {
-    APP.isAdminOpen = true;
-    document.getElementById('admin-panel').classList.add('open');
-    renderAdminBody();
-    renderProjects(); // show drafts
-    renderBlog();
-    updateCounts();
-  };
-  window.closeAdmin = function() {
-    APP.isAdminOpen = false;
-    document.getElementById('admin-panel').classList.remove('open');
-    APP.editingId = null;
-    renderProjects();
-    renderBlog();
-    updateCounts();
-  };
-
-  window.adminTab = function(tab) {
-    APP.adminTab = tab;
-    APP.editingId = null;
-    document.querySelectorAll('.admin-tab').forEach(function(t){ t.classList.remove('active'); });
-    var tabs = document.querySelectorAll('.admin-tab');
-    var tabNames = ['projects','blog','gallery','sketches','meta'];
-    var idx = tabNames.indexOf(tab);
-    if (tabs[idx]) tabs[idx].classList.add('active');
-    renderAdminBody();
-  };
-
-  function renderAdminBody() {
-    var body = document.getElementById('admin-body');
-    if (!body) return;
-    if (APP.adminTab === 'projects') body.innerHTML = buildProjectsTab();
-    if (APP.adminTab === 'blog')     body.innerHTML = buildBlogTab();
-    if (APP.adminTab === 'gallery')  body.innerHTML = buildGalleryTab();
-    if (APP.adminTab === 'sketches') body.innerHTML = buildSketchesTab();
-    if (APP.adminTab === 'meta')     body.innerHTML = buildMetaTab();
-  }
-
-  // ---- ESC helper ----
-  function esc(s) {
-    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-  function val(s) { return String(s || ''); }
-
-  // ============================================================
-  // PROJECTS TAB
-  // ============================================================
-  function buildProjectsTab() {
-    var projects = APP.data.projects || [];
-    var sorted = projects.slice().sort(function(a,b){ return (a.order||0)-(b.order||0); });
-    var html = '<div class="item-list">';
-    sorted.forEach(function(p, i) {
-      var active = APP.editingId === p.id ? ' active-edit' : '';
-      html += '<div class="item-row' + active + '">';
-      html += '<img class="item-row-thumb" src="' + esc(p.thumb||'https://via.placeholder.com/44x34') + '" onerror="this.src=\'https://via.placeholder.com/44x34\'">';
-      html += '<div class="item-row-info" onclick="adminEditProject(\'' + p.id + '\')">';
-      html += '<div class="item-row-title">' + esc(p.title||'Sem título') + (!p.published?'<span class="draft-badge" style="margin-left:6px">draft</span>':'') + '</div>';
-      html += '<div class="item-row-sub">' + esc(p.tag||'') + (p.year?' · '+esc(p.year):'') + (p.embeds&&p.embeds.length?' · '+p.embeds.length+' embed(s)':'') + (p.images&&p.images.length?' · '+p.images.length+' img(s)':'') + '</div>';
-      html += '</div>';
-      html += '<div class="order-btns"><button class="ord-btn" onclick="projMove(\'' + p.id + '\',-1)">▲</button><button class="ord-btn" onclick="projMove(\'' + p.id + '\',1)">▼</button></div>';
-      html += '<div class="item-row-actions">';
-      html += '<button class="row-btn del" onclick="projDelete(\'' + p.id + '\')" title="Delete">✕</button>';
-      html += '</div>';
-      html += '</div>';
-    });
-    html += '</div>';
-    html += '<button class="add-new-btn" onclick="adminNewProject()">+ Novo Projeto</button>';
-
-    if (APP.editingId) {
-      var p = (APP.data.projects||[]).find(function(x){ return x.id===APP.editingId; });
-      if (p) html += buildProjectForm(p);
-    }
-    return html;
-  }
-
-  function buildProjectForm(p) {
-    var embedsHtml = '';
-    (p.embeds||[]).forEach(function(e, i) {
-      embedsHtml += '<div class="embed-row">';
-      embedsHtml += '<select class="form-select embed-type" style="width:130px" onchange="projEmbedChange(\'' + p.id + '\',' + i + ',\'type\',this.value)">';
-      ['youtube','vimeo','speakerdeck'].forEach(function(t) {
-        embedsHtml += '<option value="'+t+'"'+(e.type===t?' selected':'')+'>'+t+'</option>';
-      });
-      embedsHtml += '</select>';
-      embedsHtml += '<input class="form-input embed-id" placeholder="Video / Deck ID" value="' + esc(e.id||'') + '" oninput="projEmbedChange(\'' + p.id + '\',' + i + ',\'id\',this.value)">';
-      embedsHtml += '<button class="embed-remove" onclick="projEmbedRemove(\'' + p.id + '\',' + i + ')">✕</button>';
-      embedsHtml += '</div>';
-    });
-
-    var imgsHtml = '';
-    (p.images||[]).forEach(function(src, i) {
-      imgsHtml += '<div class="image-row">';
-      imgsHtml += '<input class="form-input image-url" placeholder="https://..." value="' + esc(src||'') + '" oninput="projImageChange(\'' + p.id + '\',' + i + ',this.value)">';
-      imgsHtml += '<button class="image-remove" onclick="projImageRemove(\'' + p.id + '\',' + i + ')">✕</button>';
-      imgsHtml += '</div>';
-    });
-
-    return '<div class="edit-form" id="project-form-' + p.id + '">' +
-      '<div class="form-row-2">' +
-        '<div class="form-row"><label class="form-label">Título</label><input class="form-input" value="' + esc(p.title||'') + '" oninput="projField(\'' + p.id + '\',\'title\',this.value)"></div>' +
-        '<div class="form-row"><label class="form-label">Tag / Categoria</label><input class="form-input" value="' + esc(p.tag||'') + '" oninput="projField(\'' + p.id + '\',\'tag\',this.value)"></div>' +
-      '</div>' +
-      '<div class="form-row-2">' +
-        '<div class="form-row"><label class="form-label">Ano</label><input class="form-input" value="' + esc(p.year||'') + '" oninput="projField(\'' + p.id + '\',\'year\',this.value)"></div>' +
-        '<div class="form-row"><label class="form-label">Cliente</label><input class="form-input" value="' + esc(p.client||'') + '" oninput="projField(\'' + p.id + '\',\'client\',this.value)"></div>' +
-      '</div>' +
-      '<div class="form-row"><label class="form-label">Função / Role</label><input class="form-input" value="' + esc(p.role||'') + '" oninput="projField(\'' + p.id + '\',\'role\',this.value)"></div>' +
-      '<div class="form-row"><label class="form-label">Thumbnail URL</label><input class="form-input" placeholder="https://..." value="' + esc(p.thumb||'') + '" oninput="projField(\'' + p.id + '\',\'thumb\',this.value)"></div>' +
-      '<div class="form-row"><label class="form-label">Descrição curta</label><textarea class="form-textarea" oninput="projField(\'' + p.id + '\',\'description\',this.value)">' + esc(p.description||'') + '</textarea></div>' +
-      '<div class="form-row"><label class="form-label">Texto completo / Body</label><textarea class="form-textarea" style="min-height:120px" oninput="projField(\'' + p.id + '\',\'text\',this.value)">' + esc(p.text||'') + '</textarea></div>' +
-      '<div class="form-row"><label class="form-label">Vídeos &amp; Slides (embeds)</label>' +
-        '<div class="embed-list" id="embed-list-' + p.id + '">' + embedsHtml + '</div>' +
-        '<button class="btn-secondary" style="margin-top:4px;font-size:.6rem;padding:6px 14px" onclick="projEmbedAdd(\'' + p.id + '\')">+ Adicionar embed</button>' +
-      '</div>' +
-      '<div class="form-row"><label class="form-label">Imagens (URLs)</label>' +
-        '<div class="images-list" id="images-list-' + p.id + '">' + imgsHtml + '</div>' +
-        '<button class="btn-secondary" style="margin-top:4px;font-size:.6rem;padding:6px 14px" onclick="projImageAdd(\'' + p.id + '\')">+ Adicionar imagem</button>' +
-      '</div>' +
-      '<div class="form-row"><div class="toggle-row"><label class="toggle"><input type="checkbox"' + (p.published?' checked':'') + ' onchange="projField(\'' + p.id + '\',\'published\',this.checked)"><span class="slider"></span></label><span class="form-label" style="margin-bottom:0">Publicado</span></div></div>' +
-      '<div class="form-actions">' +
-        '<button class="btn-primary" onclick="projSaveDone()">✓ Salvar &amp; Fechar</button>' +
-        '<button class="btn-secondary" onclick="APP.editingId=null;renderAdminBody()">Fechar</button>' +
-        '<button class="btn-danger" onclick="projDelete(\'' + p.id + '\')">Excluir</button>' +
-      '</div>' +
-    '</div>';
-  }
-
-  window.adminEditProject = function(id) {
-    APP.editingId = APP.editingId === id ? null : id;
-    renderAdminBody();
-    setTimeout(function(){ var f=document.getElementById('project-form-'+id); if(f)f.scrollIntoView({behavior:'smooth',block:'start'}); },100);
-  };
-
-  window.adminNewProject = function() {
-    var p = { id: uid(), title: 'Novo Projeto', tag: '', thumb: '', description: '', text: '', year: new Date().getFullYear()+'', client: '', role: '', embeds: [], images: [], published: false, order: (APP.data.projects||[]).length };
-    if (!APP.data.projects) APP.data.projects = [];
-    APP.data.projects.push(p);
-    APP.editingId = p.id;
-    renderAdminBody();
-    setTimeout(function(){ var f=document.getElementById('project-form-'+p.id); if(f)f.scrollIntoView({behavior:'smooth',block:'start'}); },100);
-  };
-
-  window.projField = function(id, field, value) {
-    var p = (APP.data.projects||[]).find(function(x){ return x.id===id; });
-    if (p) { p[field] = value; if (field==='thumb'||field==='title'||field==='tag'||field==='published') { renderProjects(); renderAdminBody(); } }
-  };
-
-  window.projEmbedChange = function(id, idx, field, value) {
-    var p = (APP.data.projects||[]).find(function(x){ return x.id===id; });
-    if (p && p.embeds && p.embeds[idx]) p.embeds[idx][field] = value;
-  };
-  window.projEmbedAdd = function(id) {
-    var p = (APP.data.projects||[]).find(function(x){ return x.id===id; });
-    if (!p) return;
-    if (!p.embeds) p.embeds = [];
-    p.embeds.push({ type: 'youtube', id: '' });
-    renderAdminBody();
-  };
-  window.projEmbedRemove = function(id, idx) {
-    var p = (APP.data.projects||[]).find(function(x){ return x.id===id; });
-    if (p && p.embeds) { p.embeds.splice(idx,1); renderAdminBody(); }
-  };
-  window.projImageChange = function(id, idx, value) {
-    var p = (APP.data.projects||[]).find(function(x){ return x.id===id; });
-    if (p && p.images) p.images[idx] = value;
-  };
-  window.projImageAdd = function(id) {
-    var p = (APP.data.projects||[]).find(function(x){ return x.id===id; });
-    if (!p) return;
-    if (!p.images) p.images = [];
-    p.images.push('');
-    renderAdminBody();
-  };
-  window.projImageRemove = function(id, idx) {
-    var p = (APP.data.projects||[]).find(function(x){ return x.id===id; });
-    if (p && p.images) { p.images.splice(idx,1); renderAdminBody(); }
-  };
-  window.projDelete = function(id) {
-    if (!confirm('Excluir este projeto?')) return;
-    APP.data.projects = (APP.data.projects||[]).filter(function(x){ return x.id!==id; });
-    APP.editingId = null;
-    renderProjects(); renderAdminBody();
-  };
-  window.projMove = function(id, dir) {
-    var list = APP.data.projects || [];
-    var sorted = list.slice().sort(function(a,b){ return (a.order||0)-(b.order||0); });
-    var idx = sorted.findIndex(function(x){ return x.id===id; });
-    var swapIdx = idx + dir;
-    if (swapIdx < 0 || swapIdx >= sorted.length) return;
-    var tmp = sorted[idx].order; sorted[idx].order = sorted[swapIdx].order; sorted[swapIdx].order = tmp;
-    // Renumber to be safe
-    sorted.forEach(function(p,i){ p.order = i; });
-    renderProjects(); renderAdminBody();
-  };
-  window.projSaveDone = function() { APP.editingId = null; renderProjects(); renderAdminBody(); };
-
-  // ============================================================
-  // BLOG TAB
-  // ============================================================
-  function buildBlogTab() {
-    var list = (APP.data.blog||[]).slice().sort(function(a,b){ return (a.order||0)-(b.order||0); });
-    var html = '<div class="item-list">';
-    list.forEach(function(p) {
-      var active = APP.editingId === p.id ? ' active-edit' : '';
-      html += '<div class="item-row' + active + '">';
-      html += p.thumb ? '<img class="item-row-thumb" src="'+esc(p.thumb)+'" onerror="this.src=\'https://via.placeholder.com/44x34\'">' : '<div class="item-row-thumb" style="background:var(--bg2)"></div>';
-      html += '<div class="item-row-info" onclick="adminEditBlog(\'' + p.id + '\')">';
-      html += '<div class="item-row-title">' + esc(p.title||'Sem título') + (!p.published?'<span class="draft-badge" style="margin-left:6px">draft</span>':'') + '</div>';
-      html += '<div class="item-row-sub">' + esc(p.date||'') + '</div>';
-      html += '</div>';
-      html += '<div class="order-btns"><button class="ord-btn" onclick="blogMove(\'' + p.id + '\',-1)">▲</button><button class="ord-btn" onclick="blogMove(\'' + p.id + '\',1)">▼</button></div>';
-      html += '<button class="row-btn del" onclick="blogDelete(\'' + p.id + '\')" title="Delete">✕</button>';
-      html += '</div>';
-    });
-    html += '</div>';
-    html += '<button class="add-new-btn" onclick="adminNewBlog()">+ Novo Post</button>';
-    if (APP.editingId) {
-      var p = (APP.data.blog||[]).find(function(x){ return x.id===APP.editingId; });
-      if (p) html += buildBlogForm(p);
-    }
-    return html;
-  }
-
-  function buildBlogForm(p) {
-    return '<div class="edit-form" id="blog-form-' + p.id + '">' +
-      '<div class="form-row"><label class="form-label">Título</label><input class="form-input" value="' + esc(p.title||'') + '" oninput="blogField(\'' + p.id + '\',\'title\',this.value)"></div>' +
-      '<div class="form-row-2">' +
-        '<div class="form-row"><label class="form-label">Data</label><input class="form-input" type="date" value="' + esc(p.date||'') + '" oninput="blogField(\'' + p.id + '\',\'date\',this.value)"></div>' +
-        '<div class="form-row"><label class="form-label">Tag</label><input class="form-input" value="' + esc(p.tag||'') + '" oninput="blogField(\'' + p.id + '\',\'tag\',this.value)"></div>' +
-      '</div>' +
-      '<div class="form-row"><label class="form-label">Thumb URL</label><input class="form-input" placeholder="https://..." value="' + esc(p.thumb||'') + '" oninput="blogField(\'' + p.id + '\',\'thumb\',this.value)"></div>' +
-      '<div class="form-row"><label class="form-label">Excerpt / Subtítulo</label><textarea class="form-textarea" oninput="blogField(\'' + p.id + '\',\'excerpt\',this.value)">' + esc(p.excerpt||'') + '</textarea></div>' +
-      '<div class="form-row"><label class="form-label">Conteúdo completo</label><textarea class="form-textarea" style="min-height:160px" oninput="blogField(\'' + p.id + '\',\'content\',this.value)">' + esc(p.content||'') + '</textarea></div>' +
-      '<div class="form-row"><div class="toggle-row"><label class="toggle"><input type="checkbox"' + (p.published?' checked':'') + ' onchange="blogField(\'' + p.id + '\',\'published\',this.checked)"><span class="slider"></span></label><span class="form-label" style="margin-bottom:0">Publicado</span></div></div>' +
-      '<div class="form-actions">' +
-        '<button class="btn-primary" onclick="blogSaveDone()">✓ Salvar &amp; Fechar</button>' +
-        '<button class="btn-secondary" onclick="APP.editingId=null;renderAdminBody()">Fechar</button>' +
-        '<button class="btn-danger" onclick="blogDelete(\'' + p.id + '\')">Excluir</button>' +
-      '</div>' +
-    '</div>';
-  }
-
-  window.adminEditBlog = function(id) { APP.editingId = APP.editingId===id?null:id; renderAdminBody(); };
-  window.adminNewBlog  = function() {
-    var p = { id:uid(), title:'Novo Post', date:'', tag:'', thumb:'', excerpt:'', content:'', published:false, order:(APP.data.blog||[]).length };
-    if (!APP.data.blog) APP.data.blog=[];
-    APP.data.blog.push(p);
-    APP.editingId = p.id;
-    renderAdminBody();
-  };
-  window.blogField = function(id,field,value) {
-    var p=(APP.data.blog||[]).find(function(x){return x.id===id;});
-    if(p){ p[field]=value; if(field==='title'||field==='published'||field==='thumb'||field==='date'){renderBlog();renderAdminBody();}}
-  };
-  window.blogDelete = function(id) {
-    if(!confirm('Excluir este post?'))return;
-    APP.data.blog=(APP.data.blog||[]).filter(function(x){return x.id!==id;});
-    APP.editingId=null; renderBlog(); renderAdminBody();
-  };
-  window.blogMove = function(id,dir) {
-    var sorted=(APP.data.blog||[]).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
-    var idx=sorted.findIndex(function(x){return x.id===id;});
-    var si=idx+dir; if(si<0||si>=sorted.length)return;
-    var tmp=sorted[idx].order; sorted[idx].order=sorted[si].order; sorted[si].order=tmp;
-    sorted.forEach(function(p,i){p.order=i;}); renderBlog(); renderAdminBody();
-  };
-  window.blogSaveDone = function(){APP.editingId=null;renderBlog();renderAdminBody();};
-
-  // ============================================================
-  // GALLERY TAB
-  // ============================================================
-  function buildGalleryTab() {
-    var list = APP.data.gallery || [];
-    var html = '<div class="item-list">';
-    list.forEach(function(a, i) {
-      var active = APP.editingId === a.id ? ' active-edit' : '';
-      html += '<div class="item-row' + active + '">';
-      html += '<img class="item-row-thumb" src="' + esc(a.src||'https://via.placeholder.com/44x34') + '" onerror="this.src=\'https://via.placeholder.com/44x34\'">';
-      html += '<div class="item-row-info" onclick="adminEditGallery(\'' + a.id + '\')">';
-      html += '<div class="item-row-title">' + esc(a.caption||'Sem legenda') + '</div>';
-      html += '<div class="item-row-sub">' + esc((a.src||'').slice(0,48)) + '</div>';
-      html += '</div>';
-      html += '<div class="order-btns"><button class="ord-btn" onclick="galleryMove('+i+',-1)">▲</button><button class="ord-btn" onclick="galleryMove('+i+',1)">▼</button></div>';
-      html += '<button class="row-btn del" onclick="galleryDelete(\'' + a.id + '\')" title="Delete">✕</button>';
-      html += '</div>';
-      if (APP.editingId === a.id) {
-        html += '<div class="edit-form">' +
-          '<div class="form-row"><label class="form-label">URL da imagem</label><input class="form-input" value="' + esc(a.src||'') + '" oninput="galleryField(\'' + a.id + '\',\'src\',this.value)"></div>' +
-          '<div class="form-row"><label class="form-label">Legenda</label><input class="form-input" value="' + esc(a.caption||'') + '" oninput="galleryField(\'' + a.id + '\',\'caption\',this.value)"></div>' +
-          '<div class="form-actions"><button class="btn-primary" onclick="APP.editingId=null;renderGallery();renderAdminBody()">✓ Ok</button></div>' +
-        '</div>';
-      }
-    });
-    html += '</div>';
-    html += '<button class="add-new-btn" onclick="adminNewGallery()">+ Nova Imagem</button>';
-    return html;
-  }
-  window.adminEditGallery = function(id){APP.editingId=APP.editingId===id?null:id;renderAdminBody();};
-  window.adminNewGallery  = function(){
-    var a={id:uid(),src:'',caption:''};
-    if(!APP.data.gallery)APP.data.gallery=[];
-    APP.data.gallery.push(a);
-    APP.editingId=a.id; renderAdminBody();
-  };
-  window.galleryField = function(id,field,value){
-    var a=(APP.data.gallery||[]).find(function(x){return x.id===id;});
-    if(a){a[field]=value;}
-  };
-  window.galleryDelete = function(id){
-    if(!confirm('Excluir?'))return;
-    APP.data.gallery=(APP.data.gallery||[]).filter(function(x){return x.id!==id;});
-    APP.editingId=null;renderGallery();renderAdminBody();
-  };
-  window.galleryMove = function(idx,dir){
-    var list=APP.data.gallery||[];
-    var si=idx+dir; if(si<0||si>=list.length)return;
-    var tmp=list[idx];list[idx]=list[si];list[si]=tmp;
-    renderGallery();renderAdminBody();
-  };
-
-  // ============================================================
-  // SKETCHES TAB
-  // ============================================================
-  function buildSketchesTab() {
-    var list = APP.data.sketches || [];
-    var html = '<div class="item-list">';
-    list.forEach(function(s, i) {
-      var active = APP.editingId === s.id ? ' active-edit' : '';
-      html += '<div class="item-row' + active + '">';
-      html += '<img class="item-row-thumb" src="' + esc(s.src||'https://via.placeholder.com/44x44') + '" onerror="this.src=\'https://via.placeholder.com/44x44\'" style="aspect-ratio:1;object-fit:cover">';
-      html += '<div class="item-row-info" onclick="adminEditSketch(\'' + s.id + '\')">';
-      html += '<div class="item-row-title">' + esc(s.alt||'Sketch '+(i+1)) + '</div>';
-      html += '<div class="item-row-sub">' + esc((s.src||'').slice(0,48)) + '</div>';
-      html += '</div>';
-      html += '<div class="order-btns"><button class="ord-btn" onclick="sketchMove('+i+',-1)">▲</button><button class="ord-btn" onclick="sketchMove('+i+',1)">▼</button></div>';
-      html += '<button class="row-btn del" onclick="sketchDelete(\'' + s.id + '\')" title="Delete">✕</button>';
-      html += '</div>';
-      if (APP.editingId === s.id) {
-        html += '<div class="edit-form">' +
-          '<div class="form-row"><label class="form-label">URL da imagem</label><input class="form-input" value="' + esc(s.src||'') + '" oninput="sketchField(\'' + s.id + '\',\'src\',this.value)"></div>' +
-          '<div class="form-row"><label class="form-label">Alt text</label><input class="form-input" value="' + esc(s.alt||'') + '" oninput="sketchField(\'' + s.id + '\',\'alt\',this.value)"></div>' +
-          '<div class="form-actions"><button class="btn-primary" onclick="APP.editingId=null;renderSketches();renderAdminBody()">✓ Ok</button></div>' +
-        '</div>';
-      }
-    });
-    html += '</div>';
-    html += '<button class="add-new-btn" onclick="adminNewSketch()">+ Novo Sketch</button>';
-    return html;
-  }
-  window.adminEditSketch = function(id){APP.editingId=APP.editingId===id?null:id;renderAdminBody();};
-  window.adminNewSketch  = function(){
-    var s={id:uid(),src:'',alt:''};
-    if(!APP.data.sketches)APP.data.sketches=[];
-    APP.data.sketches.push(s);
-    APP.editingId=s.id;renderAdminBody();
-  };
-  window.sketchField = function(id,field,value){
-    var s=(APP.data.sketches||[]).find(function(x){return x.id===id;});
-    if(s)s[field]=value;
-  };
-  window.sketchDelete = function(id){
-    if(!confirm('Excluir?'))return;
-    APP.data.sketches=(APP.data.sketches||[]).filter(function(x){return x.id!==id;});
-    APP.editingId=null;renderSketches();renderAdminBody();
-  };
-  window.sketchMove = function(idx,dir){
-    var list=APP.data.sketches||[];
-    var si=idx+dir;if(si<0||si>=list.length)return;
-    var tmp=list[idx];list[idx]=list[si];list[si]=tmp;
-    renderSketches();renderAdminBody();
-  };
-
-  // ============================================================
-  // META / SITE TAB
-  // ============================================================
-  function buildMetaTab() {
-    var m = APP.data.meta || {};
-    var he = m.homeEmbed || {};
-    return '<div class="edit-form">' +
-      '<div class="form-row"><label class="form-label">Banner URL</label>' +
-        '<input class="form-input" value="' + esc(m.banner||'') + '" oninput="metaField(\'banner\',this.value)">' +
-        (m.banner ? '<img class="meta-preview-img" src="' + esc(m.banner) + '" onerror="this.style.display=\'none\'">' : '') +
-      '</div>' +
-      '<div class="form-row"><label class="form-label">Embed na Home (tipo)</label>' +
-        '<select class="form-select" onchange="metaEmbedType(this.value)">' +
-          '<option value=""' + (!he.type?' selected':'') + '>Nenhum</option>' +
-          ['youtube','vimeo','speakerdeck'].map(function(t){ return '<option value="'+t+'"'+(he.type===t?' selected':'')+'>'+t+'</option>'; }).join('') +
-        '</select>' +
-      '</div>' +
-      (he.type ? '<div class="form-row"><label class="form-label">ID do embed</label><input class="form-input" placeholder="Video ID / Deck ID" value="' + esc(he.id||'') + '" oninput="metaEmbedId(this.value)"></div>' : '') +
-      '<div class="form-actions"><button class="btn-primary" onclick="metaSave()">✓ Aplicar</button></div>' +
-    '</div>';
-  }
-  window.metaField = function(field,value){ if(!APP.data.meta)APP.data.meta={}; APP.data.meta[field]=value; };
-  window.metaEmbedType = function(value){ if(!APP.data.meta)APP.data.meta={}; if(!APP.data.meta.homeEmbed)APP.data.meta.homeEmbed={}; APP.data.meta.homeEmbed.type=value; renderAdminBody(); };
-  window.metaEmbedId   = function(value){ if(!APP.data.meta.homeEmbed)APP.data.meta.homeEmbed={}; APP.data.meta.homeEmbed.id=value; };
-  window.metaSave = function(){ renderMeta(); renderAdminBody(); toast('Site meta atualizado'); };
-
-  // ============================================================
-  // EXPORT FOR GIT
-  // ============================================================
-  var PUB_TEMPLATE = `<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lucca Tuelher | Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
-  <style>
-    /* ========== DESIGN SYSTEM ========== */
-    :root {
-      --bg:       #F2EFE8;
-      --bg2:      #E8E4DB;
-      --ink:      #1C1B18;
-      --ink-soft: #5A574F;
-      --ink-pale: #A09C93;
-      --rule:     #C8C4BB;
-      --accent:   #C1440E;
-      --accent2:  #2D5A8E;
-      --white:    #FAFAF7;
-      --serif: 'DM Serif Display', Georgia, serif;
-      --sans:  'DM Sans', Helvetica, sans-serif;
-      --mono:  'DM Mono', 'Courier New', monospace;
-      --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
-      --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
-    }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;min-height:100vh;}
-    body.lang-pt .en-only{display:none!important;}
-    body.lang-en .pt-only{display:none!important;}
-    .hidden{display:none!important;}
-
-    /* Grain */
-    body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.018;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-repeat:repeat;background-size:256px;}
-
-    /* Layout */
-    .container{width:min(70%,1100px);min-width:320px;margin:0 auto;padding:0 24px;}
-
-    /* Header */
-    header{padding:2.5rem 0 2rem;border-bottom:1.5px solid var(--ink);display:grid;grid-template-columns:1fr auto;align-items:end;gap:20px;}
-    .header-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:400;letter-spacing:-.02em;line-height:1;}
-    .header-role{font-family:var(--sans);font-size:.78rem;font-weight:400;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase;margin-top:6px;}
-    .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
-    .lang-icons{display:flex;gap:8px;align-items:center;}
-    .flag-btn{background:none;border:none;cursor:pointer;font-size:1.2rem;opacity:.3;transition:opacity .2s;padding:2px;}
-    .flag-btn:hover{opacity:.7;}
-    body.lang-pt .flag-btn[data-lang="pt"]{opacity:1;}
-    body.lang-en .flag-btn[data-lang="en"]{opacity:1;}
-    nav{display:flex;gap:0;align-items:center;}
-    .nav-link{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--ink-soft);text-decoration:none;cursor:pointer;padding:6px 14px;border:1px solid transparent;letter-spacing:.08em;text-transform:uppercase;transition:all .2s var(--ease);user-select:none;white-space:nowrap;}
-    .nav-link:hover{color:var(--ink);border-color:var(--rule);}
-    .nav-link.active{color:var(--ink);border-color:var(--ink);}
-
-    /* Issue bar */
-    .issue-bar{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule);margin-bottom:70px;}
-    .issue-text{font-family:var(--mono);font-size:.65rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;}
-
-    /* Section title */
-    .section-title{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;margin:80px 0 50px;}
-    .section-label{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;}
-    .section-rule{height:1px;background:var(--rule);}
-    .section-num{font-family:var(--mono);font-size:.65rem;color:var(--ink-pale);}
-
-    /* Banner */
-    .banner-container{width:100%;height:clamp(250px,40vw,420px);overflow:hidden;position:relative;background:var(--bg2);margin-bottom:60px;}
-    .banner-container::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(28,27,24,.15));}
-    .banner-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s var(--ease-out);}
-    .banner-container:hover .banner-img{transform:scale(1.03);}
-
-    /* Embed */
-    .embed-wrapper{margin-bottom:70px;}
-    .embed-area{width:100%;background:var(--ink);position:relative;overflow:hidden;}
-    .embed-area iframe{width:100%;aspect-ratio:16/9;display:block;border:none;}
-
-    /* Project grid */
-    .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:0;}
-    .project-card{cursor:pointer;position:relative;}
-    .card-thumb-wrap{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--bg2);margin-bottom:14px;position:relative;}
-    .card-thumb-wrap::after{content:'';position:absolute;inset:0;background:var(--accent);opacity:0;transition:opacity .3s var(--ease);mix-blend-mode:multiply;}
-    .project-card:hover .card-thumb-wrap::after{opacity:.08;}
-    .card-thumb{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease-out);}
-    .project-card:hover .card-thumb{transform:scale(1.04);}
-    .card-tag{font-family:var(--mono);font-size:.62rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
-    .card-title{font-family:var(--serif);font-size:1.15rem;font-weight:400;line-height:1.2;color:var(--ink);transition:color .2s;}
-    .project-card:hover .card-title{color:var(--accent);}
-    .card-arrow{display:inline-block;margin-left:6px;opacity:0;transform:translateX(-4px);transition:all .2s var(--ease);}
-    .project-card:hover .card-arrow{opacity:1;transform:translateX(0);}
-
-    /* Sketch */
-    .sketch-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:4rem;}
-    .sketch-item{aspect-ratio:1/1;overflow:hidden;cursor:zoom-in;position:relative;background:var(--bg2);}
-    .sketch-item img{width:100%;height:100%;object-fit:cover;display:block;transition:all .4s var(--ease);filter:grayscale(80%);}
-    .sketch-item:hover img{transform:scale(1.08);filter:grayscale(0%);}
-
-    /* Blog */
-    .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1.5px solid var(--ink);margin-bottom:4rem;}
-    .blog-item{padding:32px 24px 32px 0;border-bottom:1px solid var(--rule);cursor:pointer;transition:background .2s;}
-    .blog-item:nth-child(even){padding-left:24px;padding-right:0;border-left:1px solid var(--rule);}
-    .blog-item:hover{background:var(--bg2);}
-    .blog-date{font-family:var(--mono);font-size:.65rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:12px;}
-    .blog-thumb{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--bg2);margin-bottom:16px;transition:opacity .3s;}
-    .blog-item:hover .blog-thumb{opacity:.9;}
-    .blog-title{font-family:var(--serif);font-size:1.4rem;font-weight:400;line-height:1.2;margin-bottom:12px;}
-    .blog-excerpt{font-size:.85rem;color:var(--ink-soft);line-height:1.6;font-style:italic;}
-
-    /* Gallery */
-    .gallery-header{margin:4rem 0 3rem;display:grid;grid-template-columns:1fr auto;align-items:end;border-bottom:1.5px solid var(--ink);padding-bottom:20px;}
-    .gallery-h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.5rem);font-weight:400;line-height:1;}
-    .gallery-sub{font-family:var(--mono);font-size:.7rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;}
-    .art-gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;margin-bottom:4rem;}
-    .art-item{position:relative;break-inside:avoid;}
-    .art-img{width:100%;height:auto;display:block;background:var(--bg2);transition:opacity .3s;cursor:zoom-in;}
-    .art-item:hover .art-img{opacity:.9;}
-    .art-caption{font-family:var(--mono);font-size:.65rem;color:var(--ink-pale);letter-spacing:.08em;padding:10px 0 0;text-transform:uppercase;}
-
-    /* Back btn */
-    .back-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer;padding:20px 0;transition:color .2s;user-select:none;}
-    .back-btn:hover{color:var(--ink);}
-
-    /* Detail */
-    .detail-container{display:flex;flex-direction:column;gap:0;}
-    .detail-header{border-bottom:1.5px solid var(--ink);padding-bottom:32px;margin-bottom:48px;}
-    .detail-tag{font-family:var(--mono);font-size:.68rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px;}
-    .detail-title{font-family:var(--serif);font-size:clamp(2.5rem,6vw,4rem);font-weight:400;line-height:1;margin-bottom:20px;letter-spacing:-.02em;}
-    .detail-desc{font-size:1.05rem;color:var(--ink-soft);font-style:italic;line-height:1.7;max-width:65ch;}
-    .detail-meta{display:flex;gap:32px;margin-top:24px;flex-wrap:wrap;}
-    .meta-label{font-family:var(--mono);font-size:.62rem;color:var(--ink-pale);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
-    .meta-value{font-size:.85rem;color:var(--ink);}
-
-    /* Detail blocks */
-    .detail-embed{margin-bottom:48px;}
-    .detail-embed .embed-area{background:var(--ink);}
-    .detail-embed .embed-area iframe{width:100%;aspect-ratio:16/9;display:block;border:none;}
-    .detail-images{margin-bottom:48px;}
-    .detail-images-grid{display:grid;gap:16px;}
-    .detail-images-grid.cols-1{grid-template-columns:1fr;}
-    .detail-images-grid.cols-2{grid-template-columns:1fr 1fr;}
-    .detail-images-grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
-    .detail-img{width:100%;height:auto;display:block;cursor:zoom-in;background:var(--bg2);}
-    .detail-text{font-family:var(--sans);font-size:1rem;line-height:1.85;color:var(--ink-soft);white-space:pre-wrap;margin-bottom:48px;max-width:72ch;}
-
-    /* Contact */
-    #contact-view{padding:5rem 0;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-    .contact-h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:400;line-height:1.1;margin-bottom:24px;}
-    .contact-body{font-size:1rem;color:var(--ink-soft);line-height:1.7;font-style:italic;margin-bottom:32px;}
-    .contact-email{font-family:var(--mono);font-size:.9rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:2px;transition:color .2s;}
-    .contact-email:hover{color:var(--accent);border-color:var(--accent);}
-    .contact-img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:var(--bg2);margin-bottom:24px;filter:grayscale(30%);}
-    .btn-cv{display:inline-block;padding:12px 28px;background:var(--ink);color:var(--white);font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .2s var(--ease);margin-bottom:24px;}
-    .btn-cv:hover{background:var(--accent);}
-    .social-row{display:flex;gap:16px;align-items:center;}
-    .social-link{font-family:var(--mono);font-size:.68rem;color:var(--ink-soft);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
-    .social-link:hover{color:var(--accent);}
-
-    /* Lightbox */
-    #lightbox{position:fixed;inset:0;background:rgba(28,27,24,.97);z-index:8000;display:none;justify-content:center;align-items:center;cursor:zoom-out;}
-    #lightbox.open{display:flex;}
-    #lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;}
-
-    /* Fade */
-    .fade-in{animation:fadeUp .4s var(--ease-out) both;}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-
-    /* Responsive */
-    @media(max-width:900px){
-      .container{width:92%;}
-      header{grid-template-columns:1fr;gap:16px;}
-      .header-right{align-items:flex-start;flex-direction:row;justify-content:space-between;}
-      .project-grid,.art-gallery-grid{grid-template-columns:1fr 1fr;}
-      .blog-grid{grid-template-columns:1fr;}
-      .blog-item:nth-child(even){border-left:none;padding-left:0;}
-      .sketch-grid{grid-template-columns:repeat(3,1fr);}
-      #contact-view{grid-template-columns:1fr;gap:40px;}
-      nav{flex-wrap:wrap;}
-    }
-    @media(max-width:600px){
-      .project-grid,.art-gallery-grid{grid-template-columns:1fr;}
-      .sketch-grid{grid-template-columns:repeat(3,1fr);}
-      .detail-images-grid.cols-2,.detail-images-grid.cols-3{grid-template-columns:1fr;}
-    }
-  </style>
-  <!-- __BAKED_DATA__ -->
-</head>
-<body class="lang-pt">
-
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="">
 </div>
 
+<script>
+(function(){
+'use strict';
 
+// ============================================================
+// DEFAULT TEXTS — every static string on the site
+// ============================================================
+var DEFAULT_TEXTS = {
+  // Header
+  siteName:          'Lucca Tuelher',
+  siteRole:          'Storyboard Artist & Visual Storyteller',
+  issueLabel:        'Portfolio — Visual Development & Storyboard',
+  // Nav
+  navHome:           'Home',
+  navProjectsPt:     'Projetos',
+  navProjectsEn:     'Projects',
+  navGalleryPt:      'Galeria',
+  navGalleryEn:      'Gallery',
+  navBlogPt:         'Notas',
+  navBlogEn:         'Notes',
+  navContactPt:      'Contato',
+  navContactEn:      'Contact',
+  // Home sections
+  homeWorkLabel:     'Selected Work',
+  homeSketchLabel:   'Sketchbook',
+  // Projects page
+  allProjectsPt:     'Todos os Projetos',
+  allProjectsEn:     'All Projects',
+  // NDA page
+  ndaTitle:          'Acesso Restrito',
+  ndaSubtitle:       'Projetos sob acordo de confidencialidade',
+  ndaBtn:            'Entrar',
+  ndaSectionLabel:   'NDA — Confidential Work',
+  // Gallery page
+  galleryTitlePt:    'Galeria de Arte',
+  galleryTitleEn:    'Art Gallery',
+  gallerySubPt:      'Ilustrações & Processo',
+  gallerySubEn:      'Illustrations & Process',
+  // Blog section
+  blogLabelPt:       'Notas & Reflexões',
+  blogLabelEn:       'Notes & Thoughts',
+  // Detail back button
+  backPt:            'Voltar',
+  backEn:            'Back',
+  // Contact page
+  contactHeadingPt:  'Vamos\ntrabalhaar\njuntos.',
+  contactHeadingEn:  "Let's\nwork\ntogether.",
+  contactBodyPt:     'Disponível para projetos freelance em storyboard, animação e desenvolvimento visual.',
+  contactBodyEn:     'Available for freelance projects in storyboard, animation, and visual development.',
+  contactEmail:      'contato@luccatuelher.com',
+  contactCvPt:       'Baixar CV',
+  contactCvEn:       'Download CV',
+  contactCvHref:     'cv.pdf',
+  contactImgSrc:     'https://via.placeholder.com/400x533',
+  social1Label:      'LinkedIn',
+  social1Href:       '#',
+  social2Label:      'Instagram',
+  social2Href:       '#',
+  social3Label:      'Behance',
+  social3Href:       '#'
+};
 
-<div class="container">
-  <!-- HEADER -->
-  <header>
-    <div>
-      <div class="header-name">Lucca Tuelher</div>
-      <div class="header-role">Storyboard Artist &amp; Visual Storyteller</div>
-    </div>
-    <div class="header-right">
-      <div class="lang-icons">
-        <button class="flag-btn" data-lang="pt" onclick="setLang('pt')" title="Português">🇧🇷</button>
-        <button class="flag-btn" data-lang="en" onclick="setLang('en')" title="English">🇺🇸</button>
-      </div>
-      <nav>
-        <a onclick="goHome()" class="nav-link active" id="nav-work">
-          <span class="pt-only">Projetos</span><span class="en-only">Work</span>
-        </a>
-        <a onclick="goGallery()" class="nav-link" id="nav-gallery">
-          <span class="pt-only">Galeria</span><span class="en-only">Gallery</span>
-        </a>
-        <a onclick="goBlog()" class="nav-link" id="nav-blog">
-          <span class="pt-only">Notas</span><span class="en-only">Notes</span>
-        </a>
-        <a onclick="goToContact()" class="nav-link" id="nav-contact">
-          <span class="pt-only">Contato</span><span class="en-only">Contact</span>
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Issue bar -->
-  <div class="issue-bar">
-    <span class="issue-text">Portfolio — Visual Development &amp; Storyboard</span>
-    <span class="issue-text" id="issue-date"></span>
-  </div>
-
-  <!-- HOME VIEW -->
-  <div id="home-view" style="position:relative;">
-    <div class="banner-container" id="banner-container">
-      <img id="banner-img" class="banner-img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80" alt="Banner">
-    </div>
-    <div class="embed-wrapper" id="home-embed-wrapper">
-      <div class="embed-area" id="home-embed-area"></div>
-    </div>
-    <div class="section-title">
-      <span class="section-label pt-only">Projetos Selecionados</span>
-      <span class="section-label en-only">Selected Work</span>
-      <div class="section-rule"></div>
-      <span class="section-num" id="proj-count">—</span>
-    </div>
-    <div id="public-grid" class="project-grid"></div>
-    <div class="section-title">
-      <span class="section-label">Sketchbook</span>
-      <div class="section-rule"></div>
-      <span class="section-num" id="sketch-count">—</span>
-    </div>
-    <div id="sketch-grid" class="sketch-grid"></div>
-  </div>
-
-  <!-- GALLERY VIEW -->
-  <div id="gallery-view" class="hidden">
-    <div class="gallery-header">
-      <div>
-        <div class="gallery-h1 pt-only">Galeria de Arte</div>
-        <div class="gallery-h1 en-only">Art Gallery</div>
-      </div>
-      <div class="gallery-sub">
-        <span class="pt-only">Ilustrações &amp; Processo</span>
-        <span class="en-only">Illustrations &amp; Process</span>
-      </div>
-    </div>
-    <div id="art-gallery-container" class="art-gallery-grid"></div>
-  </div>
-
-  <!-- BLOG VIEW -->
-  <div id="blog-view" class="hidden">
-    <div class="section-title" style="margin-top:3rem;">
-      <span class="section-label pt-only">Notas &amp; Reflexões</span>
-      <span class="section-label en-only">Notes &amp; Thoughts</span>
-      <div class="section-rule"></div>
-      <span class="section-num" id="blog-count">—</span>
-    </div>
-    <div id="blog-grid-container" class="blog-grid"></div>
-  </div>
-
-  <!-- DETAIL VIEW -->
-  <div id="detail-view" class="hidden">
-    <div onclick="goBack()" class="back-btn">
-      ← <span class="pt-only">Voltar</span><span class="en-only">Back</span>
-    </div>
-    <div id="detail-content" class="detail-container"></div>
-  </div>
-
-  <!-- CONTACT VIEW -->
-  <div id="contact-view" class="hidden">
-    <div class="contact-left">
-      <div class="contact-h1 pt-only">Vamos<br>trabalhar<br>juntos.</div>
-      <div class="contact-h1 en-only">Let's<br>work<br>together.</div>
-      <div class="contact-body pt-only">Disponível para projetos freelance em storyboard, animação e desenvolvimento visual.</div>
-      <div class="contact-body en-only">Available for freelance projects in storyboard, animation, and visual development.</div>
-      <a href="/cdn-cgi/l/email-protection#88e4fdebebe9c8edf0e9e5f8e4eda6ebe7e5" class="contact-email"><span class="__cf_email__" data-cfemail="8ae6ffe9e9ebcaeff2ebe7fae6efa4e9e5e7">[email&#160;protected]</span></a>
-      <div style="margin-top:32px;">
-        <a href="cv.pdf" class="btn-cv" target="_blank">
-          <span class="pt-only">Baixar CV</span><span class="en-only">Download CV</span>
-        </a>
-      </div>
-      <div class="social-row" style="margin-top:24px;">
-        <a href="#" class="social-link">LinkedIn</a>
-        <a href="#" class="social-link">Instagram</a>
-        <a href="#" class="social-link">Behance</a>
-      </div>
-    </div>
-    <div class="contact-right">
-      <img src="https://via.placeholder.com/400x533" class="contact-img" alt="Foto">
-    </div>
-  </div>
-</div><!-- /container -->
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-(function() {
-  'use strict';
-
-  // ============================================================
-  // APP STATE
-  // ============================================================
-  var APP = {
-    data: {
-      projects: [],
-      blog: [],
-      gallery: [],
-      sketches: [],
-      meta: {
-        banner: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80',
-        homeEmbed: { type: '', id: '' }
-      }
-    },
-    currentLang: 'pt',
-    previousView: 'home',
-  };
-
-  // ============================================================
-  // FIREBASE CONFIG + REST API
-  // ============================================================
-  var FB = {
-    apiKey:     'AIzaSyBJ-CK1s_ySQqvM98sJbi15SejsIoicVvo',
-    projectId:  'webapps-cbefa',
-    docPath:    'portfolio/content',
-    url: function() {
-      return 'https://firestore.googleapis.com/v1/projects/webapps-cbefa/databases/(default)/documents/portfolio/content?key=AIzaSyBJ-CK1s_ySQqvM98sJbi15SejsIoicVvo';
+// ============================================================
+// APP STATE
+// ============================================================
+var APP = {
+  data: {
+    projects: [],
+    blog:     [],
+    gallery:  [],
+    sketches: [],
+    texts:    Object.assign({}, DEFAULT_TEXTS),
+    meta: {
+      banner: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80',
+      homeItems: [],
+      ndaPassword: 'nda'
     }
-  };
+  },
+  currentLang:  'pt',
+  previousView: 'home',
+  activeTab:    'projects',
+  editingId:    null,
+  isOpen:       false,
+  ndaUnlocked:  false
+};
 
-  function toFV(val) {
-    if (val === null || val === undefined) return { nullValue: null };
-    if (typeof val === 'boolean')          return { booleanValue: val };
-    if (typeof val === 'number')           return { doubleValue: val };
-    if (typeof val === 'string')           return { stringValue: val };
-    if (Array.isArray(val))                return { arrayValue: { values: val.map(toFV) } };
-    if (typeof val === 'object') {
-      var f = {};
-      Object.keys(val).forEach(function(k) { f[k] = toFV(val[k]); });
-      return { mapValue: { fields: f } };
-    }
-    return { stringValue: String(val) };
+// ============================================================
+// RENDER TEXTS — sync all static strings to the DOM
+// ============================================================
+function renderTexts() {
+  var t = APP.data.texts || {};
+  function set(id, val) { var el=document.getElementById(id); if(el && val!==undefined) el.textContent = val; }
+  function setHtml(id, val) { var el=document.getElementById(id); if(el && val!==undefined) el.innerHTML = val; }
+  function setAttr(id, attr, val) { var el=document.getElementById(id); if(el && val!==undefined) el.setAttribute(attr, val); }
+
+  set('txt-site-name',          t.siteName);
+  set('txt-site-role',          t.siteRole);
+  set('txt-issue-label',        t.issueLabel);
+  set('txt-nav-home',           t.navHome);
+  set('txt-nav-projects-pt',    t.navProjectsPt);
+  set('txt-nav-projects-en',    t.navProjectsEn);
+  set('txt-nav-gallery-pt',     t.navGalleryPt);
+  set('txt-nav-gallery-en',     t.navGalleryEn);
+  set('txt-nav-blog-pt',        t.navBlogPt);
+  set('txt-nav-blog-en',        t.navBlogEn);
+  set('txt-nav-contact-pt',     t.navContactPt);
+  set('txt-nav-contact-en',     t.navContactEn);
+  set('txt-home-work-label',    t.homeWorkLabel);
+  set('txt-home-sketch-label',  t.homeSketchLabel);
+  set('txt-all-projects-pt',    t.allProjectsPt);
+  set('txt-all-projects-en',    t.allProjectsEn);
+  set('txt-nda-title',          t.ndaTitle);
+  set('txt-nda-subtitle',       t.ndaSubtitle);
+  set('txt-nda-btn',            t.ndaBtn);
+  set('txt-nda-section-label',  t.ndaSectionLabel);
+  set('txt-gallery-title-pt',   t.galleryTitlePt);
+  set('txt-gallery-title-en',   t.galleryTitleEn);
+  set('txt-gallery-sub-pt',     t.gallerySubPt);
+  set('txt-gallery-sub-en',     t.gallerySubEn);
+  set('txt-blog-label-pt',      t.blogLabelPt);
+  set('txt-blog-label-en',      t.blogLabelEn);
+  set('txt-back-pt',            t.backPt);
+  set('txt-back-en',            t.backEn);
+  // Contact
+  var headEl = document.getElementById('txt-contact-heading-pt');
+  if (headEl) headEl.textContent = (t.contactHeadingPt||'').replace(/\\n/g,'\n');
+  var headElEn = document.getElementById('txt-contact-heading-en');
+  if (headElEn) headElEn.textContent = (t.contactHeadingEn||'').replace(/\\n/g,'\n');
+  set('txt-contact-body-pt',    t.contactBodyPt);
+  set('txt-contact-body-en',    t.contactBodyEn);
+  var emailEl = document.getElementById('txt-contact-email-link');
+  if (emailEl) { emailEl.textContent = t.contactEmail||''; emailEl.href = 'mailto:'+(t.contactEmail||''); }
+  set('txt-contact-cv-pt',      t.contactCvPt);
+  set('txt-contact-cv-en',      t.contactCvEn);
+  setAttr('txt-contact-cv-link', 'href', t.contactCvHref);
+  var imgEl = document.getElementById('txt-contact-img');
+  if (imgEl && t.contactImgSrc) imgEl.src = t.contactImgSrc;
+  // Socials
+  set('txt-social-1-label',     t.social1Label);
+  setAttr('txt-social-1-link',  'href', t.social1Href);
+  set('txt-social-2-label',     t.social2Label);
+  setAttr('txt-social-2-link',  'href', t.social2Href);
+  set('txt-social-3-label',     t.social3Label);
+  setAttr('txt-social-3-link',  'href', t.social3Href);
+}
+
+// ============================================================
+// FIREBASE REST
+// ============================================================
+var FB = {
+  apiKey: 'AIzaSyBJ-CK1s_ySQqvM98sJbi15SejsIoicVvo',
+  url: function(){
+    return 'https://firestore.googleapis.com/v1/projects/webapps-cbefa/databases/(default)/documents/portfolio/content?key='+FB.apiKey;
   }
+};
+function toFV(v){
+  if(v===null||v===undefined) return{nullValue:null};
+  if(typeof v==='boolean') return{booleanValue:v};
+  if(typeof v==='number')  return{doubleValue:v};
+  if(typeof v==='string')  return{stringValue:v};
+  if(Array.isArray(v))     return{arrayValue:{values:v.map(toFV)}};
+  if(typeof v==='object'){var f={};Object.keys(v).forEach(function(k){f[k]=toFV(v[k]);});return{mapValue:{fields:f}};}
+  return{stringValue:String(v)};
+}
+function fromFV(fv){
+  if(!fv) return null;
+  if('stringValue'  in fv) return fv.stringValue;
+  if('booleanValue' in fv) return fv.booleanValue;
+  if('integerValue' in fv) return Number(fv.integerValue);
+  if('doubleValue'  in fv) return fv.doubleValue;
+  if('nullValue'    in fv) return null;
+  if('arrayValue'   in fv) return(fv.arrayValue.values||[]).map(fromFV);
+  if('mapValue'     in fv){var o={};Object.keys(fv.mapValue.fields||{}).forEach(function(k){o[k]=fromFV(fv.mapValue.fields[k]);});return o;}
+  return null;
+}
+function docToData(doc){var o={};Object.keys(doc.fields||{}).forEach(function(k){o[k]=fromFV(doc.fields[k]);});return o;}
 
-  function fromFV(fv) {
-    if (!fv) return null;
-    if ('stringValue'  in fv) return fv.stringValue;
-    if ('booleanValue' in fv) return fv.booleanValue;
-    if ('integerValue' in fv) return Number(fv.integerValue);
-    if ('doubleValue'  in fv) return fv.doubleValue;
-    if ('nullValue'    in fv) return null;
-    if ('arrayValue'   in fv) return (fv.arrayValue.values || []).map(fromFV);
-    if ('mapValue'     in fv) {
-      var o = {};
-      Object.keys(fv.mapValue.fields || {}).forEach(function(k) { o[k] = fromFV(fv.mapValue.fields[k]); });
-      return o;
-    }
-    return null;
-  }
+window.fbLoad = function(){
+  syncStatus('Loading…','#999');
+  fetch(FB.url()).then(function(r){
+    if(r.status===404) return null;
+    if(!r.ok) return r.json().then(function(e){throw new Error((e.error||{}).message||'HTTP '+r.status);});
+    return r.json();
+  }).then(function(doc){
+    if(!doc){syncStatus('Pronto — adicione conteúdo e salve','#2D7A2D');toast('✓ Novo portfolio');return;}
+    var d=docToData(doc);
+    if(d.projects) APP.data.projects=d.projects;
+    if(d.blog)     APP.data.blog=d.blog;
+    if(d.gallery)  APP.data.gallery=d.gallery;
+    if(d.sketches) APP.data.sketches=d.sketches;
+    if(d.meta)     APP.data.meta=Object.assign({},APP.data.meta,d.meta);
+    if(d.texts)    APP.data.texts=Object.assign({},DEFAULT_TEXTS,d.texts);
+    renderAll(); renderEdBody();
+    syncStatus('Carregado · '+(d.updatedAt?new Date(d.updatedAt).toLocaleString('pt-BR'):''),'#2D7A2D');
+    toast('✓ Portfolio carregado');
+  }).catch(function(e){syncStatus('Erro: '+e.message,'#C1440E');toast('✗ '+e.message);});
+};
 
-  function docToData(doc) {
-    var o = {};
-    Object.keys(doc.fields || {}).forEach(function(k) { o[k] = fromFV(doc.fields[k]); });
-    return o;
-  }
+window.fbSave = function(){
+  syncStatus('Salvando…','#999');
+  var payload=Object.assign({},APP.data,{updatedAt:new Date().toISOString()});
+  var fields={};Object.keys(payload).forEach(function(k){fields[k]=toFV(payload[k]);});
+  fetch(FB.url(),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:fields})})
+  .then(function(r){if(!r.ok) return r.json().then(function(e){throw new Error((e.error||{}).message||'HTTP '+r.status);});return r.json();})
+  .then(function(){syncStatus('Salvo · '+new Date().toLocaleString('pt-BR'),'#2D7A2D');toast('✓ Salvo no Firebase');})
+  .catch(function(e){syncStatus('Erro: '+e.message,'#C1440E');toast('✗ '+e.message);});
+};
 
-  window.fbLoad = function() {
-    // Check for baked-in data (git/static export)
-    if (window.__PORTFOLIO_DATA__) {
-      var loaded = window.__PORTFOLIO_DATA__;
-      if (loaded.projects) APP.data.projects = loaded.projects;
-      if (loaded.blog)     APP.data.blog     = loaded.blog;
-      if (loaded.gallery)  APP.data.gallery  = loaded.gallery;
-      if (loaded.sketches) APP.data.sketches = loaded.sketches;
-      if (loaded.meta)     APP.data.meta     = Object.assign({}, APP.data.meta, loaded.meta);
-      renderAll();
-      return;
-    }
-    setSyncStatus('Loading…', '#aaa');
-    setFabLoading(true);
-    fetch(FB.url())
-      .then(function(r) {
-        // 404 = document doesn't exist yet (first run) — treat as empty
-        if (r.status === 404) return null;
-        if (!r.ok) return r.json().then(function(e) {
-          throw new Error(e.error ? e.error.message : 'HTTP ' + r.status + ' — check Firestore rules');
-        });
-        return r.json();
-      })
-      .then(function(doc) {
-        if (!doc) {
-          // First time — no data yet, just show a helpful message
-          setSyncStatus('Novo portfolio — adicione conteúdo e clique Save ↑', '#2D7A2D');
-          toast('✓ Pronto! Adicione projetos e salve.');
-                return;
-        }
-        var loaded = docToData(doc);
-        if (loaded.projects) APP.data.projects = loaded.projects;
-        if (loaded.blog)     APP.data.blog     = loaded.blog;
-        if (loaded.gallery)  APP.data.gallery  = loaded.gallery;
-        if (loaded.sketches) APP.data.sketches = loaded.sketches;
-        if (loaded.meta)     APP.data.meta     = Object.assign({}, APP.data.meta, loaded.meta);
-        renderAll();
-            var ts = loaded.updatedAt ? new Date(loaded.updatedAt).toLocaleString('pt-BR') : 'now';
-        setSyncStatus('Loaded · ' + ts, '#2D7A2D');
-        toast('✓ Portfolio carregado');
-      })
-      .catch(function(e) {
-        setSyncStatus('Erro: ' + e.message, '#C1440E');
-        toast('✗ ' + e.message);
-      })
-      .finally(function() { setFabLoading(false); });
-  };
+function syncStatus(msg,color){var el=document.getElementById('sync-status');if(el){el.textContent=msg;el.style.color=color||'';}}
+function toast(msg){var el=document.getElementById('editor-toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('show');},3000);}
 
-  window.fbSave = function() {
-    setSyncStatus('Saving…', '#aaa');
-    setFabLoading(true);
-    var payload = Object.assign({}, APP.data, { updatedAt: new Date().toISOString() });
-    var fields = {};
-    Object.keys(payload).forEach(function(k) { fields[k] = toFV(payload[k]); });
-    fetch(FB.url(), {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fields: fields })
-    })
-    .then(function(r) {
-      if (!r.ok) return r.json().then(function(e) { throw new Error(e.error ? e.error.message : 'HTTP ' + r.status); });
-      return r.json();
-    })
-    .then(function() {
-      setSyncStatus('Saved · ' + new Date().toLocaleString('pt-BR'), '#2D7A2D');
-      toast('✓ Salvo no Firebase');
-    })
-    .catch(function(e) {
-      setSyncStatus('Save error: ' + e.message, '#C1440E');
-      toast('✗ ' + e.message);
-    })
-    .finally(function() { setFabLoading(false); });
-  };
+window.exportHTML = function(){
+  var src=document.documentElement.outerHTML;
+  var dataJSON=JSON.stringify(APP.data);
+  var baked=src.replace(/APP\.data\s*=\s*\{[\s\S]*?^    \}/m,'APP.data = '+dataJSON);
+  var blob=new Blob([baked],{type:'text/html'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');a.href=url;a.download='index.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  toast('✓ index.html exportado');
+};
 
-  function setSyncStatus() {}
+// ============================================================
+// UTILITIES
+// ============================================================
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function readFile(file){return new Promise(function(resolve,reject){var r=new FileReader();r.onload=function(e){resolve(e.target.result);};r.onerror=reject;r.readAsDataURL(file);});}
 
-  function setFabLoading() {}
+// ============================================================
+// LANG
+// ============================================================
+window.setLang = function(lang){APP.currentLang=lang;document.body.className='lang-'+lang;};
 
-  function toast() {}
+// ============================================================
+// VIEWS
+// ============================================================
+var VIEWS=['home','projects','nda','blog','gallery','detail','contact'];
+function resetViews(){
+  VIEWS.forEach(function(k){var el=document.getElementById(k+'-view');if(el)el.classList.add('hidden');});
+  ['home','projects','nda','blog','gallery','contact'].forEach(function(k){var n=document.getElementById('nav-'+k);if(n)n.classList.remove('active');});
+}
+function showView(key){
+  resetViews();
+  var el=document.getElementById(key+'-view');
+  if(el){el.classList.remove('hidden');el.classList.add('fade-in');setTimeout(function(){el.classList.remove('fade-in');},500);}
+  var n=document.getElementById('nav-'+key);if(n)n.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.goHome      = function(){showView('home');APP.previousView='home';};
+window.goProjects  = function(){showView('projects');APP.previousView='projects';renderAllProjects();};
+window.goGallery   = function(){showView('gallery');APP.previousView='gallery';};
+window.goBlog      = function(){showView('blog');APP.previousView='blog';};
+window.goToContact = function(){showView('contact');};
+window.goNDA       = function(){
+  showView('nda');APP.previousView='nda';
+  if(APP.ndaUnlocked){document.getElementById('nda-gate').style.display='none';document.getElementById('nda-content').classList.remove('hidden');renderNDAProjects();}
+  else{document.getElementById('nda-gate').style.display='';document.getElementById('nda-content').classList.add('hidden');setTimeout(function(){var i=document.getElementById('nda-password-input');if(i)i.focus();},200);}
+};
+window.checkNDA = function(){
+  var input=document.getElementById('nda-password-input');
+  var err=document.getElementById('nda-error');
+  var pwd=APP.data.meta&&APP.data.meta.ndaPassword?APP.data.meta.ndaPassword:'nda';
+  if(input.value===pwd){APP.ndaUnlocked=true;document.getElementById('nda-gate').style.display='none';document.getElementById('nda-content').classList.remove('hidden');renderNDAProjects();}
+  else{err.textContent='Senha incorreta';err.style.opacity='1';input.value='';input.focus();setTimeout(function(){err.style.opacity='0';},2000);}
+};
+window.goBack = function(){
+  if(APP.previousView==='blog') goBlog();
+  else if(APP.previousView==='gallery') goGallery();
+  else if(APP.previousView==='projects') goProjects();
+  else if(APP.previousView==='nda') goNDA();
+  else goHome();
+};
 
-  // ============================================================
-  // LANG
-  // ============================================================
-  window.setLang = function(lang) {
-    APP.currentLang = lang;
-    document.body.className = 'lang-' + lang;
-  };
+// ============================================================
+// EMBED
+// ============================================================
+function buildEmbedIframe(embed){
+  if(!embed||!embed.type||!embed.id) return '';
+  var src='';
+  if(embed.type==='youtube')     src='https://www.youtube.com/embed/'+embed.id+'?rel=0';
+  if(embed.type==='vimeo')       src='https://player.vimeo.com/video/'+embed.id+'?color=C1440E&title=0&byline=0';
+  if(embed.type==='speakerdeck') src='https://speakerdeck.com/player/'+embed.id;
+  if(!src) return '';
+  return '<div class="embed-area"><iframe src="'+src+'" allowfullscreen allow="autoplay; fullscreen"></iframe></div>';
+}
 
-  // ============================================================
-  // VIEWS
-  // ============================================================
-  var VIEWS = ['home','blog','gallery','detail','contact'];
-  var NAV_KEYS = { home:'work', blog:'blog', gallery:'gallery', contact:'contact' };
+// ============================================================
+// RENDERERS
+// ============================================================
+function renderAll(){renderTexts();renderMeta();renderProjects();renderSketches();renderBlog();renderGallery();updateCounts();}
 
-  function resetViews() {
-    VIEWS.forEach(function(k) {
-      var el = document.getElementById(k + '-view');
-      if (el) el.classList.add('hidden');
-    });
-    ['work','blog','gallery','contact'].forEach(function(k) {
-      var el = document.getElementById('nav-' + k);
-      if (el) el.classList.remove('active');
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function showView(key) {
-    resetViews();
-    var el = document.getElementById(key + '-view');
-    if (el) { el.classList.remove('hidden'); el.classList.add('fade-in'); setTimeout(function(){ el.classList.remove('fade-in'); }, 500); }
-    var nk = NAV_KEYS[key];
-    if (nk) { var n = document.getElementById('nav-' + nk); if(n) n.classList.add('active'); }
-  }
-
-  window.goHome    = function() { showView('home');    APP.previousView = 'home'; };
-  window.goBlog    = function() { showView('blog');    APP.previousView = 'blog'; };
-  window.goGallery = function() { showView('gallery'); APP.previousView = 'gallery'; };
-  window.goToContact = function() { showView('contact'); };
-  window.goBack    = function() {
-    if (APP.previousView === 'blog') goBlog();
-    else if (APP.previousView === 'gallery') goGallery();
-    else goHome();
-  };
-
-  // ============================================================
-  // EMBED BUILDER
-  // ============================================================
-  function buildEmbedIframe(embed) {
-    if (!embed || !embed.type || !embed.id) return '';
-    var src = '';
-    if (embed.type === 'youtube')     src = 'https://www.youtube.com/embed/' + embed.id + '?rel=0';
-    if (embed.type === 'vimeo')       src = 'https://player.vimeo.com/video/' + embed.id + '?color=C1440E&title=0&byline=0';
-    if (embed.type === 'speakerdeck') src = 'https://speakerdeck.com/player/' + embed.id;
-    if (!src) return '';
-    return '<div class="embed-area"><iframe src="' + src + '" allowfullscreen allow="autoplay; fullscreen"></iframe></div>';
-  }
-
-  // ============================================================
-  // RENDERERS
-  // ============================================================
-  function renderAll() {
-    renderMeta();
-    renderProjects();
-    renderSketches();
-    renderBlog();
-    renderGallery();
-    updateCounts();
-  }
-
-  function renderMeta() {
-    var m = APP.data.meta || {};
-    // Banner
-    var img = document.getElementById('banner-img');
-    if (img && m.banner) img.src = m.banner;
-    // Home embed
-    var area = document.getElementById('home-embed-area');
-    var wrapper = document.getElementById('home-embed-wrapper');
-    if (area) {
-      var html = buildEmbedIframe(m.homeEmbed);
-      area.innerHTML = html;
-      if (wrapper) wrapper.style.display = html ? '' : 'none';
-    }
-  }
-
-  function renderProjects() {
-    var grid = document.getElementById('public-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    var list = (APP.data.projects || []).slice().sort(function(a,b){ return (a.order||0)-(b.order||0); });
-    list.forEach(function(p) {
-      if (!p.published) return;
-      var card = document.createElement('div');
-      card.className = 'project-card';
-      card.innerHTML =
-        '<div class="card-thumb-wrap">' +
-          '<img class="card-thumb" src="' + (p.thumb || 'https://via.placeholder.com/400x300') + '" alt="' + esc(p.title||'') + '" onerror="this.src=\\'https://via.placeholder.com/400x300\\'">' +
-        '</div>' +
-        '<div class="card-tag">' + esc(p.tag||'') + '</div>' +
-        '<div class="card-title">' + esc(p.title||'Sem título') + '<span class="card-arrow">→</span></div>';
-      card.onclick = function() { openDetail(p.id, 'project'); };
-      grid.appendChild(card);
-    });
-  }
-
-  function renderSketches() {
-    var grid = document.getElementById('sketch-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    (APP.data.sketches || []).forEach(function(s) {
-      var item = document.createElement('div');
-      item.className = 'sketch-item';
-      var img = document.createElement('img');
-      img.src = s.src || 'https://via.placeholder.com/200x200';
-      img.alt = s.alt || '';
-      img.onerror = function(){ this.src='https://via.placeholder.com/200x200'; };
-      img.onclick = function() { openLightbox(img.src); };
-      item.appendChild(img);
-      grid.appendChild(item);
-    });
-  }
-
-  function renderBlog() {
-    var grid = document.getElementById('blog-grid-container');
-    if (!grid) return;
-    grid.innerHTML = '';
-    var list = (APP.data.blog || []).slice().sort(function(a,b){ return (a.order||0)-(b.order||0); });
-    list.forEach(function(p) {
-      if (!p.published) return;
-      var item = document.createElement('div');
-      item.className = 'blog-item';
-      item.innerHTML =
-        '<span class="blog-date">' + esc(p.date||'') + '</span>' +
-        (p.thumb ? '<img class="blog-thumb" src="' + esc(p.thumb) + '" alt="" onerror="this.style.display=\\'none\\'">' : '') +
-        '<div class="blog-title">' + esc(p.title||'Sem título') + '</div>' +
-        '<div class="blog-excerpt">' + esc(p.excerpt||'') + '</div>';
-      item.onclick = function() { APP.previousView = 'blog'; openDetail(p.id, 'blog'); };
-      grid.appendChild(item);
-    });
-  }
-
-  function renderGallery() {
-    var container = document.getElementById('art-gallery-container');
-    if (!container) return;
-    container.innerHTML = '';
-    (APP.data.gallery || []).forEach(function(a) {
-      var div = document.createElement('div');
-      div.className = 'art-item';
-      div.innerHTML =
-        '<img class="art-img" src="' + esc(a.src||'https://via.placeholder.com/400x500') + '" alt="' + esc(a.caption||'') + '" onerror="this.src=\\'https://via.placeholder.com/400x500\\'">' +
-        '<div class="art-caption">' + esc(a.caption||'') + '</div>';
-      div.querySelector('.art-img').onclick = function() { openLightbox(a.src); };
-      container.appendChild(div);
-    });
-  }
-
-  function updateCounts() {
-    var sets = [
-      { id:'proj-count',    items: (APP.data.projects||[]).filter(function(p){return p.published;}) },
-      { id:'sketch-count',  items: APP.data.sketches||[] },
-      { id:'blog-count',    items: (APP.data.blog||[]).filter(function(p){return p.published;}) }
-    ];
-    sets.forEach(function(s) {
-      var el = document.getElementById(s.id);
-      if (el) el.textContent = s.items.length > 0 ? String(s.items.length).padStart(2,'0') : '—';
-    });
-  }
-
-  // ============================================================
-  // DETAIL VIEW (project or blog post, fully data-driven)
-  // ============================================================
-  function openDetail(id, type) {
-    var item = null;
-    if (type === 'project') item = (APP.data.projects||[]).find(function(p){ return p.id === id; });
-    if (type === 'blog')    item = (APP.data.blog||[]).find(function(p){ return p.id === id; });
-    if (!item) return;
-
-    var contentDiv = document.getElementById('detail-content');
-    contentDiv.innerHTML = buildDetailHTML(item, type);
-
-    // Attach lightbox to detail images
-    contentDiv.querySelectorAll('.detail-img').forEach(function(img) {
-      img.onclick = function() { openLightbox(img.src); };
-    });
-
-    resetViews();
-    document.getElementById('detail-view').classList.remove('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function buildDetailHTML(item, type) {
-    var html = '';
-
-    // Header
-    html += '<div class="detail-header">';
-    html += '<div class="detail-tag">' + esc(item.tag || type) + '</div>';
-    html += '<div class="detail-title">' + esc(item.title || '') + '</div>';
-    html += '<div class="detail-desc">' + esc(item.description || item.excerpt || '') + '</div>';
-
-    // Meta row
-    var metas = [];
-    if (item.year)   metas.push({ l: 'Ano / Year',    v: item.year });
-    if (item.client) metas.push({ l: 'Cliente / Client', v: item.client });
-    if (item.role)   metas.push({ l: 'Função / Role',  v: item.role });
-    if (item.date)   metas.push({ l: 'Data',           v: item.date });
-    if (metas.length) {
-      html += '<div class="detail-meta">';
-      metas.forEach(function(m) {
-        html += '<div class="meta-item"><div class="meta-label">' + esc(m.l) + '</div><div class="meta-value">' + esc(m.v) + '</div></div>';
-      });
-      html += '</div>';
-    }
-    html += '</div>'; // /detail-header
-
-    // Embeds
-    (item.embeds || []).forEach(function(embed) {
-      var ihtml = buildEmbedIframe(embed);
-      if (ihtml) html += '<div class="detail-embed">' + ihtml + '</div>';
-    });
-
-    // Images
-    var imgs = item.images || (item.thumb ? [item.thumb] : []);
-    if (imgs.length) {
-      var cols = imgs.length === 1 ? 'cols-1' : imgs.length === 2 ? 'cols-2' : 'cols-3';
-      html += '<div class="detail-images"><div class="detail-images-grid ' + cols + '">';
-      imgs.forEach(function(src) {
-        html += '<img class="detail-img" src="' + esc(src) + '" alt="" onerror="this.src=\\'https://via.placeholder.com/800x600\\'">';
-      });
-      html += '</div></div>';
-    }
-
-    // Body text
-    if (item.text || item.content) {
-      html += '<div class="detail-text">' + esc(item.text || item.content || '') + '</div>';
-    }
-
-    return html;
-  }
-
-  // ============================================================
-  // LIGHTBOX
-  // ============================================================
-  window.openLightbox = function(src) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox').classList.add('open');
-  };
-  window.closeLightbox = function() {
-    document.getElementById('lightbox').classList.remove('open');
-  };
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox();
+function renderAllProjects(){
+  var grid=document.getElementById('all-projects-grid');if(!grid)return;grid.innerHTML='';
+  var list=(APP.data.projects||[]).filter(function(p){return!p.nda;}).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
+  var countEl=document.getElementById('all-proj-count');if(countEl)countEl.textContent=list.length>0?String(list.length).padStart(2,'0'):'—';
+  list.forEach(function(p){
+    if(!p.published&&!APP.isOpen)return;
+    var card=document.createElement('div');card.className='project-card';
+    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/400x300')+'" alt="'+esc(p.title||'')+'" onerror="this.src=\'https://via.placeholder.com/400x300\'">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
+    card.onclick=function(){APP.previousView='projects';openDetail(p.id,'project');};
+    grid.appendChild(card);
   });
+}
+function renderNDAProjects(){
+  var grid=document.getElementById('nda-projects-grid');if(!grid)return;grid.innerHTML='';
+  var list=(APP.data.projects||[]).filter(function(p){return p.nda;}).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
+  var countEl=document.getElementById('nda-proj-count');if(countEl)countEl.textContent=list.length>0?String(list.length).padStart(2,'0'):'—';
+  list.forEach(function(p){
+    if(!p.published&&!APP.isOpen)return;
+    var card=document.createElement('div');card.className='project-card';
+    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/400x300')+'" alt="'+esc(p.title||'')+'" onerror="this.src=\'https://via.placeholder.com/400x300\'">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
+    card.onclick=function(){APP.previousView='nda';openDetail(p.id,'project');};
+    grid.appendChild(card);
+  });
+}
+function renderMeta(){
+  var m=APP.data.meta||{};
+  var bannerImg=document.getElementById('banner-img');if(bannerImg&&m.banner)bannerImg.src=m.banner;
+  var strip=document.getElementById('home-media-strip');if(!strip)return;strip.innerHTML='';
+  var items=m.homeItems||[];var i=0;
+  while(i<items.length){
+    var item=items[i];
+    if(item.type==='image'){
+      var rowImgs=[];
+      while(i<items.length&&items[i].type==='image'&&rowImgs.length<3){rowImgs.push(items[i]);i++;}
+      var row=document.createElement('div');row.className='home-image-row';
+      var aspect=rowImgs.length===1?'aspect-ratio:16/7':'aspect-ratio:4/3';
+      rowImgs.forEach(function(img){
+        var cell=document.createElement('div');cell.className='home-image-cell';cell.style.cssText=aspect;
+        var el=document.createElement('img');el.src=img.src||'';el.alt='';el.onerror=function(){this.style.display='none';};el.onclick=function(){openLightbox(img.src);};
+        cell.appendChild(el);row.appendChild(cell);
+      });strip.appendChild(row);
+    }else{
+      var embedSrc='';
+      if(item.type==='youtube')     embedSrc='https://www.youtube.com/embed/'+item.id+'?rel=0';
+      if(item.type==='vimeo')       embedSrc='https://player.vimeo.com/video/'+item.id+'?color=C1440E&title=0&byline=0';
+      if(item.type==='speakerdeck') embedSrc='https://speakerdeck.com/player/'+item.id;
+      if(embedSrc){
+        var wrap=document.createElement('div');wrap.className='home-media-item';
+        var iframe=document.createElement('iframe');iframe.src=embedSrc;iframe.setAttribute('allowfullscreen','');iframe.setAttribute('allow','autoplay; fullscreen');
+        wrap.appendChild(iframe);strip.appendChild(wrap);
+      }i++;
+    }
+  }
+}
+function renderProjects(){
+  var grid=document.getElementById('public-grid');if(!grid)return;grid.innerHTML='';
+  var list=(APP.data.projects||[]).filter(function(p){return!p.nda;}).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
+  list.forEach(function(p){
+    if(!p.published&&!APP.isOpen)return;
+    var card=document.createElement('div');card.className='project-card';
+    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/400x300')+'" alt="'+esc(p.title||'')+'" onerror="this.src=\'https://via.placeholder.com/400x300\'">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
+    card.onclick=function(){openDetail(p.id,'project');};
+    grid.appendChild(card);
+  });
+}
+function renderSketches(){
+  var grid=document.getElementById('sketch-grid');if(!grid)return;grid.innerHTML='';
+  (APP.data.sketches||[]).forEach(function(s){
+    var item=document.createElement('div');item.className='sketch-item';
+    var img=document.createElement('img');img.src=s.src||'https://via.placeholder.com/200x200';img.alt=s.alt||'';img.onerror=function(){this.src='https://via.placeholder.com/200x200';};img.onclick=function(){openLightbox(img.src);};
+    item.appendChild(img);grid.appendChild(item);
+  });
+}
+function renderBlog(){
+  var grid=document.getElementById('blog-grid-container');if(!grid)return;grid.innerHTML='';
+  var list=(APP.data.blog||[]).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
+  list.forEach(function(p){
+    if(!p.published&&!APP.isOpen)return;
+    var item=document.createElement('div');item.className='blog-item';
+    item.innerHTML='<span class="blog-date">'+esc(p.date||'')+'</span>'+(p.thumb?'<img class="blog-thumb" src="'+esc(p.thumb)+'" alt="" onerror="this.style.display=\'none\'">':'')+'<div class="blog-title">'+esc(p.title||'Sem título')+(!p.published?' <span class="draft-pill">draft</span>':'')+'</div><div class="blog-excerpt">'+esc(p.excerpt||'')+'</div>';
+    item.onclick=function(){APP.previousView='blog';openDetail(p.id,'blog');};
+    grid.appendChild(item);
+  });
+}
+function renderGallery(){
+  var container=document.getElementById('art-gallery-container');if(!container)return;container.innerHTML='';
+  (APP.data.gallery||[]).forEach(function(a){
+    var div=document.createElement('div');div.className='art-item';
+    div.innerHTML='<img class="art-img" src="'+esc(a.src||'https://via.placeholder.com/400x500')+'" alt="'+esc(a.caption||'')+'" onerror="this.src=\'https://via.placeholder.com/400x500\'"><div class="art-caption">'+esc(a.caption||'')+'</div>';
+    div.querySelector('.art-img').onclick=function(){openLightbox(a.src);};
+    container.appendChild(div);
+  });
+}
+function updateCounts(){
+  [{id:'proj-count',items:(APP.data.projects||[]).filter(function(p){return p.published||APP.isOpen;})},
+   {id:'sketch-count',items:APP.data.sketches||[]},
+   {id:'blog-count',items:(APP.data.blog||[]).filter(function(p){return p.published||APP.isOpen;})}
+  ].forEach(function(s){var el=document.getElementById(s.id);if(el)el.textContent=s.items.length>0?String(s.items.length).padStart(2,'0'):'—';});
+}
 
+// ============================================================
+// DETAIL
+// ============================================================
+function openDetail(id,type){
+  var item=null;
+  if(type==='project')item=(APP.data.projects||[]).find(function(p){return p.id===id;});
+  if(type==='blog')   item=(APP.data.blog||[]).find(function(p){return p.id===id;});
+  if(!item)return;
+  var contentDiv=document.getElementById('detail-content');
+  contentDiv.innerHTML=buildDetailHTML(item,type);
+  contentDiv.querySelectorAll('.detail-img').forEach(function(img){img.onclick=function(){openLightbox(img.src);};});
+  resetViews();document.getElementById('detail-view').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function buildDetailHTML(item,type){
+  var html='<div class="detail-header">';
+  html+='<div class="detail-tag">'+esc(item.tag||type)+'</div>';
+  html+='<div class="detail-title">'+esc(item.title||'')+'</div>';
+  html+='<div class="detail-desc">'+esc(item.description||item.excerpt||'')+'</div>';
+  var metas=[];
+  if(item.year)   metas.push({l:'Ano / Year',v:item.year});
+  if(item.client) metas.push({l:'Cliente / Client',v:item.client});
+  if(item.role)   metas.push({l:'Função / Role',v:item.role});
+  if(item.date)   metas.push({l:'Data',v:item.date});
+  if(metas.length){html+='<div class="detail-meta">';metas.forEach(function(m){html+='<div class="meta-item"><div class="meta-label">'+esc(m.l)+'</div><div class="meta-value">'+esc(m.v)+'</div></div>';});html+='</div>';}
+  html+='</div>';
+  (item.embeds||[]).forEach(function(embed){var ih=buildEmbedIframe(embed);if(ih)html+='<div class="detail-embed">'+ih+'</div>';});
+  var imgs=item.images||(item.thumb?[item.thumb]:[]);
+  if(imgs.length){var cols=imgs.length===1?'cols-1':imgs.length===2?'cols-2':'cols-3';html+='<div class="detail-images"><div class="detail-images-grid '+cols+'">';imgs.forEach(function(src){html+='<img class="detail-img" src="'+esc(src)+'" alt="" onerror="this.src=\'https://via.placeholder.com/800x600\'">';});html+='</div></div>';}
+  if(item.text||item.content)html+='<div class="detail-text">'+esc(item.text||item.content||'')+'</div>';
+  return html;
+}
 
-  // ============================================================
-  // ISSUE DATE
-  // ============================================================
-  var dateEl = document.getElementById('issue-date');
-  if (dateEl) dateEl.textContent = new Date().toLocaleDateString('pt-BR', { year:'numeric', month:'long' });
+// ============================================================
+// LIGHTBOX
+// ============================================================
+window.openLightbox=function(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open');};
+window.closeLightbox=function(){document.getElementById('lightbox').classList.remove('open');};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLightbox();closeEditor();}});
 
-  // ===========================`;
+// ============================================================
+// EDITOR
+// ============================================================
+window.toggleEditor=function(){APP.isOpen?closeEditor():openEditor();};
+window.openEditor=function(){APP.isOpen=true;document.getElementById('editor-panel').classList.add('open');renderEdBody();renderProjects();renderBlog();updateCounts();};
+window.closeEditor=function(){APP.isOpen=false;APP.editingId=null;document.getElementById('editor-panel').classList.remove('open');renderProjects();renderBlog();updateCounts();};
+window.edTab=function(tab){
+  APP.activeTab=tab;APP.editingId=null;
+  document.querySelectorAll('.ed-tab').forEach(function(t){t.classList.remove('active');});
+  var tabNames=['projects','gallery','sketches','blog','texts','site'];
+  var idx=tabNames.indexOf(tab);
+  var tabs=document.querySelectorAll('.ed-tab');
+  if(tabs[idx])tabs[idx].classList.add('active');
+  renderEdBody();
+};
+function renderEdBody(){
+  var body=document.getElementById('ed-body');if(!body)return;
+  if(APP.activeTab==='projects') body.innerHTML=buildProjectsTab();
+  if(APP.activeTab==='gallery')  body.innerHTML=buildGalleryTab();
+  if(APP.activeTab==='sketches') body.innerHTML=buildSketchesTab();
+  if(APP.activeTab==='blog')     body.innerHTML=buildBlogTab();
+  if(APP.activeTab==='texts')    body.innerHTML=buildTextsTab();
+  if(APP.activeTab==='site')     body.innerHTML=buildSiteTab();
+  attachUploadListeners();
+}
 
-  window.exportForGit = function() {
-    // Stamp current data into the template
-    var dataTag = '<script>window.__PORTFOLIO_DATA__ = ' + JSON.stringify(APP.data) + ';<\/script>';
-    var html = PUB_TEMPLATE.replace('  <!-- __BAKED_DATA__ -->', dataTag);
+// ============================================================
+// TEXTS TAB — edit every static string on the site
+// ============================================================
+function buildTextsTab(){
+  var t=APP.data.texts||{};
+  var html='';
 
-    // Download as index.html
-    var blob = new Blob([html], { type: 'text/html' });
-    var url  = URL.createObjectURL(blob);
-    var a    = document.createElement('a');
-    a.href     = url;
-    a.download = 'index.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    toast('✓ index.html baixado — pronto para git push');
-    setSyncStatus('Exported · ' + new Date().toLocaleString(\'pt-BR\'), \'#2D5A8E\');
-  };
+  function row(label,key,hint){
+    var val=esc(t[key]!==undefined?t[key]:(DEFAULT_TEXTS[key]||''));
+    return '<div class="form-row"><label class="form-label">'+label+'</label><input class="form-input" value="'+val+'" oninput="txtSet(\''+key+'\',this.value)">'+(hint?'<div class="form-hint">'+hint+'</div>':'')+'</div>';
+  }
+  function rowTA(label,key,hint){
+    var val=esc(t[key]!==undefined?t[key]:(DEFAULT_TEXTS[key]||''));
+    return '<div class="form-row"><label class="form-label">'+label+'</label><textarea class="form-textarea" style="min-height:60px" oninput="txtSet(\''+key+'\',this.value)">'+val+'</textarea>'+(hint?'<div class="form-hint">'+hint+'</div>':'')+'</div>';
+  }
 
-  // ============================================================
-  // ISSUE DATE
-  // ============================================================
-  var dateEl = document.getElementById('issue-date');
-  if (dateEl) dateEl.textContent = new Date().toLocaleDateString('pt-BR', { year:'numeric', month:'long' });
+  // ── Header & Global
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Header &amp; Global</div>';
+  html+=row('Site Name','siteName');
+  html+=row('Site Role / Subtitle','siteRole');
+  html+=row('Issue Bar Label','issueLabel');
+  html+='</div>';
 
-  // ===========================
+  // ── Navigation
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Navigation</div>';
+  html+=row('Home','navHome');
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Projects','navProjectsPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Projects','navProjectsEn')+'</div>';
+  html+='</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Gallery','navGalleryPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Gallery','navGalleryEn')+'</div>';
+  html+='</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Blog','navBlogPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Blog','navBlogEn')+'</div>';
+  html+='</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Contact','navContactPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Contact','navContactEn')+'</div>';
+  html+='</div>';
+  html+='</div>';
+
+  // ── Home Page
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Home Page</div>';
+  html+=row('"Selected Work" section label','homeWorkLabel');
+  html+=row('"Sketchbook" section label','homeSketchLabel');
+  html+='</div>';
+
+  // ── Projects Page
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Projects Page</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> All Projects heading','allProjectsPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> All Projects heading','allProjectsEn')+'</div>';
+  html+='</div>';
+  html+='</div>';
+
+  // ── NDA Page
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">NDA Page</div>';
+  html+=row('Gate Title','ndaTitle');
+  html+=row('Gate Subtitle','ndaSubtitle');
+  html+=row('Enter Button','ndaBtn');
+  html+=row('Section Label (after unlock)','ndaSectionLabel');
+  html+='</div>';
+
+  // ── Gallery Page
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Gallery Page</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Title','galleryTitlePt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Title','galleryTitleEn')+'</div>';
+  html+='</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Subtitle','gallerySubPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Subtitle','gallerySubEn')+'</div>';
+  html+='</div>';
+  html+='</div>';
+
+  // ── Blog / Notes
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Blog / Notes Page</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Label','blogLabelPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Label','blogLabelEn')+'</div>';
+  html+='</div>';
+  html+='</div>';
+
+  // ── Detail / Back
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Detail View</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> Back button','backPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> Back button','backEn')+'</div>';
+  html+='</div>';
+  html+='</div>';
+
+  // ── Contact Page
+  html+='<div class="ed-section">';
+  html+='<div class="ed-section-heading">Contact Page</div>';
+  html+=rowTA('<span class="lang-badge">PT</span> Main Heading','contactHeadingPt','Use \\n for line breaks');
+  html+=rowTA('<span class="lang-badge">EN</span> Main Heading','contactHeadingEn','Use \\n for line breaks');
+  html+=rowTA('<span class="lang-badge">PT</span> Body Text','contactBodyPt');
+  html+=rowTA('<span class="lang-badge">EN</span> Body Text','contactBodyEn');
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('Email address','contactEmail')+'</div>';
+  html+='<div>'+row('CV / Resume link','contactCvHref','e.g. cv.pdf or full URL')+'</div>';
+  html+='</div>';
+  html+='<div class="form-row-2">';
+  html+='<div>'+row('<span class="lang-badge">PT</span> CV button','contactCvPt')+'</div>';
+  html+='<div>'+row('<span class="lang-badge">EN</span> CV button','contactCvEn')+'</div>';
+  html+='</div>';
+  // Photo
+  html+='<div class="form-row"><label class="form-label">Photo URL</label><input class="form-input" value="'+esc(t.contactImgSrc||DEFAULT_TEXTS.contactImgSrc)+'" oninput="txtSet(\'contactImgSrc\',this.value)">';
+  html+='</div>';
+  // Upload zone for contact photo
+  html+=uploadZoneHTML('contactphoto','Upload contact photo');
+  if(t.contactImgSrc) html+='<img class="thumb-preview" src="'+esc(t.contactImgSrc)+'" onerror="this.style.display=\'none\'" style="margin-top:6px;aspect-ratio:3/4;object-fit:cover;max-height:160px;width:auto">';
+  // Socials
+  html+='<div style="margin-top:16px;" class="ed-section-heading">Social Links</div>';
+  html+='<div class="form-row-2"><div>'+row('Link 1 Label','social1Label')+'</div><div>'+row('Link 1 URL','social1Href')+'</div></div>';
+  html+='<div class="form-row-2"><div>'+row('Link 2 Label','social2Label')+'</div><div>'+row('Link 2 URL','social2Href')+'</div></div>';
+  html+='<div class="form-row-2"><div>'+row('Link 3 Label','social3Label')+'</div><div>'+row('Link 3 URL','social3Href')+'</div></div>';
+  html+='</div>';
+
+  return html;
+}
+
+window.txtSet = function(key, value){
+  if(!APP.data.texts) APP.data.texts={};
+  APP.data.texts[key]=value;
+  renderTexts();
+};
+
+// ============================================================
+// IMAGE UPLOAD HELPERS
+// ============================================================
+function uploadZoneHTML(zoneId,hint){
+  return '<div class="img-upload-zone" id="zone-'+zoneId+'"><input type="file" accept="image/*" multiple id="file-'+zoneId+'"><div class="img-upload-hint"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span><strong>Clique ou arraste</strong> imagens aqui</span>'+(hint?'<span>'+hint+'</span>':'')+'</div></div>';
+}
+function imgPreviewStrip(srcs,removeFn){
+  if(!srcs||!srcs.length)return'';
+  var html='<div class="img-preview-strip" id="preview-'+removeFn+'">';
+  srcs.forEach(function(src,i){html+='<div class="img-preview-item"><img src="'+esc(src)+'" onerror="this.src=\'https://via.placeholder.com/72x56\'"><button class="img-remove" onclick="'+removeFn+'('+i+')" title="Remover">✕</button></div>';});
+  html+='</div>';return html;
+}
+function attachUploadListeners(){
+  document.querySelectorAll('.img-upload-zone').forEach(function(zone){
+    var zoneId=zone.id.replace('zone-','');
+    var fileInput=zone.querySelector('input[type=file]');
+    if(!fileInput||zone._wired)return;zone._wired=true;
+    zone.addEventListener('dragover',function(e){e.preventDefault();zone.classList.add('drag-over');});
+    zone.addEventListener('dragleave',function(){zone.classList.remove('drag-over');});
+    zone.addEventListener('drop',function(e){e.preventDefault();zone.classList.remove('drag-over');handleFiles(zoneId,Array.from(e.dataTransfer.files).filter(function(f){return f.type.startsWith('image/');}));});
+    fileInput.addEventListener('change',function(){handleFiles(zoneId,Array.from(fileInput.files));fileInput.value='';});
+  });
+}
+function handleFiles(zoneId,files){
+  if(!files.length)return;
+  if(zoneId==='banner'){readFile(files[0]).then(function(d){APP.data.meta.banner=d;renderMeta();renderEdBody();});}
+  else if(zoneId==='contactphoto'){readFile(files[0]).then(function(d){if(!APP.data.texts)APP.data.texts={};APP.data.texts.contactImgSrc=d;renderTexts();renderEdBody();});}
+  else if(zoneId.startsWith('thumb-')){var id=zoneId.slice(6);readFile(files[0]).then(function(d){var item=findItem(id);if(item){item.thumb=d;renderAll();renderEdBody();}});}
+  else if(zoneId.startsWith('images-')){var id=zoneId.slice(7);Promise.all(files.map(readFile)).then(function(urls){var item=findItem(id);if(item){if(!item.images)item.images=[];item.images=item.images.concat(urls);renderAll();renderEdBody();setTimeout(function(){var f=document.getElementById('form-'+id);if(f)f.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}});}
+  else if(zoneId.startsWith('gallery-')){var id=zoneId.slice(8);Promise.all(files.map(readFile)).then(function(urls){if(id==='new'){urls.forEach(function(url){if(!APP.data.gallery)APP.data.gallery=[];APP.data.gallery.push({id:uid(),src:url,caption:''}); });}else{var item=(APP.data.gallery||[]).find(function(x){return x.id===id;});if(item)item.src=urls[0];}renderGallery();renderEdBody();});}
+  else if(zoneId.startsWith('sketch-')){var id=zoneId.slice(7);Promise.all(files.map(readFile)).then(function(urls){if(id==='new'){urls.forEach(function(url){if(!APP.data.sketches)APP.data.sketches=[];APP.data.sketches.push({id:uid(),src:url,alt:''});});}else{var item=(APP.data.sketches||[]).find(function(x){return x.id===id;});if(item)item.src=urls[0];}renderSketches();renderEdBody();});}
+  else if(zoneId.startsWith('homeitem-')){var idx=parseInt(zoneId.slice(9),10);readFile(files[0]).then(function(d){var list=APP.data.meta&&APP.data.meta.homeItems;if(list&&list[idx]){list[idx].src=d;renderMeta();renderEdBody();}});}
+  else if(zoneId.startsWith('blogthumb-')){var id=zoneId.slice(10);readFile(files[0]).then(function(d){var item=(APP.data.blog||[]).find(function(x){return x.id===id;});if(item){item.thumb=d;renderBlog();renderEdBody();}});}
+}
+function findItem(id){return(APP.data.projects||[]).find(function(x){return x.id===id;})||(APP.data.blog||[]).find(function(x){return x.id===id;});}
+
+// ============================================================
+// PROJECTS TAB
+// ============================================================
+function buildProjectsTab(){
+  var projects=(APP.data.projects||[]).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
+  var html='<div class="ed-section"><div class="item-list">';
+  projects.forEach(function(p){
+    var active=APP.editingId===p.id?' active-edit':'';
+    html+='<div class="item-row'+active+'" onclick="edEditProject(\''+p.id+'\')"><img class="item-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/42x32')+'" onerror="this.src=\'https://via.placeholder.com/42x32\'"><div class="item-info"><div class="item-title">'+esc(p.title||'Sem título')+'</div><div class="item-sub">'+esc(p.tag||'—')+(p.year?' · '+p.year:'')+(p.images&&p.images.length?' · '+p.images.length+' imgs':'')+'</div></div>';
+    if(!p.published)html+='<span class="draft-pill">draft</span>';
+    if(p.nda)html+='<span class="draft-pill" style="background:var(--ink);color:var(--white)">nda</span>';
+    html+='<div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="projMove(\''+p.id+'\',-1)">▲</button><button class="ord-btn" onclick="projMove(\''+p.id+'\',1)">▼</button><button class="del-btn" onclick="projDelete(\''+p.id+'\')">✕</button></div></div>';
+  });
+  html+='</div><button class="add-btn" onclick="projNew()">+ Novo Projeto</button></div>';
+  if(APP.editingId){var p=(APP.data.projects||[]).find(function(x){return x.id===APP.editingId;});if(p)html+=buildProjectForm(p);}
+  return html;
+}
+function buildProjectForm(p){
+  var embedsHtml='';
+  (p.embeds||[]).forEach(function(e,i){
+    embedsHtml+='<div class="embed-row"><select class="form-select" style="width:110px;padding:8px" onchange="projEmbedField(\''+p.id+'\','+i+',\'type\',this.value)">';
+    ['youtube','vimeo','speakerdeck'].forEach(function(t){embedsHtml+='<option value="'+t+'"'+(e.type===t?' selected':'')+'>'+t+'</option>';});
+    embedsHtml+='</select><input class="form-input" placeholder="Video ID" value="'+esc(e.id||'')+'" oninput="projEmbedField(\''+p.id+'\','+i+',\'id\',this.value)"><button class="embed-row-del" onclick="projEmbedRemove(\''+p.id+'\','+i+')">✕</button></div>';
+  });
+  var html='<div class="edit-form" id="form-'+p.id+'"><div class="edit-form-title">Editando projeto</div>';
+  html+='<div class="form-row-2"><div class="form-row"><label class="form-label">Título</label><input class="form-input" value="'+esc(p.title||'')+'" oninput="projField(\''+p.id+'\',\'title\',this.value)"></div><div class="form-row"><label class="form-label">Tag</label><input class="form-input" value="'+esc(p.tag||'')+'" oninput="projField(\''+p.id+'\',\'tag\',this.value)"></div></div>';
+  html+='<div class="form-row-3"><div class="form-row"><label class="form-label">Ano</label><input class="form-input" value="'+esc(p.year||'')+'" oninput="projField(\''+p.id+'\',\'year\',this.value)"></div><div class="form-row"><label class="form-label">Cliente</label><input class="form-input" value="'+esc(p.client||'')+'" oninput="projField(\''+p.id+'\',\'client\',this.value)"></div><div class="form-row"><label class="form-label">Role</label><input class="form-input" value="'+esc(p.role||'')+'" oninput="projField(\''+p.id+'\',\'role\',this.value)"></div></div>';
+  html+='<div class="form-row"><label class="form-label">Descrição</label><textarea class="form-textarea" oninput="projField(\''+p.id+'\',\'description\',this.value)">'+esc(p.description||'')+'</textarea></div>';
+  html+='<div class="form-row"><label class="form-label">Texto / Body</label><textarea class="form-textarea" style="min-height:110px" oninput="projField(\''+p.id+'\',\'text\',this.value)">'+esc(p.text||'')+'</textarea></div>';
+  html+='<div class="form-row"><label class="form-label">Thumbnail</label>'+uploadZoneHTML('thumb-'+p.id,'Imagem de capa');
+  if(p.thumb)html+='<img class="thumb-preview" src="'+esc(p.thumb)+'" onerror="this.style.display=\'none\'" style="margin-top:6px">';
+  html+='</div>';
+  html+='<div class="form-row"><label class="form-label">Imagens</label>'+uploadZoneHTML('images-'+p.id,'Múltiplas imagens')+imgPreviewStrip(p.images,'projImgRemove_'+p.id)+'</div>';
+  (function(pid){window['projImgRemove_'+pid]=function(idx){var pr=(APP.data.projects||[]).find(function(x){return x.id===pid;});if(pr&&pr.images){pr.images.splice(idx,1);renderAll();renderEdBody();}};;})(p.id);
+  html+='<div class="form-row"><label class="form-label">Embeds</label><div class="embed-list">'+embedsHtml+'</div><button class="add-btn btn-sm" style="margin-top:4px" onclick="projEmbedAdd(\''+p.id+'\')">+ Embed</button></div>';
+  html+='<div class="form-row-2"><div class="form-row"><div class="toggle-row"><label class="toggle"><input type="checkbox"'+(p.published?' checked':'')+' onchange="projField(\''+p.id+'\',\'published\',this.checked)"><span class="slider"></span></label><span class="form-label" style="margin:0">Publicado</span></div></div><div class="form-row"><div class="toggle-row"><label class="toggle"><input type="checkbox"'+(p.nda?' checked':'')+' onchange="projField(\''+p.id+'\',\'nda\',this.checked)"><span class="slider"></span></label><span class="form-label" style="margin:0">NDA</span></div></div></div>';
+  html+='<div class="form-actions"><button class="btn-save" onclick="projDone()">✓ Fechar</button><button class="btn-cancel" onclick="projDone()">Cancelar</button><button class="btn-del" onclick="projDelete(\''+p.id+'\')">Excluir</button></div></div>';
+  return html;
+}
+window.edEditProject=function(id){APP.editingId=APP.editingId===id?null:id;renderEdBody();if(APP.editingId)setTimeout(function(){var f=document.getElementById('form-'+id);if(f)f.scrollIntoView({behavior:'smooth',block:'start'});},80);};
+window.projNew=function(){var p={id:uid(),title:'Novo Projeto',tag:'',thumb:'',description:'',text:'',year:String(new Date().getFullYear()),client:'',role:'',embeds:[],images:[],published:false,order:(APP.data.projects||[]).length};if(!APP.data.projects)APP.data.projects=[];APP.data.projects.push(p);APP.editingId=p.id;renderEdBody();setTimeout(function(){var f=document.getElementById('form-'+p.id);if(f)f.scrollIntoView({behavior:'smooth',block:'start'});},80);};
+window.projField=function(id,field,value){var p=(APP.data.projects||[]).find(function(x){return x.id===id;});if(p){p[field]=value;if(['thumb','title','tag','published'].indexOf(field)!==-1){renderProjects();updateCounts();}}};
+window.projDone=function(){APP.editingId=null;renderAll();renderEdBody();};
+window.projDelete=function(id){if(!confirm('Excluir este projeto?'))return;APP.data.projects=(APP.data.projects||[]).filter(function(x){return x.id!==id;});APP.editingId=null;renderProjects();renderEdBody();updateCounts();};
+window.projMove=function(id,dir){var sorted=(APP.data.projects||[]).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});var idx=sorted.findIndex(function(x){return x.id===id;});var si=idx+dir;if(si<0||si>=sorted.length)return;var tmp=sorted[idx].order;sorted[idx].order=sorted[si].order;sorted[si].order=tmp;sorted.forEach(function(p,i){p.order=i;});renderProjects();renderEdBody();};
+window.projEmbedAdd=function(id){var p=(APP.data.projects||[]).find(function(x){return x.id===id;});if(!p)return;if(!p.embeds)p.embeds=[];p.embeds.push({type:'youtube',id:''});renderEdBody();setTimeout(function(){var f=document.getElementById('form-'+id);if(f)f.scrollIntoView({behavior:'smooth',block:'nearest'});},80);};
+window.projEmbedField=function(id,idx,field,value){var p=(APP.data.projects||[]).find(function(x){return x.id===id;});if(p&&p.embeds&&p.embeds[idx])p.embeds[idx][field]=value;};
+window.projEmbedRemove=function(id,idx){var p=(APP.data.projects||[]).find(function(x){return x.id===id;});if(p&&p.embeds){p.embeds.splice(idx,1);renderEdBody();}};
+
+// ============================================================
+// GALLERY TAB
+// ============================================================
+function buildGalleryTab(){
+  var list=APP.data.gallery||[];var html='<div class="ed-section"><div class="item-list">';
+  list.forEach(function(a,i){
+    var active=APP.editingId===a.id?' active-edit':'';
+    html+='<div class="item-row'+active+'" onclick="edEditGallery(\''+a.id+'\')"><img class="item-thumb" src="'+esc(a.src||'https://via.placeholder.com/42x32')+'" onerror="this.src=\'https://via.placeholder.com/42x32\'"><div class="item-info"><div class="item-title">'+esc(a.caption||'Sem legenda')+'</div></div><div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="galleryMove('+i+',-1)">▲</button><button class="ord-btn" onclick="galleryMove('+i+',1)">▼</button><button class="del-btn" onclick="galleryDelete(\''+a.id+'\')">✕</button></div></div>';
+    if(APP.editingId===a.id){html+='<div class="edit-form" id="form-'+a.id+'"><div class="edit-form-title">Editando imagem</div><div class="form-row"><label class="form-label">Imagem</label>'+uploadZoneHTML('gallery-'+a.id,'Clique ou arraste');if(a.src)html+='<img class="thumb-preview" src="'+esc(a.src)+'" onerror="this.style.display=\'none\'" style="margin-top:6px">';html+='</div><div class="form-row"><label class="form-label">URL externo</label><input class="form-input" value="'+esc(a.src||'')+'" placeholder="https://..." oninput="galleryField(\''+a.id+'\',\'src\',this.value)"></div><div class="form-row"><label class="form-label">Legenda</label><input class="form-input" value="'+esc(a.caption||'')+'" oninput="galleryField(\''+a.id+'\',\'caption\',this.value)"></div><div class="form-actions"><button class="btn-save" onclick="APP.editingId=null;renderGallery();renderEdBody()">✓ Ok</button></div></div>';}
+  });
+  html+='</div><div class="form-row" style="margin-top:14px"><label class="form-label">Adicionar imagens</label>'+uploadZoneHTML('gallery-new','Múltiplas imagens de uma vez')+'</div></div>';
+  return html;
+}
+window.edEditGallery=function(id){APP.editingId=APP.editingId===id?null:id;renderEdBody();};
+window.galleryField=function(id,field,value){var a=(APP.data.gallery||[]).find(function(x){return x.id===id;});if(a){a[field]=value;renderGallery();}};
+window.galleryDelete=function(id){if(!confirm('Excluir?'))return;APP.data.gallery=(APP.data.gallery||[]).filter(function(x){return x.id!==id;});APP.editingId=null;renderGallery();renderEdBody();};
+window.galleryMove=function(idx,dir){var list=APP.data.gallery||[];var si=idx+dir;if(si<0||si>=list.length)return;var tmp=list[idx];list[idx]=list[si];list[si]=tmp;renderGallery();renderEdBody();};
+
+// ============================================================
+// SKETCHES TAB
+// ============================================================
+function buildSketchesTab(){
+  var list=APP.data.sketches||[];var html='<div class="ed-section"><div class="item-list">';
+  list.forEach(function(s,i){
+    var active=APP.editingId===s.id?' active-edit':'';
+    html+='<div class="item-row'+active+'" onclick="edEditSketch(\''+s.id+'\')"><img class="item-thumb-sq" src="'+esc(s.src||'https://via.placeholder.com/32x32')+'" onerror="this.src=\'https://via.placeholder.com/32x32\'" style="aspect-ratio:1"><div class="item-info"><div class="item-title">'+esc(s.alt||'Sketch '+(i+1))+'</div></div><div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="sketchMove('+i+',-1)">▲</button><button class="ord-btn" onclick="sketchMove('+i+',1)">▼</button><button class="del-btn" onclick="sketchDelete(\''+s.id+'\')">✕</button></div></div>';
+    if(APP.editingId===s.id){html+='<div class="edit-form" id="form-'+s.id+'"><div class="edit-form-title">Editando sketch</div><div class="form-row"><label class="form-label">Imagem</label>'+uploadZoneHTML('sketch-'+s.id,'Substituir imagem');if(s.src)html+='<img class="thumb-preview" src="'+esc(s.src)+'" onerror="this.style.display=\'none\'" style="margin-top:6px;aspect-ratio:1;object-fit:cover;max-height:120px;width:auto">';html+='</div><div class="form-row"><label class="form-label">URL externo</label><input class="form-input" value="'+esc(s.src||'')+'" placeholder="https://..." oninput="sketchField(\''+s.id+'\',\'src\',this.value)"></div><div class="form-row"><label class="form-label">Alt text</label><input class="form-input" value="'+esc(s.alt||'')+'" oninput="sketchField(\''+s.id+'\',\'alt\',this.value)"></div><div class="form-actions"><button class="btn-save" onclick="APP.editingId=null;renderSketches();renderEdBody()">✓ Ok</button></div></div>';}
+  });
+  html+='</div><div class="form-row" style="margin-top:14px"><label class="form-label">Adicionar sketches</label>'+uploadZoneHTML('sketch-new','Múltiplas imagens de uma vez')+'</div></div>';
+  return html;
+}
+window.edEditSketch=function(id){APP.editingId=APP.editingId===id?null:id;renderEdBody();};
+window.sketchField=function(id,field,value){var s=(APP.data.sketches||[]).find(function(x){return x.id===id;});if(s){s[field]=value;renderSketches();}};
+window.sketchDelete=function(id){if(!confirm('Excluir?'))return;APP.data.sketches=(APP.data.sketches||[]).filter(function(x){return x.id!==id;});APP.editingId=null;renderSketches();renderEdBody();};
+window.sketchMove=function(idx,dir){var list=APP.data.sketches||[];var si=idx+dir;if(si<0||si>=list.length)return;var tmp=list[idx];list[idx]=list[si];list[si]=tmp;renderSketches();renderEdBody();};
+
+// ============================================================
+// BLOG TAB
+// ============================================================
+function buildBlogTab(){
+  var list=(APP.data.blog||[]).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});
+  var html='<div class="ed-section"><div class="item-list">';
+  list.forEach(function(p){
+    var active=APP.editingId===p.id?' active-edit':'';
+    html+='<div class="item-row'+active+'" onclick="edEditBlog(\''+p.id+'\')">';
+    if(p.thumb)html+='<img class="item-thumb" src="'+esc(p.thumb)+'" onerror="this.src=\'https://via.placeholder.com/42x32\'">';
+    html+='<div class="item-info"><div class="item-title">'+esc(p.title||'Sem título')+'</div><div class="item-sub">'+esc(p.date||'—')+'</div></div>';
+    if(!p.published)html+='<span class="draft-pill">draft</span>';
+    html+='<div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="blogMove(\''+p.id+'\',-1)">▲</button><button class="ord-btn" onclick="blogMove(\''+p.id+'\',1)">▼</button><button class="del-btn" onclick="blogDelete(\''+p.id+'\')">✕</button></div></div>';
+  });
+  html+='</div><button class="add-btn" onclick="blogNew()">+ Novo Post</button></div>';
+  if(APP.editingId){var p=(APP.data.blog||[]).find(function(x){return x.id===APP.editingId;});if(p)html+=buildBlogForm(p);}
+  return html;
+}
+function buildBlogForm(p){
+  var html='<div class="edit-form" id="form-'+p.id+'"><div class="edit-form-title">Editando post</div>';
+  html+='<div class="form-row-2"><div class="form-row"><label class="form-label">Título</label><input class="form-input" value="'+esc(p.title||'')+'" oninput="blogField(\''+p.id+'\',\'title\',this.value)"></div><div class="form-row"><label class="form-label">Data</label><input class="form-input" placeholder="Jan 2025" value="'+esc(p.date||'')+'" oninput="blogField(\''+p.id+'\',\'date\',this.value)"></div></div>';
+  html+='<div class="form-row"><label class="form-label">Tag</label><input class="form-input" value="'+esc(p.tag||'')+'" oninput="blogField(\''+p.id+'\',\'tag\',this.value)"></div>';
+  html+='<div class="form-row"><label class="form-label">Imagem de capa</label>'+uploadZoneHTML('blogthumb-'+p.id,'Imagem do post');if(p.thumb)html+='<img class="thumb-preview" src="'+esc(p.thumb)+'" onerror="this.style.display=\'none\'" style="margin-top:6px">';html+='</div>';
+  html+='<div class="form-row"><label class="form-label">URL da capa</label><input class="form-input" placeholder="https://..." value="'+esc(p.thumb||'')+'" oninput="blogField(\''+p.id+'\',\'thumb\',this.value)"></div>';
+  html+='<div class="form-row"><label class="form-label">Excerpt</label><textarea class="form-textarea" oninput="blogField(\''+p.id+'\',\'excerpt\',this.value)">'+esc(p.excerpt||'')+'</textarea></div>';
+  html+='<div class="form-row"><label class="form-label">Conteúdo</label><textarea class="form-textarea" style="min-height:130px" oninput="blogField(\''+p.id+'\',\'content\',this.value)">'+esc(p.content||'')+'</textarea></div>';
+  html+='<div class="form-row"><div class="toggle-row"><label class="toggle"><input type="checkbox"'+(p.published?' checked':'')+' onchange="blogField(\''+p.id+'\',\'published\',this.checked)"><span class="slider"></span></label><span class="form-label" style="margin:0">Publicado</span></div></div>';
+  html+='<div class="form-actions"><button class="btn-save" onclick="blogDone()">✓ Fechar</button><button class="btn-cancel" onclick="blogDone()">Cancelar</button><button class="btn-del" onclick="blogDelete(\''+p.id+'\')">Excluir</button></div></div>';
+  return html;
+}
+window.edEditBlog=function(id){APP.editingId=APP.editingId===id?null:id;renderEdBody();if(APP.editingId)setTimeout(function(){var f=document.getElementById('form-'+id);if(f)f.scrollIntoView({behavior:'smooth',block:'start'});},80);};
+window.blogNew=function(){var p={id:uid(),title:'Novo Post',date:'',tag:'',thumb:'',excerpt:'',content:'',published:false,order:(APP.data.blog||[]).length};if(!APP.data.blog)APP.data.blog=[];APP.data.blog.push(p);APP.editingId=p.id;renderEdBody();setTimeout(function(){var f=document.getElementById('form-'+p.id);if(f)f.scrollIntoView({behavior:'smooth',block:'start'});},80);};
+window.blogField=function(id,field,value){var p=(APP.data.blog||[]).find(function(x){return x.id===id;});if(p){p[field]=value;if(['title','published','thumb','date'].indexOf(field)!==-1){renderBlog();updateCounts();}}};
+window.blogDone=function(){APP.editingId=null;renderBlog();renderEdBody();};
+window.blogDelete=function(id){if(!confirm('Excluir este post?'))return;APP.data.blog=(APP.data.blog||[]).filter(function(x){return x.id!==id;});APP.editingId=null;renderBlog();renderEdBody();updateCounts();};
+window.blogMove=function(id,dir){var sorted=(APP.data.blog||[]).slice().sort(function(a,b){return(a.order||0)-(b.order||0);});var idx=sorted.findIndex(function(x){return x.id===id;});var si=idx+dir;if(si<0||si>=sorted.length)return;var tmp=sorted[idx].order;sorted[idx].order=sorted[si].order;sorted[si].order=tmp;sorted.forEach(function(p,i){p.order=i;});renderBlog();renderEdBody();};
+
+// ============================================================
+// SITE TAB
+// ============================================================
+function buildSiteTab(){
+  var m=APP.data.meta||{};
+  var html='<div class="ed-section"><div class="ed-section-heading">Banner</div>';
+  html+='<div class="form-row"><label class="form-label">Upload de banner</label>'+uploadZoneHTML('banner','Imagem de topo');if(m.banner)html+='<img class="meta-banner-preview" src="'+esc(m.banner)+'" onerror="this.style.display=\'none\'" style="margin-top:6px">';html+='</div>';
+  html+='<div class="form-row"><label class="form-label">URL do banner</label><input class="form-input" value="'+esc(m.banner||'')+'" placeholder="https://..." oninput="metaField(\'banner\',this.value)"></div>';
+  html+='<div style="height:16px;border-bottom:1px solid var(--rule);margin-bottom:16px;"></div>';
+  html+='<div class="ed-section-heading">NDA Password</div>';
+  html+='<div class="form-row"><label class="form-label">Senha NDA</label><input class="form-input" type="text" value="'+esc(m.ndaPassword||'nda')+'" oninput="metaField(\'ndaPassword\',this.value)"></div>';
+  html+='<div style="height:16px;border-bottom:1px solid var(--rule);margin-bottom:16px;"></div>';
+  html+='<div class="ed-section-heading">Home Media Strip</div>';
+  var items=m.homeItems||[];
+  html+='<div id="home-items-list">';
+  items.forEach(function(item,idx){
+    html+='<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--rule);">';
+    html+='<div style="font-family:var(--mono);font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--white);padding:3px 7px;margin-top:2px;flex-shrink:0;">'+esc(item.type)+'</div>';
+    if(item.type==='image'){html+='<div style="flex:1;min-width:0;">';if(item.src)html+='<img src="'+esc(item.src)+'" style="width:100%;height:48px;object-fit:cover;display:block;margin-bottom:6px" onerror="this.style.display=\'none\'">';html+=uploadZoneHTML('homeitem-'+idx,'Trocar imagem');html+='<input class="form-input" placeholder="Ou URL..." value="'+esc(item.src||'')+'" style="margin-top:6px" oninput="homeItemField('+idx+',\'src\',this.value)">';html+='</div>';}
+    else{html+='<input class="form-input" placeholder="ID do vídeo/deck" value="'+esc(item.id||'')+'" style="flex:1" oninput="homeItemField('+idx+',\'id\',this.value)">';}
+    html+='<div style="display:flex;flex-direction:column;gap:3px;flex-shrink:0;"><button class="ord-btn" onclick="homeItemMove('+idx+',-1)">▲</button><button class="ord-btn" onclick="homeItemMove('+idx+',1)">▼</button><button class="del-btn" onclick="homeItemRemove('+idx+')">✕</button></div></div>';
+  });
+  html+='</div><div style="display:flex;gap:8px;margin-top:4px;"><button class="add-btn" style="flex:1" onclick="homeItemAdd(\'youtube\')">+ YouTube</button><button class="add-btn" style="flex:1" onclick="homeItemAdd(\'speakerdeck\')">+ SpeakerDeck</button><button class="add-btn" style="flex:1" onclick="homeItemAdd(\'image\')">+ Imagem</button></div>';
+  html+='<div class="form-actions"><button class="btn-save" onclick="metaSave()">✓ Aplicar</button></div></div>';
+  return html;
+}
+window.metaField=function(field,value){if(!APP.data.meta)APP.data.meta={};APP.data.meta[field]=value;renderMeta();};
+window.homeItemAdd=function(type){if(!APP.data.meta)APP.data.meta={};if(!APP.data.meta.homeItems)APP.data.meta.homeItems=[];APP.data.meta.homeItems.push(type==='image'?{type:'image',src:''}:{type:type,id:''});renderMeta();renderEdBody();setTimeout(function(){var el=document.getElementById('home-items-list');if(el&&el.lastElementChild)el.lastElementChild.scrollIntoView({behavior:'smooth',block:'nearest'});},80);};
+window.homeItemRemove=function(idx){if(!APP.data.meta||!APP.data.meta.homeItems)return;APP.data.meta.homeItems.splice(idx,1);renderMeta();renderEdBody();};
+window.homeItemMove=function(idx,dir){var list=APP.data.meta&&APP.data.meta.homeItems;if(!list)return;var si=idx+dir;if(si<0||si>=list.length)return;var tmp=list[idx];list[idx]=list[si];list[si]=tmp;renderMeta();renderEdBody();};
+window.homeItemField=function(idx,field,value){var list=APP.data.meta&&APP.data.meta.homeItems;if(!list||!list[idx])return;list[idx][field]=value;renderMeta();};
+window.metaSave=function(){renderMeta();toast('✓ Site atualizado');};
+
+// ============================================================
+// INIT
+// ============================================================
+var dateEl=document.getElementById('issue-date');
+if(dateEl)dateEl.textContent=new Date().toLocaleDateString('pt-BR',{year:'numeric',month:'long'});
+if(window.__PORTFOLIO_DATA__){
+  var d=window.__PORTFOLIO_DATA__;
+  if(d.projects) APP.data.projects=d.projects;
+  if(d.blog)     APP.data.blog=d.blog;
+  if(d.gallery)  APP.data.gallery=d.gallery;
+  if(d.sketches) APP.data.sketches=d.sketches;
+  if(d.meta)     APP.data.meta=Object.assign({},APP.data.meta,d.meta);
+  if(d.texts)    APP.data.texts=Object.assign({},DEFAULT_TEXTS,d.texts);
+}
+renderAll();
+
+})();
+</script>
+</body>
+</html>
