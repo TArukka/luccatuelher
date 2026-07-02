@@ -267,7 +267,8 @@
     <div class="ed-sync">
       <button class="sync-btn" onclick="fbLoad()">↓ Load</button>
       <button class="sync-btn primary" onclick="fbSave()">↑ Save</button>
-      <button class="sync-btn blue" onclick="exportHTML()">↓ Export</button>
+      <button class="sync-btn blue" onclick="exportHTML()" title="Snippet de dados para colar no index do cliente (marcador __BAKED_DATA__)">↓ Baked</button>
+      <button class="sync-btn" onclick="exportJSON()" title="Backup completo dos dados em JSON">↓ JSON</button>
       <span class="ed-sync-status" id="sync-status">—</span>
     </div>
     <div class="ed-tabs">
@@ -439,7 +440,7 @@ together.</div>
       </div>
     </div>
     <div class="contact-right">
-      <img id="txt-contact-img" src="https://via.placeholder.com/400x533" class="contact-img" alt="Foto">
+      <img id="txt-contact-img" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23E8E4DB%27/%3E%3Ctext x=%27200%27 y=%27158%27 font-family=%27monospace%27 font-size=%2713%27 fill=%27%23A09C93%27 text-anchor=%27middle%27%3Esem imagem%3C/text%3E%3C/svg%3E" class="contact-img" alt="Foto">
     </div>
   </div>
 </div>
@@ -447,6 +448,10 @@ together.</div>
 <script>
 (function(){
 'use strict';
+
+// FIX: o serviço de placeholder antigo saiu do ar — SVG inline (mesmo do site público)
+var PH='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 400 300%27%3E%3Crect width=%27400%27 height=%27300%27 fill=%27%23E8E4DB%27/%3E%3Ctext x=%27200%27 y=%27158%27 font-family=%27monospace%27 font-size=%2713%27 fill=%27%23A09C93%27 text-anchor=%27middle%27%3Esem imagem%3C/text%3E%3C/svg%3E';
+window.__PH__=PH; // acessível nos handlers onerror inline
 
 // ============================================================
 // DEFAULT TEXTS — every static string on the site
@@ -497,7 +502,7 @@ var DEFAULT_TEXTS = {
   contactCvPt:       'Baixar CV',
   contactCvEn:       'Download CV',
   contactCvHref:     'cv.pdf',
-  contactImgSrc:     'https://via.placeholder.com/400x533',
+  contactImgSrc:     PH,
   social1Label:      'LinkedIn',
   social1Href:       '#',
   social2Label:      'Instagram',
@@ -643,6 +648,9 @@ window.fbLoad = function(){
 };
 
 window.fbSave = function(){
+  // Guarda: dava pra abrir o editor vazio e sobrescrever a nuvem sem querer
+  var vazio=!(APP.data.projects||[]).length&&!(APP.data.blog||[]).length&&!(APP.data.gallery||[]).length&&!(APP.data.sketches||[]).length;
+  if(vazio&&!confirm('Seu conteúdo local está VAZIO. Salvar agora vai sobrescrever o portfolio na nuvem com um site vazio. Continuar?'))return;
   syncStatus('Salvando…','#999');
   var payload=Object.assign({},APP.data,{updatedAt:new Date().toISOString()});
   var fields={};Object.keys(payload).forEach(function(k){fields[k]=toFV(payload[k]);});
@@ -655,15 +663,26 @@ window.fbSave = function(){
 function syncStatus(msg,color){var el=document.getElementById('sync-status');if(el){el.textContent=msg;el.style.color=color||'';}}
 function toast(msg){var el=document.getElementById('editor-toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('show');},3000);}
 
-window.exportHTML = function(){
-  var src=document.documentElement.outerHTML;
-  var dataJSON=JSON.stringify(APP.data);
-  var baked=src.replace(/APP\.data\s*=\s*\{[\s\S]*?^    \}/m,'APP.data = '+dataJSON);
-  var blob=new Blob([baked],{type:'text/html'});
+function _download(name,content,mime){
+  var blob=new Blob([content],{type:mime||'text/plain'});
   var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');a.href=url;a.download='index.html';
+  var a=document.createElement('a');a.href=url;a.download=name;
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  toast('✓ index.html exportado');
+}
+// FIX: a versão antiga dava replace num "APP.data = {...}" que não existe neste arquivo
+// (o estado é "var APP={data:{...}}"), então o export saía SEM os dados — e ainda por cima
+// exportava o HTML do próprio EDITOR (painel, senha NDA, botão Save) pro cliente.
+// O index público já suporta dados embutidos: basta colar o snippet exportado no lugar
+// do marcador <!-- __BAKED_DATA__ --> que existe no <head> dele.
+window.exportHTML = function(){
+  var json=JSON.stringify(APP.data).replace(/<\//g,'<\\/'); // evita fechar o <script> no meio do JSON
+  var snippet='<script>window.__PORTFOLIO_DATA__ = '+json+';</'+'script>';
+  _download('baked-data.html',snippet,'text/html');
+  toast('✓ baked-data.html — cole no lugar de <!-- __BAKED_DATA__ --> no index do cliente');
+};
+window.exportJSON = function(){
+  _download('portfolio-backup.json',JSON.stringify(APP.data,null,2),'application/json');
+  toast('✓ portfolio-backup.json exportado');
 };
 
 // ============================================================
@@ -723,10 +742,11 @@ window.goBack = function(){
 // ============================================================
 function buildEmbedIframe(embed){
   if(!embed||!embed.type||!embed.id) return '';
+  var id=encodeURIComponent(String(embed.id)); // sanitiza antes de entrar no src do iframe
   var src='';
-  if(embed.type==='youtube')     src='https://www.youtube.com/embed/'+embed.id+'?rel=0';
-  if(embed.type==='vimeo')       src='https://player.vimeo.com/video/'+embed.id+'?color=C1440E&title=0&byline=0';
-  if(embed.type==='speakerdeck') src='https://speakerdeck.com/player/'+embed.id;
+  if(embed.type==='youtube')     src='https://www.youtube.com/embed/'+id+'?rel=0';
+  if(embed.type==='vimeo')       src='https://player.vimeo.com/video/'+id+'?color=C1440E&title=0&byline=0';
+  if(embed.type==='speakerdeck') src='https://speakerdeck.com/player/'+id;
   if(!src) return '';
   return '<div class="embed-area"><iframe src="'+src+'" allowfullscreen allow="autoplay; fullscreen"></iframe></div>';
 }
@@ -743,7 +763,7 @@ function renderAllProjects(){
   list.forEach(function(p){
     if(!p.published&&!APP.isOpen)return;
     var card=document.createElement('div');card.className='project-card';
-    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/400x300')+'" alt="'+esc(p.title||'')+'" onerror="this.src=\'https://via.placeholder.com/400x300\'">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
+    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||PH)+'" alt="'+esc(p.title||'')+'" onerror="this.src=window.__PH__">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
     card.onclick=function(){APP.previousView='projects';openDetail(p.id,'project');};
     grid.appendChild(card);
   });
@@ -755,7 +775,7 @@ function renderNDAProjects(){
   list.forEach(function(p){
     if(!p.published&&!APP.isOpen)return;
     var card=document.createElement('div');card.className='project-card';
-    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/400x300')+'" alt="'+esc(p.title||'')+'" onerror="this.src=\'https://via.placeholder.com/400x300\'">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
+    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||PH)+'" alt="'+esc(p.title||'')+'" onerror="this.src=window.__PH__">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
     card.onclick=function(){APP.previousView='nda';openDetail(p.id,'project');};
     grid.appendChild(card);
   });
@@ -779,9 +799,10 @@ function renderMeta(){
       });strip.appendChild(row);
     }else{
       var embedSrc='';
-      if(item.type==='youtube')     embedSrc='https://www.youtube.com/embed/'+item.id+'?rel=0';
-      if(item.type==='vimeo')       embedSrc='https://player.vimeo.com/video/'+item.id+'?color=C1440E&title=0&byline=0';
-      if(item.type==='speakerdeck') embedSrc='https://speakerdeck.com/player/'+item.id;
+      var eid=encodeURIComponent(String(item.id||''));
+      if(item.type==='youtube')     embedSrc='https://www.youtube.com/embed/'+eid+'?rel=0';
+      if(item.type==='vimeo')       embedSrc='https://player.vimeo.com/video/'+eid+'?color=C1440E&title=0&byline=0';
+      if(item.type==='speakerdeck') embedSrc='https://speakerdeck.com/player/'+eid;
       if(embedSrc){
         var wrap=document.createElement('div');wrap.className='home-media-item';
         var iframe=document.createElement('iframe');iframe.src=embedSrc;iframe.setAttribute('allowfullscreen','');iframe.setAttribute('allow','autoplay; fullscreen');
@@ -796,7 +817,7 @@ function renderProjects(){
   list.forEach(function(p){
     if(!p.published&&!APP.isOpen)return;
     var card=document.createElement('div');card.className='project-card';
-    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/400x300')+'" alt="'+esc(p.title||'')+'" onerror="this.src=\'https://via.placeholder.com/400x300\'">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
+    card.innerHTML='<div class="card-thumb-wrap"><img class="card-thumb" src="'+esc(p.thumb||PH)+'" alt="'+esc(p.title||'')+'" onerror="this.src=window.__PH__">'+(!p.published?'<div class="card-draft">Draft</div>':'')+'</div><div class="card-tag">'+esc(p.tag||'')+'</div><div class="card-title">'+esc(p.title||'Sem título')+'<span class="card-arrow">→</span></div>';
     card.onclick=function(){openDetail(p.id,'project');};
     grid.appendChild(card);
   });
@@ -805,7 +826,7 @@ function renderSketches(){
   var grid=document.getElementById('sketch-grid');if(!grid)return;grid.innerHTML='';
   (APP.data.sketches||[]).forEach(function(s){
     var item=document.createElement('div');item.className='sketch-item';
-    var img=document.createElement('img');img.src=s.src||'https://via.placeholder.com/200x200';img.alt=s.alt||'';img.onerror=function(){this.src='https://via.placeholder.com/200x200';};img.onclick=function(){openLightbox(img.src);};
+    var img=document.createElement('img');img.src=s.src||PH;img.alt=s.alt||'';img.onerror=function(){this.src=PH;};img.onclick=function(){openLightbox(img.src);};
     item.appendChild(img);grid.appendChild(item);
   });
 }
@@ -824,7 +845,7 @@ function renderGallery(){
   var container=document.getElementById('art-gallery-container');if(!container)return;container.innerHTML='';
   (APP.data.gallery||[]).forEach(function(a){
     var div=document.createElement('div');div.className='art-item';
-    div.innerHTML='<img class="art-img" src="'+esc(a.src||'https://via.placeholder.com/400x500')+'" alt="'+esc(a.caption||'')+'" onerror="this.src=\'https://via.placeholder.com/400x500\'"><div class="art-caption">'+esc(a.caption||'')+'</div>';
+    div.innerHTML='<img class="art-img" src="'+esc(a.src||PH)+'" alt="'+esc(a.caption||'')+'" onerror="this.src=window.__PH__"><div class="art-caption">'+esc(a.caption||'')+'</div>';
     div.querySelector('.art-img').onclick=function(){openLightbox(a.src);};
     container.appendChild(div);
   });
@@ -864,7 +885,7 @@ function buildDetailHTML(item,type){
   html+='</div>';
   (item.embeds||[]).forEach(function(embed){var ih=buildEmbedIframe(embed);if(ih)html+='<div class="detail-embed">'+ih+'</div>';});
   var imgs=item.images||(item.thumb?[item.thumb]:[]);
-  if(imgs.length){var cols=imgs.length===1?'cols-1':imgs.length===2?'cols-2':'cols-3';html+='<div class="detail-images"><div class="detail-images-grid '+cols+'">';imgs.forEach(function(src){html+='<img class="detail-img" src="'+esc(src)+'" alt="" onerror="this.src=\'https://via.placeholder.com/800x600\'">';});html+='</div></div>';}
+  if(imgs.length){var cols=imgs.length===1?'cols-1':imgs.length===2?'cols-2':'cols-3';html+='<div class="detail-images"><div class="detail-images-grid '+cols+'">';imgs.forEach(function(src){html+='<img class="detail-img" src="'+esc(src)+'" alt="" onerror="this.src=window.__PH__">';});html+='</div></div>';}
   if(item.text||item.content)html+='<div class="detail-text">'+esc(item.text||item.content||'')+'</div>';
   return html;
 }
@@ -1050,7 +1071,7 @@ function uploadZoneHTML(zoneId,hint){
 function imgPreviewStrip(srcs,removeFn){
   if(!srcs||!srcs.length)return'';
   var html='<div class="img-preview-strip" id="preview-'+removeFn+'">';
-  srcs.forEach(function(src,i){html+='<div class="img-preview-item"><img src="'+esc(src)+'" onerror="this.src=\'https://via.placeholder.com/72x56\'"><button class="img-remove" onclick="'+removeFn+'('+i+')" title="Remover">✕</button></div>';});
+  srcs.forEach(function(src,i){html+='<div class="img-preview-item"><img src="'+esc(src)+'" onerror="this.src=window.__PH__"><button class="img-remove" onclick="'+removeFn+'('+i+')" title="Remover">✕</button></div>';});
   html+='</div>';return html;
 }
 function attachUploadListeners(){
@@ -1085,7 +1106,7 @@ function buildProjectsTab(){
   var html='<div class="ed-section"><div class="item-list">';
   projects.forEach(function(p){
     var active=APP.editingId===p.id?' active-edit':'';
-    html+='<div class="item-row'+active+'" onclick="edEditProject(\''+p.id+'\')"><img class="item-thumb" src="'+esc(p.thumb||'https://via.placeholder.com/42x32')+'" onerror="this.src=\'https://via.placeholder.com/42x32\'"><div class="item-info"><div class="item-title">'+esc(p.title||'Sem título')+'</div><div class="item-sub">'+esc(p.tag||'—')+(p.year?' · '+p.year:'')+(p.images&&p.images.length?' · '+p.images.length+' imgs':'')+'</div></div>';
+    html+='<div class="item-row'+active+'" onclick="edEditProject(\''+p.id+'\')"><img class="item-thumb" src="'+esc(p.thumb||PH)+'" onerror="this.src=window.__PH__"><div class="item-info"><div class="item-title">'+esc(p.title||'Sem título')+'</div><div class="item-sub">'+esc(p.tag||'—')+(p.year?' · '+p.year:'')+(p.images&&p.images.length?' · '+p.images.length+' imgs':'')+'</div></div>';
     if(!p.published)html+='<span class="draft-pill">draft</span>';
     if(p.nda)html+='<span class="draft-pill" style="background:var(--ink);color:var(--white)">nda</span>';
     html+='<div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="projMove(\''+p.id+'\',-1)">▲</button><button class="ord-btn" onclick="projMove(\''+p.id+'\',1)">▼</button><button class="del-btn" onclick="projDelete(\''+p.id+'\')">✕</button></div></div>';
@@ -1133,7 +1154,7 @@ function buildGalleryTab(){
   var list=APP.data.gallery||[];var html='<div class="ed-section"><div class="item-list">';
   list.forEach(function(a,i){
     var active=APP.editingId===a.id?' active-edit':'';
-    html+='<div class="item-row'+active+'" onclick="edEditGallery(\''+a.id+'\')"><img class="item-thumb" src="'+esc(a.src||'https://via.placeholder.com/42x32')+'" onerror="this.src=\'https://via.placeholder.com/42x32\'"><div class="item-info"><div class="item-title">'+esc(a.caption||'Sem legenda')+'</div></div><div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="galleryMove('+i+',-1)">▲</button><button class="ord-btn" onclick="galleryMove('+i+',1)">▼</button><button class="del-btn" onclick="galleryDelete(\''+a.id+'\')">✕</button></div></div>';
+    html+='<div class="item-row'+active+'" onclick="edEditGallery(\''+a.id+'\')"><img class="item-thumb" src="'+esc(a.src||PH)+'" onerror="this.src=window.__PH__"><div class="item-info"><div class="item-title">'+esc(a.caption||'Sem legenda')+'</div></div><div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="galleryMove('+i+',-1)">▲</button><button class="ord-btn" onclick="galleryMove('+i+',1)">▼</button><button class="del-btn" onclick="galleryDelete(\''+a.id+'\')">✕</button></div></div>';
     if(APP.editingId===a.id){html+='<div class="edit-form" id="form-'+a.id+'"><div class="edit-form-title">Editando imagem</div><div class="form-row"><label class="form-label">Imagem</label>'+uploadZoneHTML('gallery-'+a.id,'Clique ou arraste');if(a.src)html+='<img class="thumb-preview" src="'+esc(a.src)+'" onerror="this.style.display=\'none\'" style="margin-top:6px">';html+='</div><div class="form-row"><label class="form-label">URL externo</label><input class="form-input" value="'+esc(a.src||'')+'" placeholder="https://..." oninput="galleryField(\''+a.id+'\',\'src\',this.value)"></div><div class="form-row"><label class="form-label">Legenda</label><input class="form-input" value="'+esc(a.caption||'')+'" oninput="galleryField(\''+a.id+'\',\'caption\',this.value)"></div><div class="form-actions"><button class="btn-save" onclick="APP.editingId=null;renderGallery();renderEdBody()">✓ Ok</button></div></div>';}
   });
   html+='</div><div class="form-row" style="margin-top:14px"><label class="form-label">Adicionar imagens</label>'+uploadZoneHTML('gallery-new','Múltiplas imagens de uma vez')+'</div></div>';
@@ -1151,7 +1172,7 @@ function buildSketchesTab(){
   var list=APP.data.sketches||[];var html='<div class="ed-section"><div class="item-list">';
   list.forEach(function(s,i){
     var active=APP.editingId===s.id?' active-edit':'';
-    html+='<div class="item-row'+active+'" onclick="edEditSketch(\''+s.id+'\')"><img class="item-thumb-sq" src="'+esc(s.src||'https://via.placeholder.com/32x32')+'" onerror="this.src=\'https://via.placeholder.com/32x32\'" style="aspect-ratio:1"><div class="item-info"><div class="item-title">'+esc(s.alt||'Sketch '+(i+1))+'</div></div><div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="sketchMove('+i+',-1)">▲</button><button class="ord-btn" onclick="sketchMove('+i+',1)">▼</button><button class="del-btn" onclick="sketchDelete(\''+s.id+'\')">✕</button></div></div>';
+    html+='<div class="item-row'+active+'" onclick="edEditSketch(\''+s.id+'\')"><img class="item-thumb-sq" src="'+esc(s.src||PH)+'" onerror="this.src=window.__PH__" style="aspect-ratio:1"><div class="item-info"><div class="item-title">'+esc(s.alt||'Sketch '+(i+1))+'</div></div><div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="sketchMove('+i+',-1)">▲</button><button class="ord-btn" onclick="sketchMove('+i+',1)">▼</button><button class="del-btn" onclick="sketchDelete(\''+s.id+'\')">✕</button></div></div>';
     if(APP.editingId===s.id){html+='<div class="edit-form" id="form-'+s.id+'"><div class="edit-form-title">Editando sketch</div><div class="form-row"><label class="form-label">Imagem</label>'+uploadZoneHTML('sketch-'+s.id,'Substituir imagem');if(s.src)html+='<img class="thumb-preview" src="'+esc(s.src)+'" onerror="this.style.display=\'none\'" style="margin-top:6px;aspect-ratio:1;object-fit:cover;max-height:120px;width:auto">';html+='</div><div class="form-row"><label class="form-label">URL externo</label><input class="form-input" value="'+esc(s.src||'')+'" placeholder="https://..." oninput="sketchField(\''+s.id+'\',\'src\',this.value)"></div><div class="form-row"><label class="form-label">Alt text</label><input class="form-input" value="'+esc(s.alt||'')+'" oninput="sketchField(\''+s.id+'\',\'alt\',this.value)"></div><div class="form-actions"><button class="btn-save" onclick="APP.editingId=null;renderSketches();renderEdBody()">✓ Ok</button></div></div>';}
   });
   html+='</div><div class="form-row" style="margin-top:14px"><label class="form-label">Adicionar sketches</label>'+uploadZoneHTML('sketch-new','Múltiplas imagens de uma vez')+'</div></div>';
@@ -1171,7 +1192,7 @@ function buildBlogTab(){
   list.forEach(function(p){
     var active=APP.editingId===p.id?' active-edit':'';
     html+='<div class="item-row'+active+'" onclick="edEditBlog(\''+p.id+'\')">';
-    if(p.thumb)html+='<img class="item-thumb" src="'+esc(p.thumb)+'" onerror="this.src=\'https://via.placeholder.com/42x32\'">';
+    if(p.thumb)html+='<img class="item-thumb" src="'+esc(p.thumb)+'" onerror="this.src=window.__PH__">';
     html+='<div class="item-info"><div class="item-title">'+esc(p.title||'Sem título')+'</div><div class="item-sub">'+esc(p.date||'—')+'</div></div>';
     if(!p.published)html+='<span class="draft-pill">draft</span>';
     html+='<div class="item-actions" onclick="event.stopPropagation()"><button class="ord-btn" onclick="blogMove(\''+p.id+'\',-1)">▲</button><button class="ord-btn" onclick="blogMove(\''+p.id+'\',1)">▼</button><button class="del-btn" onclick="blogDelete(\''+p.id+'\')">✕</button></div></div>';
@@ -1247,6 +1268,9 @@ if(window.__PORTFOLIO_DATA__){
   if(d.texts)    APP.data.texts=Object.assign({},DEFAULT_TEXTS,d.texts);
 }
 renderAll();
+// FIX: auto-load no boot — antes o editor abria sempre vazio e era preciso lembrar de
+// clicar Load; esquecer e clicar Save sobrescreveria a nuvem com um portfolio vazio.
+if(!window.__PORTFOLIO_DATA__) fbLoad();
 
 })();
 </script>
